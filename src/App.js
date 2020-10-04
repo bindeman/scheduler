@@ -2,12 +2,31 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Dashboard from './Dashboard'
+import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import CssBaseline from "@material-ui/core/CssBaseline";
+
+const theme = createMuiTheme({
+    typography: {
+        fontFamily: 'Open Sans, Comic Sans',
+    },
+    overrides: {
+        MuiCssBaseline: {
+            '@global': {
+                '@font-face': "Open Sans",
+            },
+        },
+    },
+});
 
 function App() {
   return (
     
     <div className="App">
+        <MuiThemeProvider theme={theme}>
+            <CssBaseline />
       <Dashboard />
+        </MuiThemeProvider>
     </div>
   );
 }

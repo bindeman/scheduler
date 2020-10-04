@@ -24,7 +24,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './ListItems';
 import Chart from './Chart';
-import Deposits from './Deposits';
+import Deposits from './Events';
 import Orders from './Orders';
 
 
