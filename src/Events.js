@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        marginTop: "6px",
+        marginTop: "7px",
         color: "#727272",
         minWidth: theme.spacing(8),
 
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     },
     durationIcon: {
         fontSize: "14px",
-        margin: "2.5px 3px 1px 0px"
+        margin: "1.5px 3px 1px 0px"
     },
     eventTime: {
         backgroundColor: "#658546",
@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "3px",
         letterSpacing: "-0.28px",
         fontWeight: 700,
+        marginTop: "3px",
         fontSize: "11px",
         "&:disabled":  {
             backgroundColor: "red",
@@ -91,6 +92,10 @@ const useStyles = makeStyles((theme) => ({
         letterSpacing: "-0.08px",
         lineHeight: "17px"
     },
+    buttonChevron: {
+        fontSize: "5px",
+        color: "#658546",
+    }
 }));
 
 
@@ -186,16 +191,24 @@ export default function Events() {
   return (
     <React.Fragment>
         {events.map(event => (
-        <Button endIcon={<ChevronRight/>} className={classes.paper}>
+        <Button endIcon={<ChevronRight className={classes.buttonChevron}/>} className={classes.paper}>
+
             <Grid container spacing={4}>
-                <Grid item xs={3}>
-                    <Button className="startTime" variant="contained" disableRipple={true} disabled={false} className={classes.eventTime}>{event.startTime}</Button>
+                <Grid item xs={12} sm={3}>
+                <Grid container xs={12} sm={3} spacing={4}>
+                    <Grid item xs={3} sm={12}>
+                    <Button size="large" className="startTime" variant="contained" disableRipple={true} disabled={false} className={classes.eventTime}>{event.startTime}</Button>
+                    </Grid>
+
+                    <Grid item xs={3} sm={12}>
                     <div className={classes.duration}>
                     <ScheduleIcon className={classes.durationIcon}/>
                     <Typography className={classes.durationText}>
                         {event.duration}
                     </Typography>
                     </div>
+                    </Grid>
+                </Grid>
                 </Grid>
                 <Grid item xs={12} sm={8}>
                     <Typography className={classes.eventTitle}>{event.title}</Typography>

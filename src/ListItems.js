@@ -92,8 +92,6 @@ export default function ListItems() {
         },
     ];
 
-
-
     const classes = useStyles();
 
     return (
