@@ -4,8 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
@@ -16,33 +14,31 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './ListItems';
-import Chart from './Chart';
 import Events from './Events';
-import Orders from './Orders';
 import ListItems from "./ListItems";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import globalSealLogo from "./img/globalSealLogo.png";
 import ListItemText from "@material-ui/core/ListItemText";
 import globalCRED from "./img/globalCRED.svg";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
+import Chart from './Chart';
+
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      {`Copyright © ${new Date().getFullYear()} `}
+      <Link color="inherit" href="http://theglobalseal.com">
+        The Global Seal.
       </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
+
+      {'All rights reserved.'}
     </Typography>
   );
 }
 
-const drawerWidth = 240;
+const drawerWidth = 260;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,8 +50,9 @@ const useStyles = makeStyles((theme) => ({
   toolbarIcon: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
+    justifyContent: 'flex-start',
+    marginBottom: "-12px",
+    padding: '0 0',
 
     ...theme.mixins.toolbar,
   },
@@ -85,17 +82,17 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     position: 'relative',
-    whiteSpace: 'wrap',
+    //whiteSpace: 'wrap',
     boxShadow: " 0 0 23px rgba(0,0,0,0.10);",
     width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
+      duration: theme.transitions.duration.leavingScreen,
     }),
   },
   drawerPaperClose: {
-    overflowX: 'hidden',
-    whiteSpace: 'nowrap',
+    overflowX: 'auto',
+    //whiteSpace: 'nowrap',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -110,6 +107,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
+    backgroundColor: "#F4F4F4"
   },
   container: {
     paddingTop: theme.spacing(4),
@@ -124,11 +122,23 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   fixedHeight: {
-    height: 240,
+    height: 270,
   },
   logo: {
-    alignSelf: "flex-start"
+    alignSelf: "flex-start",
+    //margin: "auto",
+    //transform: "scale(1.3)",
+    transform: "scale(1.15) translate(30px, 35px)",
+    transition: "0.20s ease-in-out",
+    //transition: "0.25s"
+
   },
+  logoClosed: {
+    //transform: "scale(0.9)",
+    transition: "0.20s ease-in-out",
+    //animationTimingFunction: "ease-in-out",
+  },
+
   listItemIcon: {
     width: "48px",
     fontWeight: 700
@@ -153,6 +163,16 @@ const useStyles = makeStyles((theme) => ({
   events: {
     maxWidth: "500px",
     margin: "auto"
+  },
+  textLogo: {
+    opacity: "0%",
+    transition: "0.25s",
+    //animationTimingFunction: "ease-in-out"
+  },
+  textLogoClosed: {
+    //opacity: "0%"
+    transition: "0.25s",
+    //animationTimingFunction: "ease-in-out"
   }
 }));
 
@@ -177,14 +197,12 @@ export default function Dashboard() {
         }}
         open={open}
       >
-        <List className={classes.logo}>
+        <List className={clsx( open && classes.logo, classes.logoClosed)}>
         <ListItem className={classes.listItem}>
           <ListItemIcon>
             <img className={classes.listItemIcon} src={globalSealLogo}/>
           </ListItemIcon>
-
-          {/*<ListItemText primary={*/}
-          {/*  <img src={globalCRED}/>}/>*/}
+            <img className={clsx( !open && classes.textLogo, classes.textLogoClosed)} src={globalCRED}/>
         </ListItem>
         </List>
 
@@ -209,7 +227,17 @@ export default function Dashboard() {
             </Grid>
 
             <Grid item xs={12}>
-              <Events />
+              <BrowserRouter>
+                <div>
+                  <Switch>
+                    <Route path="/" component={Events} exact/>
+                    <Route path="/list" component={Chart} exact/>
+                    <Route path="/" component={Events} exact/>
+                  </Switch>
+                </div>
+              </BrowserRouter>
+
+
             </Grid>
 
           </Grid>

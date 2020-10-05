@@ -21,7 +21,6 @@ const theme = createMuiTheme({
 
 function App() {
   return (
-    
     <div className="App">
         <MuiThemeProvider theme={theme}>
             <CssBaseline />

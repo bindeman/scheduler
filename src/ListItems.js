@@ -2,30 +2,10 @@ import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import PeopleIcon from '@material-ui/icons/People';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import LayersIcon from '@material-ui/icons/Layers';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import Button from "@material-ui/core/Button";
 import {makeStyles} from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import clsx from "clsx";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Drawer from "@material-ui/core/Drawer";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import Deposits from "./Events";
 import Box from "@material-ui/core/Box";
-
-
 import employers from './img/employers.png';
 import learners from './img/learners.png';
 import administrators from './img/adminstrators.png';
@@ -39,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-evenly",
+        minWidth: "260px"
     },
     listItem: {
         borderRadius: "8px",
@@ -50,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
     },
     listItemText: {
         fontSize: "11px",
-        lineHeight: "9px"
+        lineHeight: "9px",
+        minWidth: "180px"
     },
     listItemIcon: {
         width: "30px",

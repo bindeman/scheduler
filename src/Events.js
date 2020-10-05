@@ -1,23 +1,10 @@
 import React from 'react';
-import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Title from './Title';
-import Paper from '@material-ui/core/Paper'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import {IconButton} from "@material-ui/core";
 import {ChevronRight, Schedule} from "@material-ui/icons";
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-import learners from "./img/learners.png";
-import educators from "./img/educators.png";
-import employers from "./img/employers.png";
-import administrators from "./img/adminstrators.png";
-import contentproviders from "./img/contentproviders.png";
-import {ScaleHelper} from "recharts/lib/util/CartesianUtils";
-import withStyles from "@material-ui/core/styles/withStyles";
-import { green, purple } from '@material-ui/core/colors';
 
 function preventDefault(event) {
   event.preventDefault();
@@ -97,9 +84,6 @@ const useStyles = makeStyles((theme) => ({
         color: "#658546",
     }
 }));
-
-
-
 
 export default function Events() {
     const events = [
@@ -195,8 +179,8 @@ export default function Events() {
 
             <Grid container spacing={4}>
                 <Grid item xs={12} sm={3}>
-                <Grid container xs={12} sm={3} spacing={4}>
-                    <Grid item xs={3} sm={12}>
+                <Grid container xs={12} sm={3} spacing={0}>
+                    <Grid item xs={4} sm={12}>
                     <Button size="large" className="startTime" variant="contained" disableRipple={true} disabled={false} className={classes.eventTime}>{event.startTime}</Button>
                     </Grid>
 
