@@ -13,8 +13,9 @@ import contentproviders from './img/contentproviders.png';
 import educators from './img/educators.png';
 import globalSealLogo from './img/globalSealLogo.png'
 import globalCRED from './img/globalCRED.svg'
+import clsx from "clsx";
 
-const useStyles = makeStyles((theme) => ({
+const useMenuStyles = makeStyles((theme) => ({
     menuList: {
         display: "flex",
         flexDirection: "column",
@@ -31,7 +32,17 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "11px",
         lineHeight: "9px",
         display: "block",
-        width: "130px"
+        width: "130px",
+        opacity: "100%",
+        transition: "0.25s"
+    },
+    menuListItemTextClosed: {
+        fontSize: "11px",
+        lineHeight: "9px",
+        display: "block",
+        width: "130px",
+        opacity: "0%",
+        transition: "0.25s",
     },
     menuListItemIconContainer: {
         width: "30px",
@@ -50,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function ListItems() {
+export default function ListItems(props) {
     const menuItems = [
         {
             title: "Language Learners",
@@ -79,7 +90,7 @@ export default function ListItems() {
         },
     ];
 
-    const menubar = useStyles();
+    const menubar = useMenuStyles();
 
     return (
         <List className={menubar.menuList}>
@@ -92,7 +103,7 @@ export default function ListItems() {
                         </div>
                     </ListItemIcon>
                     <ListItemText primary={
-                        <Typography className={menubar.menuListItemText}
+                        <Typography className={clsx( !props.drawerOpen && menubar.menuListItemTextClosed, menubar.menuListItemText)}
                             component="span"
                             variant="body2"
                             color="textPrimary"

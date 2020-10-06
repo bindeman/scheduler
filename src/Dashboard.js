@@ -270,7 +270,9 @@ export default function Dashboard() {
         </List>
 
         <div className={classes.centered}>
-        <ListItems/>
+        <ListItems
+        drawerOpen={open}
+        />
         </div>
 
         <div className={classes.toolbarIcon}>
