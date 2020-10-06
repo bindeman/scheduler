@@ -11,11 +11,9 @@ import learners from './img/learners.png';
 import administrators from './img/adminstrators.png';
 import contentproviders from './img/contentproviders.png';
 import educators from './img/educators.png';
-import globalSealLogo from './img/globalSealLogo.png'
-import globalCRED from './img/globalCRED.svg'
 import clsx from "clsx";
 
-const useMenuStyles = makeStyles((theme) => ({
+const useMenuStyles = makeStyles(() => ({
     menuList: {
         display: "flex",
         flexDirection: "column",
@@ -34,7 +32,8 @@ const useMenuStyles = makeStyles((theme) => ({
         display: "block",
         width: "130px",
         opacity: "100%",
-        transition: "0.25s"
+        transitionDelay: "0.15s",
+        transition: "0.4s",
     },
     menuListItemTextClosed: {
         fontSize: "11px",
@@ -55,11 +54,6 @@ const useMenuStyles = makeStyles((theme) => ({
         width: "100%"
     }
 }));
-
-
-
-
-
 
 export default function ListItems(props) {
     const menuItems = [
@@ -99,7 +93,7 @@ export default function ListItems(props) {
                 <ListItem className={menubar.menuListItem} button href={item.link}>
                     <ListItemIcon>
                         <div className={menubar.menuListItemIconContainer}>
-                        <img className={menubar.menuListItemIcon} src={item.imageURL}/>
+                        <img alt={`${item.title} icon`} className={menubar.menuListItemIcon} src={item.imageURL}/>
                         </div>
                     </ListItemIcon>
                     <ListItemText primary={

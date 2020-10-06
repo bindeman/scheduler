@@ -1,4 +1,4 @@
-import React, {useEffect, useLayoutEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,7 +11,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import Events from './Events';
@@ -19,7 +18,6 @@ import ListItems from "./ListItems";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import globalSealLogo from "./img/globalSealLogo.png";
-import ListItemText from "@material-ui/core/ListItemText";
 import globalCRED from "./img/globalCRED.svg";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Chart from './Chart';
@@ -84,23 +82,23 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     position: 'relative',
-    //whiteSpace: 'wrap',
+    overflowX: 'hidden',
     boxShadow: " 0 0 23px rgba(0,0,0,0.10);",
     width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: "0.33s",
+
     }),
   },
   drawerPaperClose: {
-    overflowX: 'auto',
-    //whiteSpace: 'nowrap',
+    overflowX: 'hidden',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
-      duration: "0.33s"
-      //delay: "0.1s"
+      duration: "0.33s",
+      delay: "0.1s"
     }),
-    width: "100px",
+    width: "103px",
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
@@ -122,30 +120,17 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
     flexDirection: 'column',
   },
-  fixedHeight: {
-    height: 270,
-  },
   logo: {
-
-    //transform: "scale(1.3)",
     transform: "translate(20px, 20px)",
     transition: "0.25s ease-in-out",
     marginBottom: "30px"
 
-    //transitionDelay: "0.25s"
-
-    //transition: "0.25s"
-
   },
   logoClosed: {
-    //transform: "scale(0.9)",
     width: "100%",
-    marginLeft: "6px",
+    marginLeft: "8px",
     transition: "0.25s ease-in",
-    marginTop: "10px"
-    //transitionDelay: "0.08s"
-
-    //animationTimingFunction: "ease-in-out",
+    marginTop: "10px",
   },
   listItemIconContainer: {
     transform: "scale(1.17)",
@@ -166,8 +151,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     height: "100%",
-
-
   },
   heroTitle: {
     fontSize: "23px",
@@ -186,9 +169,11 @@ const useStyles = makeStyles((theme) => ({
   textLogo: {
     opacity: "0%",
     transition: "0.25s",
+    transitionDelay: "0.0s",
     position: "relative",
   },
   textLogoClosed: {
+    //transitionDelay: "0.1s",
     transition: "0.25s",
     paddingLeft: "11px",
     paddingBottom: "3px"
@@ -204,23 +189,21 @@ export default function Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   const size = useWindowSize();
+
+  //TODO put this into its own function
   if(size.width < 720) {
-    if (open === true) setOpen(false)
+    if (open === true) handleDrawerClose()
   } else if (size.width > 720) {
-    if (open === false) setOpen(true)
+    if (open === false) handleDrawerOpen()
   }
 
   function useWindowSize() {
-    // Initialize state with undefined width/height so server and client renders match
-    // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
     const [windowSize, setWindowSize] = useState({
       width: undefined,
       height: undefined,
     });
-
 
     useEffect(() => {
       // Handler to call on window resize
@@ -230,8 +213,6 @@ export default function Dashboard() {
           width: window.innerWidth,
           height: window.innerHeight,
         });
-
-
       }
 
       // Add event listener
@@ -247,7 +228,6 @@ export default function Dashboard() {
     return windowSize;
   }
 
-
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -262,10 +242,10 @@ export default function Dashboard() {
         <ListItem>
           <ListItemIcon>
             <div className={clsx( open && classes.listItemIconContainer, classes.listItemIconContainerClosed)}>
-            <img className={classes.listItemIcon} src={globalSealLogo}/>
+            <img alt="Global Seal Logo" className={classes.listItemIcon} src={globalSealLogo}/>
             </div>
           </ListItemIcon>
-            <img className={clsx( !open && classes.textLogo, classes.textLogoClosed)} src={globalCRED}/>
+            <img className={clsx( !open && classes.textLogo, classes.textLogoClosed)} alt="Global C.R.E.D. Logo" src={globalCRED}/>
         </ListItem>
         </List>
 
@@ -284,9 +264,7 @@ export default function Dashboard() {
       </Drawer>
       <main className={classes.content}>
         <Container maxWidth="lg" className={classes.container}>
-
           <Grid container spacing={3}>
-
             <Grid item xs={12}>
               <Typography className={classes.heroTitle}>Events Schedule for Language Learners</Typography>
             </Grid>
@@ -301,12 +279,8 @@ export default function Dashboard() {
                   </Switch>
                 </div>
               </BrowserRouter>
-
-
             </Grid>
-
           </Grid>
-
           <Box pt={4}>
             <Copyright />
           </Box>

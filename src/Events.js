@@ -1,15 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import {ChevronRight, Schedule} from "@material-ui/icons";
+import {ChevronRight} from "@material-ui/icons";
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
-
-function preventDefault(event) {
-  event.preventDefault();
-}
-
 
 const useStyles = makeStyles((theme) => ({
     depositContext: {
@@ -82,6 +77,13 @@ const useStyles = makeStyles((theme) => ({
     buttonChevron: {
         fontSize: "5px",
         color: "#658546",
+    },
+    dateHeading: {
+        fontSize: "16px",
+        textAlign: "left",
+        fontWeight: 700,
+        color: "#B0B0B0",
+        letterSpacing: "-0.2px"
     }
 }));
 
@@ -174,14 +176,24 @@ export default function Events() {
   const classes = useStyles();
   return (
     <React.Fragment>
+        <Typography className={classes.dateHeading}>December 2, 2020</Typography>
         {events.map(event => (
-        <Button endIcon={<ChevronRight className={classes.buttonChevron}/>} className={classes.paper}>
-
+        <Button
+            endIcon={<ChevronRight
+                className={classes.buttonChevron}/>}
+            className={classes.paper}>
             <Grid container spacing={4}>
                 <Grid item xs={12} sm={3}>
                 <Grid container xs={12} sm={3} spacing={0}>
                     <Grid item xs={4} sm={12}>
-                    <Button size="large" className="startTime" variant="contained" disableRipple={true} disabled={false} className={classes.eventTime}>{event.startTime}</Button>
+                    <Button size="large"
+                            className="startTime"
+                            variant="contained"
+                            disableRipple={true}
+                            disabled={false}
+                            className={classes.eventTime}>
+                        {event.startTime}
+                    </Button>
                     </Grid>
 
                     <Grid item xs={3} sm={12}>
