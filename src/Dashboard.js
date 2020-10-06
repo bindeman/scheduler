@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -38,6 +38,8 @@ function Copyright() {
   );
 }
 
+
+
 const drawerWidth = 260;
 
 const useStyles = makeStyles((theme) => ({
@@ -51,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    marginBottom: "-12px",
+    //marginBottom: "-12px",
     padding: '0 0',
 
     ...theme.mixins.toolbar,
@@ -87,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
     width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+      duration: "0.33s",
     }),
   },
   drawerPaperClose: {
@@ -95,19 +97,18 @@ const useStyles = makeStyles((theme) => ({
     //whiteSpace: 'nowrap',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+      duration: "0.33s"
+      //delay: "0.1s"
     }),
-    width: theme.spacing(10),
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(10),
-    },
+    width: "100px",
   },
   appBarSpacer: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
     height: '100vh',
     overflow: 'auto',
-    backgroundColor: "#F4F4F4"
+    backgroundColor: "#F4F4F4",
+    padding: "12px"
   },
   container: {
     paddingTop: theme.spacing(4),
@@ -125,30 +126,48 @@ const useStyles = makeStyles((theme) => ({
     height: 270,
   },
   logo: {
-    alignSelf: "flex-start",
-    //margin: "auto",
+
     //transform: "scale(1.3)",
-    transform: "scale(1.15) translate(30px, 35px)",
-    transition: "0.20s ease-in-out",
+    transform: "translate(20px, 20px)",
+    transition: "0.25s ease-in-out",
+    marginBottom: "30px"
+
+    //transitionDelay: "0.25s"
+
     //transition: "0.25s"
 
   },
   logoClosed: {
     //transform: "scale(0.9)",
-    transition: "0.20s ease-in-out",
+    width: "100%",
+    marginLeft: "6px",
+    transition: "0.25s ease-in",
+    marginTop: "10px"
+    //transitionDelay: "0.08s"
+
     //animationTimingFunction: "ease-in-out",
   },
-
+  listItemIconContainer: {
+    transform: "scale(1.17)",
+    height: "auto",
+    fontWeight: 700,
+    transition: "0.25s ease-in-out"
+  },
+  listItemIconContainerClosed: {
+    width: "54px",
+    height: "auto",
+    transition: "0.25s ease-in-out"
+  },
   listItemIcon: {
-    width: "48px",
-    fontWeight: 700
-
+    width: "100%"
   },
   centered: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    height: "100%"
+    height: "100%",
+
+
   },
   heroTitle: {
     fontSize: "23px",
@@ -167,12 +186,12 @@ const useStyles = makeStyles((theme) => ({
   textLogo: {
     opacity: "0%",
     transition: "0.25s",
-    //animationTimingFunction: "ease-in-out"
+    position: "relative",
   },
   textLogoClosed: {
-    //opacity: "0%"
     transition: "0.25s",
-    //animationTimingFunction: "ease-in-out"
+    paddingLeft: "11px",
+    paddingBottom: "3px"
   }
 }));
 
@@ -187,6 +206,48 @@ export default function Dashboard() {
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
+  const size = useWindowSize();
+  if(size.width < 720) {
+    if (open === true) setOpen(false)
+  } else if (size.width > 720) {
+    if (open === false) setOpen(true)
+  }
+
+  function useWindowSize() {
+    // Initialize state with undefined width/height so server and client renders match
+    // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
+    const [windowSize, setWindowSize] = useState({
+      width: undefined,
+      height: undefined,
+    });
+
+
+    useEffect(() => {
+      // Handler to call on window resize
+      function handleResize() {
+        // Set window width/height to state
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+
+
+      }
+
+      // Add event listener
+      window.addEventListener("resize", handleResize);
+
+      // Call handler right away so state gets updated with initial window size
+      handleResize();
+
+      // Remove event listener on cleanup
+      return () => window.removeEventListener("resize", handleResize);
+    }, []); // Empty array ensures that effect is only run on mount
+
+    return windowSize;
+  }
+
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -198,9 +259,11 @@ export default function Dashboard() {
         open={open}
       >
         <List className={clsx( open && classes.logo, classes.logoClosed)}>
-        <ListItem className={classes.listItem}>
+        <ListItem>
           <ListItemIcon>
+            <div className={clsx( open && classes.listItemIconContainer, classes.listItemIconContainerClosed)}>
             <img className={classes.listItemIcon} src={globalSealLogo}/>
+            </div>
           </ListItemIcon>
             <img className={clsx( !open && classes.textLogo, classes.textLogoClosed)} src={globalCRED}/>
         </ListItem>
@@ -211,9 +274,9 @@ export default function Dashboard() {
         </div>
 
         <div className={classes.toolbarIcon}>
-          <IconButton onClick={open ? handleDrawerClose : handleDrawerOpen}>
-            <MenuIcon />
-          </IconButton>
+          {/*<IconButton onClick={open ? handleDrawerClose : handleDrawerOpen}>*/}
+          {/*  <MenuIcon />*/}
+          {/*</IconButton>*/}
         </div>
 
       </Drawer>
@@ -223,7 +286,7 @@ export default function Dashboard() {
           <Grid container spacing={3}>
 
             <Grid item xs={12}>
-              <Typography className={classes.heroTitle}>Event Schedule for Language Learners</Typography>
+              <Typography className={classes.heroTitle}>Events Schedule for Language Learners</Typography>
             </Grid>
 
             <Grid item xs={12}>

@@ -15,28 +15,33 @@ import globalSealLogo from './img/globalSealLogo.png'
 import globalCRED from './img/globalCRED.svg'
 
 const useStyles = makeStyles((theme) => ({
-    list: {
+    menuList: {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-evenly",
-        minWidth: "260px"
+        width: "100%",
+        paddingLeft: "20px",
+        paddingRight: "20px",
     },
-    listItem: {
+    menuListItem: {
         borderRadius: "8px",
-        width: "calc(100% - 18px)",
-        marginLeft: "9px",
-        marginRight: "9px",
-        marginTop: "18px",
-        marginBottom: "18px"
+
     },
-    listItemText: {
+    menuListItemText: {
         fontSize: "11px",
         lineHeight: "9px",
-        minWidth: "180px"
+        display: "block",
+        width: "130px"
     },
-    listItemIcon: {
+    menuListItemIconContainer: {
         width: "30px",
+        height: "auto",
+        marginTop: "18px",
+        marginBottom: "18px",
         fontWeight: 700
+    },
+    menuListItemIcon: {
+        width: "100%"
     }
 }));
 
@@ -74,18 +79,20 @@ export default function ListItems() {
         },
     ];
 
-    const classes = useStyles();
+    const menubar = useStyles();
 
     return (
-        <List className={classes.list}>
+        <List className={menubar.menuList}>
         <div>
             {menuItems.map(item => (
-                <ListItem className={classes.listItem} button href={item.link}>
+                <ListItem className={menubar.menuListItem} button href={item.link}>
                     <ListItemIcon>
-                        <img className={classes.listItemIcon} src={item.imageURL}/>
+                        <div className={menubar.menuListItemIconContainer}>
+                        <img className={menubar.menuListItemIcon} src={item.imageURL}/>
+                        </div>
                     </ListItemIcon>
                     <ListItemText primary={
-                        <Typography className={classes.listItemText}
+                        <Typography className={menubar.menuListItemText}
                             component="span"
                             variant="body2"
                             color="textPrimary"
