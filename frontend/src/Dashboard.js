@@ -112,7 +112,10 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
     maxWidth: "500px",
-    margin: "auto"
+    minHeight: "100%",
+    margin: "auto",
+    display: "flex",
+    //justifyContent: "space-evenly"
   },
   paper: {
     padding: theme.spacing(2),
@@ -152,16 +155,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     height: "100%",
   },
-  heroTitle: {
-    fontSize: "23px",
-    textTransform: "uppercase",
-    fontWeight: 800,
-    color: "#1C5100",
-    letterSpacing: "-0.57px",
-    lineHeight: "23px",
-    textAlign: "left",
-    maxWidth: "350px"
-  },
   events: {
     maxWidth: "500px",
     margin: "auto"
@@ -177,6 +170,10 @@ const useStyles = makeStyles((theme) => ({
     transition: "0.25s",
     paddingLeft: "11px",
     paddingBottom: "3px"
+  },
+  contentGrid: {
+    display: "flex",
+    justifyContent: "space-evenly"
   }
 }));
 
@@ -264,26 +261,21 @@ export default function Dashboard() {
       </Drawer>
       <main className={classes.content}>
         <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Typography className={classes.heroTitle}>Events Schedule for Language Learners</Typography>
-            </Grid>
+          <Grid container className={classes.contentGrid} spacing={3} style={{minHeight: "100%"}}>
+            <Events/>
 
-            <Grid item xs={12}>
-              <BrowserRouter>
-                <div>
-                  <Switch>
-                    <Route path="/" component={Events} exact/>
-                    <Route path="/list" component={Chart} exact/>
-                    <Route path="/" component={Events} exact/>
-                  </Switch>
-                </div>
-              </BrowserRouter>
-            </Grid>
+            {/*<Grid item xs={12}>*/}
+            {/*  /!*<BrowserRouter>*!/*/}
+            {/*  /!*  <div>*!/*/}
+            {/*  /!*    <Switch>*!/*/}
+            {/*  /!*      <Route path="/" component={Events} exact/>*!/*/}
+            {/*  /!*      <Route path="/list" component={Chart} exact/>*!/*/}
+            {/*  /!*      <Route path="/" component={Events} exact/>*!/*/}
+            {/*  /!*    </Switch>*!/*/}
+            {/*  /!*  </div>*!/*/}
+            {/*  /!*</BrowserRouter>*!/*/}
+            {/*</Grid>*/}
           </Grid>
-          <Box pt={4}>
-            <Copyright />
-          </Box>
         </Container>
       </main>
     </div>

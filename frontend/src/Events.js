@@ -8,6 +8,13 @@ import Button from "@material-ui/core/Button";
 import axios from 'axios';
 import moment from "moment-timezone";
 import jstz from 'jstz';
+import LoadingSpinner from "./Spinner";
+import Box from "@material-ui/core/Box";
+import Link from "@material-ui/core/Link";
+import Slide from '@material-ui/core/Slide';
+import Fade from '@material-ui/core/Fade';
+
+
 
 
 
@@ -89,8 +96,32 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 700,
         color: "#B0B0B0",
         letterSpacing: "-0.2px"
-    }
+    },
+    heroTitle: {
+        fontSize: "23px",
+        textTransform: "uppercase",
+        fontWeight: 800,
+        color: "#1C5100",
+        letterSpacing: "-0.57px",
+        lineHeight: "23px",
+        textAlign: "left",
+        maxWidth: "350px",
+        transition: "0.25s"
+    },
 }));
+
+function Copyright() {
+    return (
+        <Typography variant="body2" color="textSecondary" align="center">
+            {`Copyright © ${new Date().getFullYear()} `}
+            <Link color="inherit" href="http://theglobalseal.com">
+                The Global Seal.
+            </Link>{' '}
+
+            {'All rights reserved.'}
+        </Typography>
+    );
+}
 
 export default function Events() {
     const timezone = jstz.determine();
@@ -112,9 +143,21 @@ export default function Events() {
   const results = events;
   return (
     <React.Fragment>
-        <Typography className={classes.dateHeading}>December 2, 2020</Typography>
 
-        {results != null && results.map((item) => {
+
+        {!loading && (
+            <Fade in={!loading} timeout={500}>
+            <Grid item xs={12}>
+             <Typography className={classes.heroTitle}>Events Schedule for Language Learners</Typography>
+        </Grid>
+            </Fade>
+                )}
+        <Grid item xs={12} style={{margin: "auto"}}>
+        {/*<Typography className={classes.dateHeading}>December 2, 2020</Typography>*/}
+        {loading && (
+                <LoadingSpinner/>
+            )}
+        {!loading && results.map((item) => {
             let date = moment(item.date);
             let time = date.tz(timezone.name()).format('LT z');
             console.log(time);
@@ -122,6 +165,7 @@ export default function Events() {
             console.log(time);
 
             return (
+                <Fade in={!loading} timeout={500}>
                 <Button
                     endIcon={<ChevronRight
                         className={classes.buttonChevron}/>}
@@ -157,8 +201,14 @@ export default function Events() {
                             </Typography>
                         </Grid>
                     </Grid>
-                </Button>)
+                </Button>
+                </Fade>)
         })}
+        </Grid>
+
+        {!loading && (<Copyright />)}
+
     </React.Fragment>
   );
+
 }
