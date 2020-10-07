@@ -1,4 +1,4 @@
 module.exports = {
-    mongoURI: process.env.DATABASE
+    mongoURI: 'mongodb+srv://phil:notsecure123@database-tuqyt.mongodb.net/test?retryWrites=true&w=majority'
 
 }
