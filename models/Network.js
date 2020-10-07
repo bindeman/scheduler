@@ -1,74 +1,51 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
-//const LayerSchema = require('Layer');
-
-// const LayerSchema = new Schema({
-
-//     name: {
-//         type: String,
-//         //required: false
-//     },
-//     id: {
-//         type: Number,
-//         //required: true
-//     },
-//     type: {
-//         type: String,
-//         //required: true
-//     },
-//     activation: {
-//         type: String,
-//         //required: true
-//     },
-//     width: {
-//         type: Number,
-//         //required: true
-//     }
-
-// });
 
 // Create Schema
 const NetworkSchema = new Schema({
 
-    name: {
+    // id: {
+    //     type: Number,
+    //     required: true,
+    // },
+    title: {
         type: String,
-        required: false,
-        default: "Untitled"
+        required: true,
+        default: "Untitled Event"
     },
-    description: {
-        type: String,
-        required: false
-    },
-    creator: {
+    presenter: {
         type: String,
         required: true,
         Default: "Anonymous"
     },
-    date: {
-        type: Date,
-        default: Date.now 
-    },
-    layers: [{name: {
-        type: String,
-        //required: false
-    },
-    id: {
-        type: Number,
-        //required: true
-    },
-    type: {
-        type: String,
-        //required: true
-    },
-    activation: {
-        type: String,
-        //required: true
-    },
-    width: {
-        type: Number,
-        //required: true
-    }}]
+    // organization: {
+    //     type: String,
+    //     required: true,
+    //     Default: "Anonymous",
+    // },
+    // date: {
+    //     type: Date,
+    //     default: Date.now,
+    //     required: true
+    // },
+    // duration: {
+    //     type: Number,
+    //     default: 60,
+    //     required: true,
+    // },
+    // category: {
+    //     type: Number,
+    //     required: true
+    // },
+    // link: {
+    //     type: String,
+    //     required: true
+    // },
+    // description: {
+    //     type: String,
+    //     required: true
+    // }
 });
 
 module.exports = Network = mongoose.model('network', NetworkSchema);

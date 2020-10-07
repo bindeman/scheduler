@@ -1,16 +1,22 @@
 const express = require('express');
 const router = express.Router();
 
-// Layer Model
+// Event Model
 
-const Layer = require('../../models/Layer');
+const Event = require('../../models/Event');
 
 // @route GET api/items
 // @desc GET All Visualizations
 // @access Public
 router.get('/', (req, res) => {
-    Layer.find()
+    Event.find()
         .sort({ date: -1 })
+        .then(items => res.json(items))
+});
+
+
+router.get('match/:id', (req, res) => {
+    Event.findById(req.params.id)
         .then(items => res.json(items))
 });
 
@@ -18,18 +24,25 @@ router.get('/', (req, res) => {
 // @desc Create a visualization
 // @access Public
 router.post('/', (req, res) => {
-    const newLayer = new Layer({
-        name: req.body.name
-        //other fields will go here
+    const newEvent = new Event({
+        id: req.body.id,
+        title: req.body.title,
+        presenter: req.body.presenter,
+        organization: req.body.organization,
+        date: req.body.date,
+        duration: req.body.duration,
+        category: req.body.category,
+        link: req.body.title,
+        description: req.body.presenter,
     });
-    newLayer.save().then(item => res.json(item));
+    newEvent.save().then(item => res.json(item));
 });
 
 // @route DELETE api/items/:id
 // @desc Delete a Post
 // @access Public
 router.delete('/:id', (req, res) => {
-    Layer.findById(req.params.id)
+    Event.findById(req.params.id)
         .then(item => item.remove().then(() => res.json({ sucesss: true })))
         .catch(err => res.status(404).json({ success: false }));
 });

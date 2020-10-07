@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import {ChevronRight} from "@material-ui/icons";
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import axios from 'axios';
+import moment from "moment-timezone";
+import jstz from 'jstz';
+
+
 
 const useStyles = makeStyles((theme) => ({
     depositContext: {
@@ -88,132 +93,72 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Events() {
-    const events = [
-        {
-            title: "Exploring the differences between language, international affairs, and copyright law in the East Asia",
-            presenter:"Linda Egnatz",
-            organization: "Walworth Foundation",
-            date: "December 3rd, 2020",
-            startTime: "2:30 pm",
-            endTime: "3:00 pm",
-            duration: "30 min"
-        },
-        {
-            title: "Rule and language, and exploration of the foundations of Arabic?",
-            presenter:"Frank Underwood",
-            organization: "Literacy Foundation",
-            date: "December 3rd, 2020",
-            startTime: "2:30 pm",
-            endTime: "3:00 pm",
-            duration: "30 min"
-        },
-        {
-            title: "Exploring the differences between language, international affairs, and copyright law in the East Asia",
-            presenter:"Doug Stamper",
-            organization: "Services of the National Youth Association for Children",
-            date: "December 3rd, 2020",
-            startTime: "2:30 pm",
-            endTime: "3:00 pm",
-            duration: "30 min"
-        },
-        {
-            title: "Exploring the differences between language, international affairs, and copyright law in the East Asia",
-            presenter:"Kathy Durant",
-            organization: "Academy of the Arts",
-            date: "December 3rd, 2020",
-            startTime: "2:30 pm",
-            endTime: "3:00 pm",
-            duration: "30 min"
-        },
-        {
-            title: "Rule and language, and exploration of the foundations of Arabic?",
-            presenter:"Linda Egnatz",
-            organization: "Walworth Foundation",
-            date: "December 3rd, 2020",
-            startTime: "2:30 pm",
-            endTime: "3:00 pm",
-            duration: "30 min"
-        },
-        {
-            title: "Exploring the differences between language, international affairs, and copyright law in the East Asia",
-            presenter:"Linda Egnatz",
-            organization: "Walworth Foundation",
-            date: "December 3rd, 2020",
-            startTime: "2:30 pm",
-            endTime: "3:00 pm",
-            duration: "30 min"
-        },
-        {
-            title: "Exploring the differences between language, international affairs, and copyright law in the East Asia",
-            presenter:"Linda Egnatz",
-            organization: "Walworth Foundation",
-            date: "December 3rd, 2020",
-            startTime: "2:30 pm",
-            endTime: "3:00 pm",
-            duration: "30 min"
-        },
-        {
-            title: "Rule and language, and exploration of the foundations of Arabic?",
-            presenter:"Linda Egnatz",
-            organization: "Walworth Foundation",
-            date: "December 3rd, 2020",
-            startTime: "12:30 pm",
-            endTime: "3:00 pm",
-            duration: "30 min"
-        },
-        {
-            title: "Exploring the differences between language, international affairs, and copyright law in the East Asia",
-            presenter:"Linda Egnatz",
-            organization: "Walworth Foundation",
-            date: "December 3rd, 2020",
-            startTime: "2:30 pm",
-            endTime: "3:00 pm",
-            duration: "30 min"
-        },
+    const timezone = jstz.determine();
+    const [events, setEvents] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    ];
+    React.useEffect(() => {
+        const FetchData = async () => {
+            const response = await axios.get('/api/events');
+            console.log(response.data);
+            console.log("Hey this function is run");
+            setEvents(response.data);
+            setLoading(false);
+        }
+        FetchData();
+    }, []);
 
   const classes = useStyles();
+  const results = events;
   return (
     <React.Fragment>
         <Typography className={classes.dateHeading}>December 2, 2020</Typography>
-        {events.map(event => (
-        <Button
-            endIcon={<ChevronRight
-                className={classes.buttonChevron}/>}
-            className={classes.paper}>
-            <Grid container spacing={4}>
-                <Grid item xs={12} sm={3}>
-                <Grid container xs={12} sm={3} spacing={0}>
-                    <Grid item xs={4} sm={12}>
-                    <Button size="large"
-                            className="startTime"
-                            variant="contained"
-                            disableRipple={true}
-                            disabled={false}
-                            className={classes.eventTime}>
-                        {event.startTime}
-                    </Button>
-                    </Grid>
 
-                    <Grid item xs={3} sm={12}>
-                    <div className={classes.duration}>
-                    <ScheduleIcon className={classes.durationIcon}/>
-                    <Typography className={classes.durationText}>
-                        {event.duration}
-                    </Typography>
-                    </div>
+        {results != null && results.map((item) => {
+            let date = moment(item.date);
+            let time = date.tz(timezone.name()).format('LT z');
+            console.log(time);
+
+            console.log(time);
+
+            return (
+                <Button
+                    endIcon={<ChevronRight
+                        className={classes.buttonChevron}/>}
+                    className={classes.paper}>
+                    <Grid container spacing={4}>
+                        <Grid item xs={12} sm={3}>
+                            <Grid container xs={12} sm={3} spacing={0}>
+                                <Grid item xs={4} sm={12}>
+                                    <Button size="large"
+                                            className="startTime"
+                                            variant="contained"
+                                            disableRipple={true}
+                                            disabled={false}
+                                            className={classes.eventTime}>
+                                        {time}
+                                    </Button>
+                                </Grid>
+
+                                <Grid item xs={3} sm={12}>
+                                    <div className={classes.duration}>
+                                        <ScheduleIcon className={classes.durationIcon}/>
+                                        <Typography className={classes.durationText}>
+                                            {`${item.duration} min`}
+                                        </Typography>
+                                    </div>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={12} sm={8}>
+                            <Typography className={classes.eventTitle}>{item.title}</Typography>
+                            <Typography className={classes.eventSubtitle}>
+                                {`${item.presenter}, ${item.organization}`}
+                            </Typography>
+                        </Grid>
                     </Grid>
-                </Grid>
-                </Grid>
-                <Grid item xs={12} sm={8}>
-                    <Typography className={classes.eventTitle}>{event.title}</Typography>
-                    <Typography className={classes.eventSubtitle}>
-                        {`${event.presenter}, ${event.organization}`}
-                    </Typography>
-                </Grid>
-            </Grid>
-        </Button>))}
+                </Button>)
+        })}
     </React.Fragment>
   );
 }

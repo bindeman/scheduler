@@ -2,10 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
-const items = require('./routes/api/items');
-const statics = require('./routes/api/static');
-const networks = require('./routes/api/networks');
-//const layers = require('./routes/api/layers');
+const events = require('./routes/api/events');
 
 
 
@@ -17,18 +14,20 @@ app.use(bodyParser.json());
 //DB config
 const db = require('./config/keys').mongoURI;
 
+
 // Connect to Mongo
 
 mongoose
-    .connect(db)
+    .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('Connected to Database'))
-    .catch(err => console.log((err)));
+    .catch(err => {
+        console.log(err)
+        console.log("Could not connect to database")
+    });
 
 //Use Routes
 
-app.use('/api/items', items);
-app.use('/api/static', statics);
-app.use('/api/networks', networks);
+app.use('/api/events', events);
 
 //Served compiled static React content in production
 if (process.env.NODE_ENV === 'production') {
