@@ -13,7 +13,7 @@ import contentproviders from './img/contentproviders.png';
 import educators from './img/educators.png';
 
 import clsx from "clsx";
-import {Link, LinkProps } from "react-router-dom";
+import {useLocation, Link, NavLink, LinkProps } from "react-router-dom";
 
 
 const useMenuStyles = makeStyles(() => ({
@@ -27,6 +27,11 @@ const useMenuStyles = makeStyles(() => ({
     },
     menuListItem: {
         borderRadius: "8px",
+        marginTop: "14px",
+        "&.active": {
+            background: '#F9F9F9',
+        },
+
 
     },
     menuListItemText: {
@@ -49,13 +54,18 @@ const useMenuStyles = makeStyles(() => ({
     menuListItemIconContainer: {
         width: "30px",
         height: "auto",
-        marginTop: "18px",
-        marginBottom: "18px",
+        marginTop: "11px",
+        marginBottom: "11px",
         fontWeight: 700
     },
     menuListItemIcon: {
         width: "100%"
-    }
+    },
+    hiThereGOODSir: {
+        backgroundColor: "red",
+        fontWeight: 900,
+    },
+
 }));
 
 export default function ListItems(props) {
@@ -100,13 +110,13 @@ export default function ListItems(props) {
     // const AdapterLink = React.forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => (
     //     <Link innerRef={ref} {...props} />
     // ));
-
-
+    const location = useLocation();
+    console.log(location.pathname);
     return (
         <List className={menubar.menuList}>
         <div>
             {menuItems.map(item => (
-                <ListItem className={menubar.menuListItem} button component={Link} to={item.link}>
+                <ListItem className={menubar.menuListItem} button component={NavLink} to={item.link} activeClassName="active">
                     <ListItemIcon>
                         <div className={menubar.menuListItemIconContainer}>
                         <img alt={`${item.title} icon`} className={menubar.menuListItemIcon} src={item.imageURL}/>
