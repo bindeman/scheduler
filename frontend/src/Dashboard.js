@@ -265,6 +265,12 @@ export default function Dashboard() {
 
             <Switch>
               <Route
+                  path='/'
+                  exact
+                  component={() => <Events category={1}
+                                           title="Language Learners"/>}
+              />
+              <Route
                   path='/learners'
                   exact
                   component={() => <Events category={1}
