@@ -73,27 +73,27 @@ export default function ListItems(props) {
         {
             title: "Language Learners",
             imageURL: learners,
-            link: "/1"
+            link: "/learners"
         },
         {
             title: "Language Educators",
             imageURL: educators,
-            link: "/2"
+            link: "/educators"
         },
         {
             title: "Employers, Language Service Providers and H.R. Personnel",
             imageURL: employers,
-            link: "/3"
+            link: "/employers"
         },
         {
             title: "Administrators, Counselors and College Recruiters",
             imageURL: administrators,
-            link: "/4"
+            link: "/administrators"
         },
         {
             title: "Language Learning Content and Assessment Providers",
             imageURL: contentproviders,
-            link: "/5"
+            link: "/contentproviders"
         },
     ];
 

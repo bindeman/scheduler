@@ -265,19 +265,19 @@ export default function Dashboard() {
 
             <Switch>
               <Route
-                  path='/1'
+                  path='/learners'
                   exact
                   component={() => <Events category={1}
                                            title="Language Learners"/>}
               />
               <Route
-                  path='/2'
+                  path='/educators'
                   exact
                   component={() => <Events category={2}
                                            title="Language Educators"/>}
               />
               <Route
-                  path='/3'
+                  path='/employers'
                   exact
                   component={() => <Events category={3}
                                            title="Employers, Language Service Providers and H.R. Personnel"
@@ -285,13 +285,13 @@ export default function Dashboard() {
                   />}
               />
               <Route
-                  path='/4'
+                  path='/administrators'
                   exact
                   component={() => <Events category={4}
                                            title="Administrators, Counselors and College Recruiters"/>}
               />
               <Route
-                  path='/5'
+                  path='/contentproviders'
                   exact
                   component={() => <Events category={5}
                                            title="Language Learning Content and Assessment Providers"/>}
