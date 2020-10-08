@@ -123,14 +123,29 @@ function Copyright() {
     );
 }
 
-export default function Events() {
+export default function Events(props) {
     const timezone = jstz.determine();
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [currentDay, newDay] = useState(0);
+
+    const handleNewDate = (date) => newDay(date);
+
+    // const figureOutWhenDateEnds = ((events) => {
+    //     events.map((item) => {
+    //        console.log(item.date);
+    //     });
+    // });
 
     React.useEffect(() => {
         const FetchData = async () => {
-            const response = await axios.get('/api/events');
+            console.log("======= Props are: " + props.category);
+            const response = await axios.get(`/api/events/category/${props.category}`, {
+              headers: {
+                'timezone': timezone.name()
+              }
+            });
+            let currentDate = null;
             console.log(response.data);
             console.log("Hey this function is run");
             setEvents(response.data);
@@ -139,8 +154,10 @@ export default function Events() {
         FetchData();
     }, []);
 
+
+
   const classes = useStyles();
-  const results = events;
+
   return (
     <React.Fragment>
 
@@ -148,25 +165,34 @@ export default function Events() {
         {!loading && (
             <Fade in={!loading} timeout={500}>
             <Grid item xs={12}>
-             <Typography className={classes.heroTitle}>Events Schedule for Language Learners</Typography>
+             <Typography className={classes.heroTitle}>Events Schedule for {props.title}</Typography>
+                {/*<Typography className={classes.dateHeading}>Next event is {moment(events[0].date).endOf('day').fromNow()}</Typography>*/}
         </Grid>
             </Fade>
                 )}
         <Grid item xs={12} style={{margin: "auto"}}>
-        {/*<Typography className={classes.dateHeading}>December 2, 2020</Typography>*/}
+
         {loading && (
                 <LoadingSpinner/>
             )}
-        {!loading && results.map((item) => {
+        {!loading && events.map((item, index) => {
             let date = moment(item.date);
-            let time = date.tz(timezone.name()).format('LT z');
-            console.log(time);
 
-            console.log(time);
+            let time = date.format('LT z');
+            let day = Number(date.format('D'));
+
+
+
+
+
+            // console.log(day);
+            //
+            // console.log(time);
 
             return (
                 <Fade in={!loading} timeout={500}>
-                <Button
+
+                    <Button
                     endIcon={<ChevronRight
                         className={classes.buttonChevron}/>}
                     className={classes.paper}>
@@ -202,6 +228,7 @@ export default function Events() {
                         </Grid>
                     </Grid>
                 </Button>
+
                 </Fade>)
         })}
         </Grid>

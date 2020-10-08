@@ -11,7 +11,10 @@ import learners from './img/learners.png';
 import administrators from './img/adminstrators.png';
 import contentproviders from './img/contentproviders.png';
 import educators from './img/educators.png';
+
 import clsx from "clsx";
+import {Link, LinkProps } from "react-router-dom";
+
 
 const useMenuStyles = makeStyles(() => ({
     menuList: {
@@ -60,37 +63,50 @@ export default function ListItems(props) {
         {
             title: "Language Learners",
             imageURL: learners,
-            link: "#"
+            link: "/1"
         },
         {
             title: "Language Educators",
             imageURL: educators,
-            link: "#"
+            link: "/2"
         },
         {
             title: "Employers, Language Service Providers and H.R. Personnel",
             imageURL: employers,
-            link: "#"
+            link: "/3"
         },
         {
             title: "Administrators, Counselors and College Recruiters",
             imageURL: administrators,
-            link: "#"
+            link: "/4"
         },
         {
             title: "Language Learning Content and Assessment Providers",
             imageURL: contentproviders,
-            link: "#"
+            link: "/5"
         },
     ];
 
     const menubar = useMenuStyles();
 
+    // const CustomLink = React.useMemo(
+    //     (url) =>
+    //         React.forwardRef((linkProps, ref) => (
+    //             <Link ref={ref} to={url} {...linkProps} />
+    //         )),
+    //     [url],
+    // );
+
+    // const AdapterLink = React.forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => (
+    //     <Link innerRef={ref} {...props} />
+    // ));
+
+
     return (
         <List className={menubar.menuList}>
         <div>
             {menuItems.map(item => (
-                <ListItem className={menubar.menuListItem} button href={item.link}>
+                <ListItem className={menubar.menuListItem} button component={Link} to={item.link}>
                     <ListItemIcon>
                         <div className={menubar.menuListItemIconContainer}>
                         <img alt={`${item.title} icon`} className={menubar.menuListItemIcon} src={item.imageURL}/>

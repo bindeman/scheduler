@@ -262,19 +262,42 @@ export default function Dashboard() {
       <main className={classes.content}>
         <Container maxWidth="lg" className={classes.container}>
           <Grid container className={classes.contentGrid} spacing={3} style={{minHeight: "100%"}}>
-            <Events/>
 
-            {/*<Grid item xs={12}>*/}
-            {/*  /!*<BrowserRouter>*!/*/}
-            {/*  /!*  <div>*!/*/}
-            {/*  /!*    <Switch>*!/*/}
-            {/*  /!*      <Route path="/" component={Events} exact/>*!/*/}
-            {/*  /!*      <Route path="/list" component={Chart} exact/>*!/*/}
-            {/*  /!*      <Route path="/" component={Events} exact/>*!/*/}
-            {/*  /!*    </Switch>*!/*/}
-            {/*  /!*  </div>*!/*/}
-            {/*  /!*</BrowserRouter>*!/*/}
-            {/*</Grid>*/}
+            <Switch>
+              <Route
+                  path='/1'
+                  exact
+                  component={() => <Events category={1}
+                                           title="Language Learners"/>}
+              />
+              <Route
+                  path='/2'
+                  exact
+                  component={() => <Events category={2}
+                                           title="Language Educators"/>}
+              />
+              <Route
+                  path='/3'
+                  exact
+                  component={() => <Events category={3}
+                                           title="Employers, Language Service Providers and H.R. Personnel"
+
+                  />}
+              />
+              <Route
+                  path='/4'
+                  exact
+                  component={() => <Events category={4}
+                                           title="Administrators, Counselors and College Recruiters"/>}
+              />
+              <Route
+                  path='/5'
+                  exact
+                  component={() => <Events category={5}
+                                           title="Language Learning Content and Assessment Providers"/>}
+              />
+            </Switch>
+
           </Grid>
         </Container>
       </main>
