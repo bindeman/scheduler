@@ -12,18 +12,30 @@ const Event = require('../../models/Event');
 router.get('/', (req, res) => {
     let now = new Date();
     const timezone = req.get("timezone");
+    console.log(req.get("timezone"));
     Event.find({date: {$gte: now} })
+        .lean()
         .sort({ date: 1 })
         .then((items) => {
+            let day = -1;
             items.map(item => {
                 //const date = item.date;
-                //console.log(moment(item.date).tz(timezone));
-               item.date = moment(item.date).tz(timezone);
-               item.newDate = true;
+                let itemDay = Number(moment(item.date).tz(timezone).format('D'));
+                item.dateInUserTimeZone = moment(item.date).tz(timezone).format();
+                console.log(item.dateInUserTimeZone);
+                if(itemDay != day) {
+                    item.dateHeader = true;
+                    day = itemDay;
+                }
+               //item.dateInUserTimezone = moment(item.date).tz(timezone).format();
+               // console.log("Moment: " + moment(item.date).tz(timezone).format('LT z'));
+               // console.log("Item: " + item.date);
             });
             res.json(items);
         })
 });
+
+
 
 
 //display all future events

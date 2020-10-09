@@ -13,6 +13,8 @@ import Box from "@material-ui/core/Box";
 import Link from "@material-ui/core/Link";
 import Slide from '@material-ui/core/Slide';
 import Fade from '@material-ui/core/Fade';
+import EventTime from "./EventTime";
+import Duration from "./Duration";
 
 
 
@@ -33,43 +35,6 @@ const useStyles = makeStyles((theme) => ({
         textTransform: "none",
         backgroundColor: "#EFF0ED",
         marginTop: "18px"
-    },
-    duration: {
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: "7px",
-        color: "#727272",
-        minWidth: theme.spacing(8),
-
-    },
-    durationText: {
-        fontSize: "10px",
-    },
-    durationIcon: {
-        fontSize: "14px",
-        margin: "1.5px 3px 1px 0px"
-    },
-    eventTime: {
-        backgroundColor: "#658546",
-        boxShadow: "none",
-        color: "#fff",
-        textTransform: "lowercase",
-        padding: "3px 8px 2px 8px",
-        borderRadius: "3px",
-        letterSpacing: "-0.28px",
-        fontWeight: 700,
-        marginTop: "3px",
-        fontSize: "11px",
-        "&:disabled":  {
-            backgroundColor: "red",
-            color: "purple"
-        },
-        "&:hover": {
-            //you want this to be the same as the backgroundColor above
-            backgroundColor: "#658546",
-            boxShadow: "none",
-        }
     },
     eventTitle: {
         fontSize: "13px",
@@ -95,7 +60,8 @@ const useStyles = makeStyles((theme) => ({
         textAlign: "left",
         fontWeight: 700,
         color: "#B0B0B0",
-        letterSpacing: "-0.2px"
+        letterSpacing: "-0.2px",
+        marginTop: "30px",
     },
     heroTitle: {
         fontSize: "23px",
@@ -108,20 +74,14 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: "350px",
         transition: "0.25s"
     },
+    copyright: {
+        fontSize: "10px",
+        color: "#B0B0B0",
+        position: "relative",
+        bottom: "-20px"
+    }
 }));
 
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {`Copyright © ${new Date().getFullYear()} `}
-            <Link color="inherit" href="http://theglobalseal.com">
-                The Global Seal.
-            </Link>{' '}
-
-            {'All rights reserved.'}
-        </Typography>
-    );
-}
 
 export default function Events(props) {
     const timezone = jstz.determine();
@@ -140,10 +100,10 @@ export default function Events(props) {
     React.useEffect(() => {
         const FetchData = async () => {
             console.log("======= Props are: " + props.category);
-            const response = await axios.get(`/api/events/category/${props.category}`, {
-              headers: {
-                'timezone': timezone.name()
-              }
+            const response = await axios.get(`/api/events`, {
+                headers: {
+                    'timezone': timezone.name()
+                }
             });
             let currentDate = null;
             console.log(response.data);
@@ -154,9 +114,29 @@ export default function Events(props) {
         FetchData();
     }, []);
 
+const classes = useStyles();
 
 
-  const classes = useStyles();
+
+
+function Copyright() {
+    return (
+        <Typography className={classes.copyright} align="center">
+            {`Copyright © ${new Date().getFullYear()} `}
+            <Link color="inherit" href="http://theglobalseal.com">
+                The Global Seal.
+            </Link>{' '}
+
+            {'All rights reserved.'}
+        </Typography>
+    );
+}
+
+
+
+
+
+
 
   return (
     <React.Fragment>
@@ -166,7 +146,6 @@ export default function Events(props) {
             <Fade in={!loading} timeout={500}>
             <Grid item xs={12}>
              <Typography className={classes.heroTitle}>Events Schedule for {props.title}</Typography>
-                {/*<Typography className={classes.dateHeading}>Next event is {moment(events[0].date).endOf('day').fromNow()}</Typography>*/}
         </Grid>
             </Fade>
                 )}
@@ -191,7 +170,8 @@ export default function Events(props) {
 
             return (
                 <Fade in={!loading} timeout={500}>
-
+                    <div>
+                    {item.dateHeader && <Typography className={classes.dateHeading}>Events {moment(item.dateInUserTimeZone).fromNow()}</Typography>}
                     <Button
                     endIcon={<ChevronRight
                         className={classes.buttonChevron}/>}
@@ -200,23 +180,11 @@ export default function Events(props) {
                         <Grid item xs={12} sm={3}>
                             <Grid container xs={12} sm={3} spacing={0}>
                                 <Grid item xs={4} sm={12}>
-                                    <Button size="large"
-                                            className="startTime"
-                                            variant="contained"
-                                            disableRipple={true}
-                                            disabled={false}
-                                            className={classes.eventTime}>
-                                        {time}
-                                    </Button>
+                                    <EventTime time={item.dateInUserTimeZone}/>
                                 </Grid>
 
                                 <Grid item xs={3} sm={12}>
-                                    <div className={classes.duration}>
-                                        <ScheduleIcon className={classes.durationIcon}/>
-                                        <Typography className={classes.durationText}>
-                                            {`${item.duration} min`}
-                                        </Typography>
-                                    </div>
+                                <Duration duration={item.duration}/>
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -228,10 +196,11 @@ export default function Events(props) {
                         </Grid>
                     </Grid>
                 </Button>
-
+                    </div>
                 </Fade>)
         })}
         </Grid>
+
 
         {!loading && (<Copyright />)}
 
