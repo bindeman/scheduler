@@ -15,6 +15,11 @@ import Slide from '@material-ui/core/Slide';
 import Fade from '@material-ui/core/Fade';
 import EventTime from "./EventTime";
 import Duration from "./Duration";
+import EventCategory from "./EventCategory";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
 
 
 
@@ -86,21 +91,26 @@ const useStyles = makeStyles((theme) => ({
 export default function Events(props) {
     const timezone = jstz.determine();
     const [events, setEvents] = useState([]);
+    const [liveEvents, setLiveEvents] = useState([]);
+    const [pastEvents, setPastEvents] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [currentDay, newDay] = useState(0);
 
-    const handleNewDate = (date) => newDay(date);
 
-    // const figureOutWhenDateEnds = ((events) => {
-    //     events.map((item) => {
-    //        console.log(item.date);
-    //     });
-    // });
+    const switchData = (selectedEvent) => {
+        setEvents(selectedEvent);
+    };
+
 
     React.useEffect(() => {
         const FetchData = async () => {
             console.log("======= Props are: " + props.category);
-            const response = await axios.get(`/api/events`, {
+            const response = await axios.get(`/api/events/`, {
+                headers: {
+                    'timezone': timezone.name()
+                }
+            });
+
+            const liveEventsResponse = await axios.get(`/api/events/live`, {
                 headers: {
                     'timezone': timezone.name()
                 }
@@ -108,11 +118,15 @@ export default function Events(props) {
             let currentDate = null;
             console.log(response.data);
             console.log("Hey this function is run");
+            setLiveEvents(liveEventsResponse.data)
             setEvents(response.data);
             setLoading(false);
         }
         FetchData();
     }, []);
+
+
+
 
 const classes = useStyles();
 
@@ -154,51 +168,24 @@ function Copyright() {
         {loading && (
                 <LoadingSpinner/>
             )}
-        {!loading && events.map((item, index) => {
-            let date = moment(item.date);
 
-            let time = date.format('LT z');
-            let day = Number(date.format('D'));
-
-
-
-
-
-            // console.log(day);
-            //
-            // console.log(time);
-
-            return (
                 <Fade in={!loading} timeout={500}>
                     <div>
-                    {item.dateHeader && <Typography className={classes.dateHeading}>Events {moment(item.dateInUserTimeZone).fromNow()}</Typography>}
-                    <Button
-                    endIcon={<ChevronRight
-                        className={classes.buttonChevron}/>}
-                    className={classes.paper}>
-                    <Grid container spacing={4}>
-                        <Grid item xs={12} sm={3}>
-                            <Grid container xs={12} sm={3} spacing={0}>
-                                <Grid item xs={4} sm={12}>
-                                    <EventTime time={item.dateInUserTimeZone}/>
-                                </Grid>
-
-                                <Grid item xs={3} sm={12}>
-                                <Duration duration={item.duration}/>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                        <Grid item xs={12} sm={8}>
-                            <Typography className={classes.eventTitle}>{item.title}</Typography>
-                            <Typography className={classes.eventSubtitle}>
-                                {`${item.presenter}, ${item.organization}`}
-                            </Typography>
-                        </Grid>
-                    </Grid>
-                </Button>
+                    <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
+                        <Button>Future Events</Button>
+                        <Button>Past Events</Button>
+                        <Button>
+                        <Select labelId="label" id="select" value="20">
+                            <MenuItem value="10">Ten</MenuItem>
+                            <MenuItem value="20">Twenty</MenuItem>
+                        </Select>
+                        </Button>
+                    </ButtonGroup>
+                    <EventCategory data={liveEvents}/>
+                    {/*<EventCategory data={events}/>*/}
                     </div>
-                </Fade>)
-        })}
+                </Fade>
+
         </Grid>
 
 

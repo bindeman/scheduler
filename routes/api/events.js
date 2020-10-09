@@ -10,7 +10,10 @@ const Event = require('../../models/Event');
 // @desc GET All Visualizations
 // @access Public
 router.get('/', (req, res) => {
-    let now = new Date();
+    let now = new Date().getTime()-(2*60*60*1000);
+    let currentTime = new Date("2020-10-09T00:49:55.000Z").getTime();
+    console.log("currentTime" + currentTime);
+    console.log(now);
     const timezone = req.get("timezone");
     console.log(req.get("timezone"));
     Event.find({date: {$gte: now} })
@@ -22,11 +25,13 @@ router.get('/', (req, res) => {
                 //const date = item.date;
                 let itemDay = Number(moment(item.date).tz(timezone).format('D'));
                 item.dateInUserTimeZone = moment(item.date).tz(timezone).format();
-                console.log(item.dateInUserTimeZone);
+                //console.log(item.dateInUserTimeZone);
                 if(itemDay != day) {
                     item.dateHeader = true;
                     day = itemDay;
                 }
+
+
                //item.dateInUserTimezone = moment(item.date).tz(timezone).format();
                // console.log("Moment: " + moment(item.date).tz(timezone).format('LT z'));
                // console.log("Item: " + item.date);
@@ -35,7 +40,41 @@ router.get('/', (req, res) => {
         })
 });
 
+//Get live events
+router.get('/live', (req, res) => {
+    const timezone = req.get("timezone");
+    console.log(timezone)
 
+    const minute = 60*1000;
+    let twoHoursAgo = new Date().getTime()-(120*minute);
+    let now = new Date().getTime();
+
+    function isEventLive(item) {
+        console.log("=============")
+        console.log(item);
+
+        item.dateInUserTimeZone = moment(item.date).tz(timezone).format();
+        let eventStartTime = new Date(item.date).getTime();
+        let eventEndTime = new Date(item.date).getTime()+item.duration*minute;
+        if(eventEndTime > now) {
+            console.log("THIS EVENT IS LIVE");
+        } else {
+            console.log("THIS EVENT IS NOT LIVE");
+        }
+        return (eventEndTime > now && eventStartTime < now);
+
+    }
+
+    Event.find({date: {$gte: twoHoursAgo, $lt: now} })
+        .lean()
+        .sort({ date: 1 })
+        .then((items) => {
+           const liveEvents = items.filter((item) => isEventLive(item));
+
+            //const result = items.filter(item => item.live === true);
+            res.json(liveEvents);
+        })
+});
 
 
 //display all future events

@@ -49,4 +49,12 @@ const EventSchema = new Schema({
     }
 });
 
+
+// EventSchema.virtual('endDate')
+//     .get(function () {
+//         const minute = 60*1000;
+//         console.log(this.date.getTime()+(minute*this.duration));
+//         return this.date.getTime()+(minute*this.duration);
+//     });
+
 module.exports = Event = mongoose.model('event', EventSchema);
