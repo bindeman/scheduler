@@ -15,6 +15,7 @@ import Slide from '@material-ui/core/Slide';
 import Fade from '@material-ui/core/Fade';
 import EventTime from "./EventTime";
 import Duration from "./Duration";
+import EventModal from "./EventModal";
 
 
 
@@ -65,7 +66,15 @@ const useStyles = makeStyles(() => ({
 
 
 export default function EventCategory(props) {
+    const [modalOpen, setModalOpen] = React.useState(false);
 
+    const handleModalOpen = () => {
+        setModalOpen(true);
+    };
+
+    const handleModalClose = () => {
+        setModalOpen(false);
+    };
 const classes = useStyles();
 
 
@@ -73,15 +82,28 @@ const classes = useStyles();
     <React.Fragment>
 
 
+        <div>
+            <EventModal
+            open={modalOpen}
+            title={"Exploring the differences between language, international affairs, and copyright law in the East Asia"}
+            presenter={"Linda Egnatz"}
+            organization={"Walworth Foundation"}
+            duration={"30 min"}
+            description={"This event explores the ideas of intersectionality and the piece of work that is required for those who need a way back. We understand what is required when the world changes to accomodate new news."}
+            bio={"International Education Consultant, former International Education Administrator of Seattle Public Schools, World Language Supervisor Emeritus for the State of Washington"}
+            dateInUserTimeZone={Date.now()}
+            closeModal={handleModalClose}
 
-
+            >
+            </EventModal>
+        {props.live && <Typography className={classes.dateHeading}>Events happening right now</Typography>}
         {props.data.map((item, index) => {
             return (
                     <div>
                     {item.dateHeader && <Typography className={classes.dateHeading}>Events {moment(item.dateInUserTimeZone).fromNow()}</Typography>}
                     <Button
-                    endIcon={<ChevronRight
-                        className={classes.buttonChevron}/>}
+                        onClick={handleModalOpen}
+                        endIcon={<ChevronRight  className={classes.buttonChevron}/>}
                     className={classes.paper}>
                     <Grid container spacing={4}>
                         <Grid item xs={12} sm={3}>
@@ -105,6 +127,7 @@ const classes = useStyles();
                 </Button>
                     </div>)
         })}
+        </div>
 
     </React.Fragment>
   );

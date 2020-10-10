@@ -9,40 +9,53 @@ const Event = require('../../models/Event');
 // @route GET api/items
 // @desc GET All Visualizations
 // @access Public
-router.get('/', (req, res) => {
-    let now = new Date().getTime()-(2*60*60*1000);
-    let currentTime = new Date("2020-10-09T00:49:55.000Z").getTime();
-    console.log("currentTime" + currentTime);
-    console.log(now);
-    const timezone = req.get("timezone");
-    console.log(req.get("timezone"));
-    Event.find({date: {$gte: now} })
+router.get('/future', (req, res) => {
+    let now = new Date()
+    const timezone = req.get("timezone") ? req.get("timezone") : "Etc/GMT";
+    Event.find({date: {$gt: now} })
         .lean()
         .sort({ date: 1 })
         .then((items) => {
             let day = -1;
             items.map(item => {
-                //const date = item.date;
                 let itemDay = Number(moment(item.date).tz(timezone).format('D'));
                 item.dateInUserTimeZone = moment(item.date).tz(timezone).format();
-                //console.log(item.dateInUserTimeZone);
                 if(itemDay != day) {
                     item.dateHeader = true;
                     day = itemDay;
                 }
-
-
-               //item.dateInUserTimezone = moment(item.date).tz(timezone).format();
-               // console.log("Moment: " + moment(item.date).tz(timezone).format('LT z'));
-               // console.log("Item: " + item.date);
             });
             res.json(items);
-        })
+        }).catch(err => res.status(404).json({ success: false }));
+});
+
+
+
+//See past events across all categories
+router.get('/past', (req, res) => {
+    let now = new Date()
+    const timezone = req.get("timezone") ? req.get("timezone") : "Etc/GMT";
+    Event.find({endDate: {$lt: now} })
+        .lean()
+        .sort({ date: -1 })
+        .then((items) => {
+            let day = -1;
+            items.map(item => {
+                let itemDay = Number(moment(item.date).tz(timezone).format('D'));
+                item.dateInUserTimeZone = moment(item.date).tz(timezone).format();
+                if(itemDay != day) {
+                    item.dateHeader = true;
+                    day = itemDay;
+                }
+            });
+            res.json(items);
+        }).catch(err => res.status(404).json({ success: false }));
 });
 
 //Get live events
-router.get('/live', (req, res) => {
-    const timezone = req.get("timezone");
+router.get('/live_old', (req, res) => {
+    const timezone = req.get("timezone") ? req.get("timezone") : "Etc/GMT";
+
     console.log(timezone)
 
     const minute = 60*1000;
@@ -50,17 +63,10 @@ router.get('/live', (req, res) => {
     let now = new Date().getTime();
 
     function isEventLive(item) {
-        console.log("=============")
-        console.log(item);
-
+        //convert timezone
         item.dateInUserTimeZone = moment(item.date).tz(timezone).format();
         let eventStartTime = new Date(item.date).getTime();
         let eventEndTime = new Date(item.date).getTime()+item.duration*minute;
-        if(eventEndTime > now) {
-            console.log("THIS EVENT IS LIVE");
-        } else {
-            console.log("THIS EVENT IS NOT LIVE");
-        }
         return (eventEndTime > now && eventStartTime < now);
 
     }
@@ -70,10 +76,23 @@ router.get('/live', (req, res) => {
         .sort({ date: 1 })
         .then((items) => {
            const liveEvents = items.filter((item) => isEventLive(item));
+           res.json(liveEvents);
+        }).catch(err => res.status(404).json({ success: false }));
+});
 
-            //const result = items.filter(item => item.live === true);
-            res.json(liveEvents);
-        })
+router.get('/live', (req, res) => {
+    const timezone = req.get("timezone") ? req.get("timezone") : "Etc/GMT";
+    console.log(timezone)
+
+    let now = new Date().getTime();
+
+
+    Event.find({date: {$lt: now}, endDate: {$gt: now} })
+        .lean()
+        .sort({ date: 1 })
+        .then(items => res.json(items))
+        .catch(err => res.status(404).json({ success: false }));
+
 });
 
 
@@ -90,9 +109,8 @@ router.get('/category/:number', (req, res) => {
 router.get('match/:id', (req, res) => {
     Event.findById(req.params.id)
         .then(items => res.json(items))
+        .catch(err => res.status(404).json({ success: false }));
 });
-
-
 
 
 // @route POST api/items
@@ -107,9 +125,11 @@ router.post('/', (req, res) => {
         date: req.body.date,
         duration: req.body.duration,
         category: req.body.category,
-        link: req.body.title,
-        description: req.body.presenter,
+        link: req.body.link,
+        description: req.body.description,
+        bio: req.body.bio,
     });
+    console.log(newEvent);
     newEvent.save().then(item => res.json(item));
 });
 

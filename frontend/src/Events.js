@@ -104,7 +104,7 @@ export default function Events(props) {
     React.useEffect(() => {
         const FetchData = async () => {
             console.log("======= Props are: " + props.category);
-            const response = await axios.get(`/api/events/`, {
+            const response = await axios.get(`/api/events/future`, {
                 headers: {
                     'timezone': timezone.name()
                 }
@@ -115,11 +115,19 @@ export default function Events(props) {
                     'timezone': timezone.name()
                 }
             });
+
+            const pastEventsResponse = await axios.get(`/api/events/past`, {
+                headers: {
+                    'timezone': timezone.name()
+                }
+            });
+
             let currentDate = null;
             console.log(response.data);
             console.log("Hey this function is run");
-            setLiveEvents(liveEventsResponse.data)
+            setLiveEvents(liveEventsResponse.data);
             setEvents(response.data);
+            setPastEvents((pastEventsResponse.data));
             setLoading(false);
         }
         FetchData();
@@ -135,14 +143,14 @@ const classes = useStyles();
 
 function Copyright() {
     return (
-        <Typography className={classes.copyright} align="center">
+        <p className={classes.copyright} align="center">
             {`Copyright © ${new Date().getFullYear()} `}
             <Link color="inherit" href="http://theglobalseal.com">
                 The Global Seal.
             </Link>{' '}
 
             {'All rights reserved.'}
-        </Typography>
+        </p>
     );
 }
 
@@ -171,18 +179,20 @@ function Copyright() {
 
                 <Fade in={!loading} timeout={500}>
                     <div>
-                    <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
-                        <Button>Future Events</Button>
-                        <Button>Past Events</Button>
-                        <Button>
-                        <Select labelId="label" id="select" value="20">
-                            <MenuItem value="10">Ten</MenuItem>
-                            <MenuItem value="20">Twenty</MenuItem>
-                        </Select>
-                        </Button>
-                    </ButtonGroup>
-                    <EventCategory data={liveEvents}/>
-                    {/*<EventCategory data={events}/>*/}
+                    {/*<ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">*/}
+                    {/*    <Button>Future Events</Button>*/}
+                    {/*    <Button>Past Events</Button>*/}
+                    {/*    <Button>*/}
+                    {/*    <Select labelId="label" id="select" value="20">*/}
+                    {/*        <MenuItem value="10">Ten</MenuItem>*/}
+                    {/*        <MenuItem value="20">Twenty</MenuItem>*/}
+                    {/*    </Select>*/}
+                    {/*    </Button>*/}
+                    {/*</ButtonGroup>*/}
+                        {liveEvents.length > 0 &&
+                    <EventCategory data={liveEvents} live={true}/>}
+                    <EventCategory data={events}/>
+                    <EventCategory data={pastEvents}/>
                     </div>
                 </Fade>
 

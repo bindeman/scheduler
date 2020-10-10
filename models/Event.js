@@ -18,12 +18,10 @@ const EventSchema = new Schema({
     presenter: {
         type: String,
         required: true,
-        Default: "Anonymous"
     },
     organization: {
         type: String,
         required: true,
-        Default: "Anonymous",
     },
     date: {
         type: Date,
@@ -46,6 +44,12 @@ const EventSchema = new Schema({
     description: {
         type: String,
         required: true
+    },
+    endDate: {
+        type: Date,
+    },
+    bio: {
+        type: String,
     }
 });
 
