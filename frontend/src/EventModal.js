@@ -20,6 +20,8 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
+import PrimaryButton from "./PrimaryButton";
+import EventCategory from "./EventCategory";
 
 
 
@@ -32,10 +34,14 @@ const useStyles = makeStyles((theme) => ({
         overflow: 'auto',
         borderRadius: "13px",
         flexDirection: 'column',
-        width: "100%",
+        boxShadow: "0 0 40px 0 rgba(0,0,0,0.15)",
+        //width: "100%",
         textAlign: "left",
+        position: "absolute",
+        //left: "1px",
         textTransform: "none",
-        marginTop: "18px"
+        marginTop: "18px",
+
     },
     eventTitle: {
         fontSize: "13px",
@@ -79,7 +85,8 @@ const useStyles = makeStyles((theme) => ({
     },
     dialogBottom: {
         backgroundColor: "#F7F7F7",
-        marginTop: "20px"
+        marginTop: "20px",
+        padding: "15px"
     },
     timing: {
         float: "right"
@@ -105,9 +112,16 @@ const classes = useStyles();
     <React.Fragment>
 
         <Dialog
+            style={{position: 'absolute'}}
+            disablePortal
+            disableEnforceFocus
+            disableAutoFocus
             open={props.open}
             classes={{paper: classes.paper}}
+            container={() => document.getElementById('content')}
+            BackdropProps={{ style: { backgroundColor: "rgba(0,0,0,0.10)", position: "absolute"} }}
             onClose={props.closeModal}>
+
             <div className={classes.modalContent}>
             <DialogTitle>
                 <Typography className={classes.dialogTitle} onClose={props.closeModal}>
@@ -135,18 +149,17 @@ const classes = useStyles();
                 </DialogContent>
             </div>
                     <DialogActions className={classes.dialogBottom}>
-                        <Grid container className={classes.timing} xs={12} sm={3} spacing={0}>
-                            <Grid item xs={4} sm={12}>
-                                <EventTime time={props.dateInUserTimeZone}/>
-                            </Grid>
+                        {/*<Grid container className={classes.timing} xs={12} sm={3} spacing={0}>*/}
+                        {/*    <Grid item xs={4} sm={12}>*/}
+                        {/*        <EventTime time={props.dateInUserTimeZone}/>*/}
+                        {/*    </Grid>*/}
 
-                            <Grid item xs={3} sm={12}>
-                                <Duration duration={props.duration}/>
-                            </Grid>
-                        </Grid>
-                        {/*<Button autoFocus onClick={props.closeModal} color="primary">*/}
-                        {/*    Save changes*/}
-                        {/*</Button>*/}
+                        {/*    <Grid item xs={3} sm={12}>*/}
+                        {/*        <Duration duration={props.duration}/>*/}
+                        {/*    </Grid>*/}
+                        {/*</Grid>*/}
+                        <PrimaryButton text={"Watch Recording"}/>
+                        {/*onClick={props.closeModal}*/}
                     </DialogActions>
         </Dialog>
 

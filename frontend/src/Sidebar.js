@@ -68,7 +68,7 @@ const useMenuStyles = makeStyles(() => ({
 
 }));
 
-export default function ListItems(props) {
+export default function Sidebar(props) {
     const menuItems = [
         {
             title: "Language Learners",

@@ -10,7 +10,7 @@ import Chart from "./Chart";
 
 const theme = createMuiTheme({
     typography: {
-        fontFamily: 'Open Sans, Comic Sans',
+        fontFamily: 'Open Sans, Helvetica, Arial',
     },
     overrides: {
         MuiCssBaseline: {
@@ -18,6 +18,10 @@ const theme = createMuiTheme({
                 '@font-face': "Open Sans",
             },
         },
+        dialog: {
+            position: "left",
+            left: "90px"
+        }
     },
 });
 

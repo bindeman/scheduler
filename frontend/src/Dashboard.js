@@ -14,7 +14,7 @@ import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import Events from './Events';
-import ListItems from "./ListItems";
+import ListItems from "./Sidebar";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import globalSealLogo from "./img/globalSealLogo.png";
@@ -81,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   drawerPaper: {
+    zIndex: 9999,
     position: 'relative',
     overflowX: 'hidden',
     boxShadow: " 0 0 23px rgba(0,0,0,0.10);",
@@ -104,6 +105,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     height: '100vh',
+    position: "relative",
     overflow: 'auto',
     backgroundColor: "#F4F4F4",
     padding: "12px"
@@ -259,7 +261,7 @@ export default function Dashboard() {
         </div>
 
       </Drawer>
-      <main className={classes.content}>
+      <main className={classes.content} id={"content"}>
         <Container maxWidth="lg" className={classes.container}>
           <Grid container className={classes.contentGrid} spacing={3} style={{minHeight: "100%"}}>
 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import {ChevronRight} from "@material-ui/icons";
@@ -76,19 +76,21 @@ export default function EventCategory(props) {
         setModalOpen(false);
     };
 const classes = useStyles();
-
+const divRef = useRef();
 
   return (
     <React.Fragment>
 
 
-        <div>
+        <div ref={divRef}>
             <EventModal
             open={modalOpen}
             title={"Exploring the differences between language, international affairs, and copyright law in the East Asia"}
             presenter={"Linda Egnatz"}
             organization={"Walworth Foundation"}
             duration={"30 min"}
+            divRef={divRef}
+            live={true}
             description={"This event explores the ideas of intersectionality and the piece of work that is required for those who need a way back. We understand what is required when the world changes to accomodate new news."}
             bio={"International Education Consultant, former International Education Administrator of Seattle Public Schools, World Language Supervisor Emeritus for the State of Washington"}
             dateInUserTimeZone={Date.now()}
