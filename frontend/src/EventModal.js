@@ -22,6 +22,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import PrimaryButton from "./PrimaryButton";
 import EventCategory from "./EventCategory";
+import ResponsiveTime from "./ResponsiveTime";
 
 
 
@@ -86,7 +87,8 @@ const useStyles = makeStyles((theme) => ({
     dialogBottom: {
         backgroundColor: "#F7F7F7",
         marginTop: "20px",
-        padding: "15px"
+        padding: "23px",
+        display: "flex",
     },
     timing: {
         float: "right"
@@ -99,7 +101,7 @@ const useStyles = makeStyles((theme) => ({
     },
     modalContent: {
         padding: "20px"
-    }
+    },
 }));
 
 
@@ -148,16 +150,12 @@ const classes = useStyles();
                     </Grid>
                 </DialogContent>
             </div>
-                    <DialogActions className={classes.dialogBottom}>
-                        {/*<Grid container className={classes.timing} xs={12} sm={3} spacing={0}>*/}
-                        {/*    <Grid item xs={4} sm={12}>*/}
-                        {/*        <EventTime time={props.dateInUserTimeZone}/>*/}
-                        {/*    </Grid>*/}
-
-                        {/*    <Grid item xs={3} sm={12}>*/}
-                        {/*        <Duration duration={props.duration}/>*/}
-                        {/*    </Grid>*/}
-                        {/*</Grid>*/}
+                    <DialogActions
+                        className={classes.dialogBottom} disableSpacing>
+                        <ResponsiveTime
+                            dateInUserTimeZone={props.dateInUserTimeZone}
+                            duration={props.duration}
+                        />
                         <PrimaryButton text={"Watch Recording"}/>
                         {/*onClick={props.closeModal}*/}
                     </DialogActions>

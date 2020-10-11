@@ -36,21 +36,15 @@ const BootstrapButton = withStyles({
 
 
 
-const useStyles = makeStyles((theme) => ({
-    margin: {
-        margin: theme.spacing(1)
-    }
-}));
+
 
 export default function PrimaryButton(props) {
-    const classes = useStyles();
 
     return (
         <BootstrapButton
             variant="contained"
             color="primary"
             disableRipple
-            className={classes.margin}
             onClick={props.onClick ? props.onClick : ""}
         >
             {props.text}

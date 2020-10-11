@@ -12,8 +12,10 @@ const useStyles = makeStyles((theme) => ({
     duration: {
         display: "flex",
         alignItems: "center",
+        maxWidth: "100px",
         justifyContent: "center",
-        marginTop: "7px",
+        paddingTop: "7px",
+        paddingBottom: "4px",
         color: "#727272",
         minWidth: theme.spacing(8),
 
@@ -41,14 +43,13 @@ export default function Duration(props) {
 
   return (
     <React.Fragment>
-      <ResponsiveContainer>
+
           <div className={classes.duration}>
               <ScheduleIcon className={classes.durationIcon}/>
               <Typography className={classes.durationText}>
                   {`${props.duration} min`}
               </Typography>
           </div>
-      </ResponsiveContainer>
     </React.Fragment>
   );
 }

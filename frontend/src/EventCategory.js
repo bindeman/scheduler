@@ -16,6 +16,7 @@ import Fade from '@material-ui/core/Fade';
 import EventTime from "./EventTime";
 import Duration from "./Duration";
 import EventModal from "./EventModal";
+import ResponsiveTime from "./ResponsiveTime";
 
 
 
@@ -88,7 +89,7 @@ const divRef = useRef();
             title={"Exploring the differences between language, international affairs, and copyright law in the East Asia"}
             presenter={"Linda Egnatz"}
             organization={"Walworth Foundation"}
-            duration={"30 min"}
+            duration={"30"}
             divRef={divRef}
             live={true}
             description={"This event explores the ideas of intersectionality and the piece of work that is required for those who need a way back. We understand what is required when the world changes to accomodate new news."}
@@ -109,15 +110,10 @@ const divRef = useRef();
                     className={classes.paper}>
                     <Grid container spacing={4}>
                         <Grid item xs={12} sm={3}>
-                            <Grid container xs={12} sm={3} spacing={0}>
-                                <Grid item xs={4} sm={12}>
-                                    <EventTime time={item.dateInUserTimeZone}/>
-                                </Grid>
-
-                                <Grid item xs={3} sm={12}>
-                                <Duration duration={item.duration}/>
-                                </Grid>
-                            </Grid>
+                            <ResponsiveTime
+                                dateInUserTimeZone={item.dateInUserTimeZone}
+                                duration={item.duration}
+                            />
                         </Grid>
                         <Grid item xs={12} sm={8}>
                             <Typography className={classes.eventTitle}>{item.title}</Typography>

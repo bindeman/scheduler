@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: "none",
         color: "#fff",
         textTransform: "lowercase",
-        padding: "3px 8px 2px 8px",
+        padding: "2px 8px 2px 8px",
         borderRadius: "3px",
         letterSpacing: "-0.28px",
         fontWeight: 700,
@@ -37,7 +37,6 @@ export default function EventTime(props) {
 
   return (
     <React.Fragment>
-      <ResponsiveContainer>
           <Button size="large"
                   className="startTime"
                   variant="contained"
@@ -46,7 +45,6 @@ export default function EventTime(props) {
                   className={classes.eventTime}>
               {moment(props.time).format('LT')}
           </Button>
-      </ResponsiveContainer>
     </React.Fragment>
   );
 }
