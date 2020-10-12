@@ -1,25 +1,13 @@
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import {ChevronRight} from "@material-ui/icons";
-import ScheduleIcon from '@material-ui/icons/Schedule';
 import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
 import axios from 'axios';
-import moment from "moment-timezone";
 import jstz from 'jstz';
 import LoadingSpinner from "./Spinner";
-import Box from "@material-ui/core/Box";
 import Link from "@material-ui/core/Link";
-import Slide from '@material-ui/core/Slide';
 import Fade from '@material-ui/core/Fade';
-import EventTime from "./EventTime";
-import Duration from "./Duration";
 import EventCategory from "./EventCategory";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
 
 
 
@@ -163,9 +151,9 @@ function Copyright() {
                     {/*    </Button>*/}
                     {/*</ButtonGroup>*/}
                         {liveEvents.length > 0 &&
-                    <EventCategory data={liveEvents} live={true}/>}
-                    <EventCategory data={events}/>
-                    <EventCategory data={pastEvents}/>
+                    <EventCategory data={liveEvents} eventStatus={"live"}/>}
+                    <EventCategory data={events} eventStatus={"future"}/>
+                    <EventCategory data={pastEvents} eventStatus={"past"} />
                     </div>
                 </Fade>
 

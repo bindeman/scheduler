@@ -3,39 +3,13 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
-import Box from '@material-ui/core/Box';
 import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
-import MenuIcon from '@material-ui/icons/Menu';
-import Events from './Events';
 import ListItems from "./Sidebar";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import globalSealLogo from "./img/globalSealLogo.png";
 import globalCRED from "./img/globalCRED.svg";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
-import Chart from './Chart';
-import Content from "./Content";
 
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {`Copyright © ${new Date().getFullYear()} `}
-      <Link color="inherit" href="http://theglobalseal.com">
-        The Global Seal.
-      </Link>{' '}
-
-      {'All rights reserved.'}
-    </Typography>
-  );
-}
 
 const drawerWidth = 260;
 

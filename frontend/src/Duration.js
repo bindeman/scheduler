@@ -1,12 +1,7 @@
 import React from 'react';
 import {makeStyles, useTheme} from '@material-ui/core/styles';
-import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
-import Title from './Title';
-import moment from "moment-timezone";
-import Button from "@material-ui/core/Button";
 import ScheduleIcon from "@material-ui/icons/Schedule";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
     duration: {

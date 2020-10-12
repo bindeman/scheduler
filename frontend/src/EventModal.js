@@ -1,28 +1,20 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import {ChevronRight} from "@material-ui/icons";
-import ScheduleIcon from '@material-ui/icons/Schedule';
 import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import axios from 'axios';
 import moment from "moment-timezone";
-import jstz from 'jstz';
-import LoadingSpinner from "./Spinner";
-import Box from "@material-ui/core/Box";
-import Link from "@material-ui/core/Link";
-import Slide from '@material-ui/core/Slide';
-import Fade from '@material-ui/core/Fade';
-import EventTime from "./EventTime";
-import Duration from "./Duration";
-import Modal from "@material-ui/core/Modal";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import PrimaryButton from "./PrimaryButton";
-import EventCategory from "./EventCategory";
 import ResponsiveTime from "./ResponsiveTime";
+import liveBadge from "./img/livebadge.svg";
+import Chip from "@material-ui/core/Chip";
+import Avatar from "@material-ui/core/Avatar";
+import CloseIcon from '@material-ui/icons/Close';
+import IconButton from "@material-ui/core/IconButton";
+
 
 
 
@@ -37,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: "13px",
         flexDirection: 'column',
         boxShadow: "0 0 40px 0 rgba(0,0,0,0.15)",
-        //width: "100%",
         textAlign: "left",
         textTransform: "none",
         marginTop: "18px",
@@ -76,9 +67,9 @@ const useStyles = makeStyles((theme) => ({
     },
     closeButton: {
         position: 'absolute',
-        right: theme.spacing(1),
-        top: theme.spacing(1),
-        color: theme.palette.grey[500],
+        right: theme.spacing(2),
+        top: theme.spacing(2),
+        color: "#D3D3D3",
     },
     eventDescription: {
         fontWeight: 600,
@@ -97,24 +88,48 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 700,
         fontSize: "13px",
         color: "#A5A5A5",
-        marginTop: "10px"
     },
     modalContent: {
         padding: "20px"
     },
+    liveBadge: {
+        maxWidth: "60px",
+        maxHeight: "25px"
+    }
 }));
 
 
 export default function EventModal(props) {
+
+let eventTitleText;
+let buttonText
+    switch (props.eventStatus) {
+        case "future":
+            eventTitleText = "Scheduled event " + moment(props.dateInUserTimeZone).fromNow();
+            buttonText = "Event Page"
+            break;
+        case "past":
+            eventTitleText = "Past event from " + moment(props.dateInUserTimeZone).format('MMMM Do, YYYY');
+            buttonText = "Watch Recording"
+            break;
+        case "live":
+            eventTitleText = "Event started " + moment(props.dateInUserTimeZone).fromNow();
+            buttonText = "Join Event"
+            break;
+        case "recorded":
+            eventTitleText = "Pre-Recorded event";
+            buttonText = "Watch Event"
+            break;
+
+    }
 
 const classes = useStyles();
 
 
   return (
     <React.Fragment>
-
         <Dialog
-            style={{position: 'absolute', display: "block", margin: "auto"}}
+            style={{position: 'absolute'}}
             disablePortal
             disableEnforceFocus
             disableAutoFocus
@@ -125,16 +140,32 @@ const classes = useStyles();
             onClose={props.closeModal}>
 
             <div className={classes.modalContent}>
-            <DialogTitle>
-                <Typography className={classes.dialogTitle} onClose={props.closeModal}>
-                    Event
+            <DialogTitle style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                <div>
+                {props.eventStatus === "live" && (<img alt="Live Badge" className={classes.liveBadge} src={liveBadge}/>)}
+                <Typography className={classes.dialogTitle}>
+                    {eventTitleText}
                 </Typography>
+                </div>
+                <IconButton className={classes.closeButton} onClick={props.closeModal}>
+                    <CloseIcon />
+                </IconButton>
+
             </DialogTitle>
                 <DialogContent>
                     <Grid container spacing={6}>
                         <Grid item xs={12} sm={7}>
                             <Typography className={`${classes.eventTitle} ${classes.titleGutter}`}>{props.title}</Typography>
                             <Typography className={classes.eventDescription}>{props.description}</Typography>
+
+
+
+                            {/*<div className={classes.root}>*/}
+                            {/*    <Chip label="Basic" />*/}
+                            {/*    <Chip label="Disabled" disabled />*/}
+                            {/*    <Chip avatar={<Avatar>M</Avatar>} label="Clickable" />*/}
+                            {/*</div>*/}
+
                         </Grid>
                         <Grid item xs={12} sm={5}>
                             <Typography className={classes.eventSubtitle}>{`${props.presenter},`}</Typography>
@@ -156,7 +187,7 @@ const classes = useStyles();
                             dateInUserTimeZone={props.dateInUserTimeZone}
                             duration={props.duration}
                         />
-                        <PrimaryButton text={"Watch Recording"}/>
+                        <PrimaryButton text={buttonText}/>
                         {/*onClick={props.closeModal}*/}
                     </DialogActions>
         </Dialog>
