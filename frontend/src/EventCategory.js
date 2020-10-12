@@ -68,33 +68,44 @@ const useStyles = makeStyles(() => ({
 
 export default function EventCategory(props) {
     const [modalOpen, setModalOpen] = React.useState(false);
+    const [modalProps, setModalProps] = React.useState({
+    });
 
-    const handleModalOpen = () => {
+     const handleModalOpen = (e, item) => {
+        const props = {
+            title: item.title,
+            presenter: item.presenter,
+            organization: item.organization,
+            duration: item.duration,
+            description: item.description,
+            bio: item.bio,
+            dateInUserTimeZone: item.dateInUserTimeZone,
+        }
+
+        setModalProps(props);
         setModalOpen(true);
-    };
+
+    }
 
     const handleModalClose = () => {
         setModalOpen(false);
     };
 const classes = useStyles();
-const divRef = useRef();
 
   return (
     <React.Fragment>
 
 
-        <div ref={divRef}>
+        <div>
             <EventModal
             open={modalOpen}
-            title={"Exploring the differences between language, international affairs, and copyright law in the East Asia"}
-            presenter={"Linda Egnatz"}
-            organization={"Walworth Foundation"}
-            duration={"30"}
-            divRef={divRef}
-            live={true}
-            description={"This event explores the ideas of intersectionality and the piece of work that is required for those who need a way back. We understand what is required when the world changes to accomodate new news."}
-            bio={"International Education Consultant, former International Education Administrator of Seattle Public Schools, World Language Supervisor Emeritus for the State of Washington"}
-            dateInUserTimeZone={Date.now()}
+            title={modalProps.title}
+            presenter={modalProps.presenter}
+            organization={modalProps.organization}
+            duration={modalProps.duration}
+            description={modalProps.description}
+            bio={modalProps.bio}
+            dateInUserTimeZone={modalProps.dateInUserTimeZone}
             closeModal={handleModalClose}
 
             >
@@ -105,7 +116,7 @@ const divRef = useRef();
                     <div>
                     {item.dateHeader && <Typography className={classes.dateHeading}>Events {moment(item.dateInUserTimeZone).fromNow()}</Typography>}
                     <Button
-                        onClick={handleModalOpen}
+                        onClick={(e => handleModalOpen(e, item))}
                         endIcon={<ChevronRight  className={classes.buttonChevron}/>}
                     className={classes.paper}>
                     <Grid container spacing={4}>

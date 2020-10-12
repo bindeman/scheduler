@@ -26,21 +26,6 @@ import Select from "@material-ui/core/Select";
 
 
 const useStyles = makeStyles((theme) => ({
-    depositContext: {
-        flex: 1,
-    },
-    paper: {
-        padding: "26px 33px 26px 33px",
-        display: 'flex',
-        overflow: 'auto',
-        borderRadius: "6px",
-        flexDirection: 'column',
-        width: "100%",
-        textAlign: "left",
-        textTransform: "none",
-        backgroundColor: "#EFF0ED",
-        marginTop: "18px"
-    },
     eventTitle: {
         fontSize: "13px",
         fontWeight: "700",
@@ -76,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
         letterSpacing: "-0.57px",
         lineHeight: "23px",
         textAlign: "left",
-        maxWidth: "350px",
+        //maxWidth: "350px",
         transition: "0.25s"
     },
     copyright: {
@@ -133,13 +118,7 @@ export default function Events(props) {
         FetchData();
     }, []);
 
-
-
-
 const classes = useStyles();
-
-
-
 
 function Copyright() {
     return (
@@ -153,12 +132,6 @@ function Copyright() {
         </p>
     );
 }
-
-
-
-
-
-
 
   return (
     <React.Fragment>

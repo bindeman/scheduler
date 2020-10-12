@@ -37,17 +37,10 @@ function Copyright() {
   );
 }
 
-
-
 const drawerWidth = 260;
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
-  },
+
   toolbarIcon: {
     display: 'flex',
     alignItems: 'center',
@@ -56,21 +49,6 @@ const useStyles = makeStyles((theme) => ({
     padding: '0 0',
 
     ...theme.mixins.toolbar,
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
   },
   menuButton: {
     marginRight: 36,
@@ -102,24 +80,7 @@ const useStyles = makeStyles((theme) => ({
     }),
     width: "103px",
   },
-  appBarSpacer: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    height: '100vh',
-    position: "relative",
-    overflow: 'auto',
-    backgroundColor: "#F4F4F4",
-    padding: "12px"
-  },
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-    maxWidth: "500px",
-    minHeight: "100%",
-    margin: "auto",
-    display: "flex",
-    //justifyContent: "space-evenly"
-  },
+
   paper: {
     padding: theme.spacing(2),
     display: 'flex',
@@ -174,28 +135,13 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: "11px",
     paddingBottom: "3px"
   },
-  contentGrid: {
-    display: "flex",
-    justifyContent: "space-evenly"
-  }
 }));
-
-
-
 
 export default function SidebarDrawer() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
   useEffect(() => {
-    // Handler to call on window resize
     function handleResize() {
       setOpen(window.innerWidth < 720 ? false : true);
     }

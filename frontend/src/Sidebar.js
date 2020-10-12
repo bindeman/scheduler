@@ -11,9 +11,8 @@ import learners from './img/learners.png';
 import administrators from './img/adminstrators.png';
 import contentproviders from './img/contentproviders.png';
 import educators from './img/educators.png';
-
 import clsx from "clsx";
-import {useLocation, Link, NavLink, LinkProps } from "react-router-dom";
+import {useLocation, NavLink } from "react-router-dom";
 
 
 const useMenuStyles = makeStyles(() => ({
@@ -31,8 +30,6 @@ const useMenuStyles = makeStyles(() => ({
         "&.active": {
             background: '#F9F9F9',
         },
-
-
     },
     menuListItemText: {
         fontSize: "11px",
@@ -99,17 +96,6 @@ export default function Sidebar(props) {
 
     const menubar = useMenuStyles();
 
-    // const CustomLink = React.useMemo(
-    //     (url) =>
-    //         React.forwardRef((linkProps, ref) => (
-    //             <Link ref={ref} to={url} {...linkProps} />
-    //         )),
-    //     [url],
-    // );
-
-    // const AdapterLink = React.forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => (
-    //     <Link innerRef={ref} {...props} />
-    // ));
     const location = useLocation();
     console.log(location.pathname);
     return (
