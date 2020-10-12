@@ -22,8 +22,6 @@ import globalCRED from "./img/globalCRED.svg";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Chart from './Chart';
 import Content from "./Content";
-import Sidebar from "./Sidebar";
-import SidebarDrawer from "./Drawer";
 
 
 function Copyright() {
@@ -182,52 +180,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function useWindowSize() {
-  const [windowSize, setWindowSize] = useState({
-    width: undefined,
-    height: undefined,
-  });
-  const [drawerOpen, setDrawerOpen] = useState(0);
-
-  useEffect(() => {
-    // Handler to call on window resize
-    function handleResize() {
-
-      if(window.innerWidth < 900) {
-        if(drawerOpen === 1) setDrawerOpen( 0)
-      } else if ((window.innerWidth > 900)) {
-        if(drawerOpen === 0) setDrawerOpen( 1)
-      }
-      // Set window width/height to state
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-
-      // if(windowSize.width < 720) {
-      //   if (drawerOpen === true) setDrawerOpen("false")
-      // } else if (windowSize.width > 720) {
-      //   if (drawerOpen === false) setDrawerOpen("true")
-      // }
-    }
-
-    // Add event listener
-    window.addEventListener("resize", handleResize);
-
-    // Call handler right away so state gets updated with initial window size
-    handleResize();
-
-    // Remove event listener on cleanup
-    return () => window.removeEventListener("resize", handleResize);
-  }, []); // Empty array ensures that effect is only run on mount
-
-  return drawerOpen;
-}
 
 
-export default function Dashboard() {
+
+export default function SidebarDrawer() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -235,18 +194,55 @@ export default function Dashboard() {
     setOpen(false);
   };
 
-  //const size =useWindowSize();
+  useEffect(() => {
+    // Handler to call on window resize
+    function handleResize() {
+      setOpen(window.innerWidth < 720 ? false : true);
+    }
 
-  //TODO put this into its own function
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => window.removeEventListener("resize", handleResize);
 
-
+  }, []); // Empty array ensures that effect is only run on mount
 
 
   return (
-    <div className={classes.root}>
+      <React.Fragment>
       <CssBaseline />
-      <SidebarDrawer/>
-      <Content/>
-    </div>
+      <Drawer
+        variant="permanent"
+        classes={{
+          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+        }}
+        open={open}
+      >
+        <List className={clsx( open && classes.logo, classes.logoClosed)}>
+
+        <ListItem>
+          <ListItemIcon>
+            <div className={clsx( open && classes.listItemIconContainer, classes.listItemIconContainerClosed)}>
+            <img alt="Global Seal Logo" className={classes.listItemIcon} src={globalSealLogo}/>
+            </div>
+          </ListItemIcon>
+            <img className={clsx( !open && classes.textLogo, classes.textLogoClosed)} alt="Global C.R.E.D. Logo" src={globalCRED}/>
+        </ListItem>
+        </List>
+
+        <div className={classes.centered}>
+        <ListItems
+        drawerOpen={open}
+        />
+        </div>
+
+        <div className={classes.toolbarIcon}>
+          {/*<IconButton onClick={open ? handleDrawerClose : handleDrawerOpen}>*/}
+          {/*  <MenuIcon />*/}
+          {/*</IconButton>*/}
+        </div>
+
+      </Drawer>
+      </React.Fragment>
+
   );
 }

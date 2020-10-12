@@ -49,15 +49,19 @@ const useStyles = makeStyles((theme) => ({
         color: "#444444",
         letterSpacing: "-0.08px",
         lineHeight: "17px",
-        marginBottom: "5px"
     },
     eventSubtitle: {
         fontSize: "13px",
         fontWeight: "600",
+        display: "block",
         color: "#658546",
         letterSpacing: "-0.08px",
-        lineHeight: "17px"
+        lineHeight: "17px",
     },
+    titleGutter: {
+        marginBottom: "8px"
+    },
+
     buttonChevron: {
         fontSize: "5px",
         color: "#658546",
@@ -86,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
     dialogBottom: {
         backgroundColor: "#F7F7F7",
         marginTop: "20px",
-        padding: "23px",
+        padding: "23px 35px",
         display: "flex",
     },
     dialogTitle: {
@@ -129,12 +133,12 @@ const classes = useStyles();
                 <DialogContent>
                     <Grid container spacing={6}>
                         <Grid item xs={12} sm={7}>
-                            <Typography className={classes.eventTitle}>{props.title}</Typography>
+                            <Typography className={`${classes.eventTitle} ${classes.titleGutter}`}>{props.title}</Typography>
                             <Typography className={classes.eventDescription}>{props.description}</Typography>
                         </Grid>
                         <Grid item xs={12} sm={5}>
                             <Typography className={classes.eventSubtitle}>{`${props.presenter},`}</Typography>
-                            <Typography className={classes.eventSubtitle}>{props.organization}</Typography>
+                            <Typography className={`${classes.eventSubtitle} ${classes.titleGutter}`}>{props.organization}</Typography>
                             <Typography className={classes.eventDescription}>{props.bio}</Typography>
                         </Grid>
                         {/*<Grid item xs={12} sm={8}>*/}

@@ -12,6 +12,12 @@ const theme = createMuiTheme({
     typography: {
         fontFamily: 'Open Sans, Helvetica, Arial',
     },
+    breakpoints: {
+        values: {
+            xs: 0,
+            sm: 700,
+        },
+    },
     overrides: {
         MuiCssBaseline: {
             '@global': {
@@ -19,6 +25,7 @@ const theme = createMuiTheme({
             },
 
         },
+
     },
 });
 
