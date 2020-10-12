@@ -17,11 +17,8 @@ const theme = createMuiTheme({
             '@global': {
                 '@font-face': "Open Sans",
             },
+
         },
-        dialog: {
-            position: "left",
-            left: "90px"
-        }
     },
 });
 

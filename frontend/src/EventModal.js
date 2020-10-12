@@ -33,13 +33,12 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         display: 'flex',
         overflow: 'auto',
+        position: "fixed",
         borderRadius: "13px",
         flexDirection: 'column',
         boxShadow: "0 0 40px 0 rgba(0,0,0,0.15)",
         //width: "100%",
         textAlign: "left",
-        position: "absolute",
-        //left: "1px",
         textTransform: "none",
         marginTop: "18px",
 
@@ -90,9 +89,6 @@ const useStyles = makeStyles((theme) => ({
         padding: "23px",
         display: "flex",
     },
-    timing: {
-        float: "right"
-    },
     dialogTitle: {
         fontWeight: 700,
         fontSize: "13px",
@@ -114,14 +110,14 @@ const classes = useStyles();
     <React.Fragment>
 
         <Dialog
-            style={{position: 'absolute'}}
+            style={{position: 'absolute', display: "block", margin: "auto"}}
             disablePortal
             disableEnforceFocus
             disableAutoFocus
             open={props.open}
             classes={{paper: classes.paper}}
             container={() => document.getElementById('content')}
-            BackdropProps={{ style: { backgroundColor: "rgba(0,0,0,0.10)", position: "absolute"} }}
+            BackdropProps={{ style: { backgroundColor: "rgba(0,0,0,0.10)", position: "fixed"} }}
             onClose={props.closeModal}>
 
             <div className={classes.modalContent}>
