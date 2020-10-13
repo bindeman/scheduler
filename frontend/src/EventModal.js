@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         display: 'flex',
-        overflow: 'auto',
+        //overflow: 'auto',
         position: "fixed",
         borderRadius: "13px",
         flexDirection: 'column',
@@ -152,7 +152,7 @@ const classes = useStyles();
                 </IconButton>
 
             </DialogTitle>
-                <DialogContent>
+                <DialogContent style={{ overflow: "hidden" }}>
                     <Grid container spacing={6}>
                         <Grid item xs={12} sm={7}>
                             <Typography className={`${classes.eventTitle} ${classes.titleGutter}`}>{props.title}</Typography>
