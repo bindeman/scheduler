@@ -19,15 +19,14 @@ const BootstrapButton = withStyles({
         backgroundColor: "transparent",
         borderColor: "#fff",
         "&:hover": {
-            backgroundColor: "#1C5100",
+            backgroundColor: "#fff",
             borderColor: "#fff",
             boxShadow: "none",
-            color: "#fff"
+            color: "#1C5100"
         },
         "&:active": {
             boxShadow: "none",
-            backgroundColor: "fff",
-            color: "#133600",
+            backgroundColor: "#AABEA0",
             borderColor: "#fff",
         },
         "&:focus": {
