@@ -2,6 +2,7 @@ import React from 'react';
 import {makeStyles, useTheme} from '@material-ui/core/styles';
 import moment from "moment-timezone";
 import Button from "@material-ui/core/Button";
+import clsx from "clsx";
 
 const useStyles = makeStyles((theme) => ({
     eventTime: {
@@ -16,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: "3px",
         marginRight: "3px",
         fontSize: "11px",
+        opacity: "1.0",
         "&:disabled":  {
             backgroundColor: "red",
             color: "purple"
@@ -23,8 +25,12 @@ const useStyles = makeStyles((theme) => ({
         "&:hover": {
             backgroundColor: "#658546",
             boxShadow: "none",
-        }
+        },
+
     },
+    pastEvent: {
+        opacity: "0.20"
+    }
 
 
 }));
@@ -41,7 +47,7 @@ export default function EventTime(props) {
                   variant="contained"
                   disableRipple={true}
                   disabled={false}
-                  className={classes.eventTime}>
+                  className={clsx(classes.eventTime, props.eventStatus === "past" && classes.pastEvent)}>
               {moment(props.time).format('LT')}
           </Button>
     </React.Fragment>

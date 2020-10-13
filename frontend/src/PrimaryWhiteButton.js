@@ -10,30 +10,28 @@ const BootstrapButton = withStyles({
         textTransform: "none",
         fontSize: 11,
         fontWeight: 700,
-        color: "#648540",
+        color: "#fff",
         letterSpacing: "-0.25px",
         lineHeight: "14px",
         padding: "9px 26px",
         border: "3px solid",
         borderRadius: "18px",
-        backgroundColor: "white",
-        borderColor: "#648540",
+        backgroundColor: "transparent",
+        borderColor: "#fff",
         "&:hover": {
             backgroundColor: "#1C5100",
-            borderColor: "#1C5100",
+            borderColor: "#fff",
             boxShadow: "none",
             color: "#fff"
-
-
         },
         "&:active": {
             boxShadow: "none",
-            backgroundColor: "#133600",
-            color: "#fff"
-            //borderColor: '#648540',
+            backgroundColor: "fff",
+            color: "#133600",
+            borderColor: "#fff",
         },
         "&:focus": {
-            boxShadow: "0 0 0 0.2rem rgba(65,117,5,.3)"
+            boxShadow: "0 0 0 0.2rem rgba(211,255,186,.3)"
         }
     }
 })(Button);

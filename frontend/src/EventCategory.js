@@ -118,7 +118,7 @@ const classes = useStyles();
                             <ResponsiveTime
                                 dateInUserTimeZone={item.dateInUserTimeZone}
                                 duration={item.duration}
-                                live={props.eventStatus}
+                                eventStatus={props.eventStatus}
                             />
                         </Grid>
                         <Grid item xs={12} sm={8}>

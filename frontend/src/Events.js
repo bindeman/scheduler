@@ -8,6 +8,7 @@ import LoadingSpinner from "./Spinner";
 import Link from "@material-ui/core/Link";
 import Fade from '@material-ui/core/Fade';
 import EventCategory from "./EventCategory";
+import RecordedEvents from "./RecordedEvents";
 
 
 
@@ -160,7 +161,13 @@ function Copyright() {
         </Grid>
 
 
-        {!loading && (<Copyright />)}
+        {!loading &&
+        <div>
+            <RecordedEvents/>
+            <Copyright />
+        </div>
+        }
+
 
     </React.Fragment>
   );
