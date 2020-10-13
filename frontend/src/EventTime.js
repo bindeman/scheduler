@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
         letterSpacing: "-0.28px",
         fontWeight: 700,
         marginTop: "3px",
+        marginRight: "3px",
         fontSize: "11px",
         "&:disabled":  {
             backgroundColor: "red",

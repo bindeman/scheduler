@@ -45,7 +45,9 @@ export default function PrimaryButton(props) {
             variant="contained"
             color="primary"
             disableRipple
-            onClick={props.onClick ? props.onClick : ""}
+            target={"_blank"}
+            href={props.link}
+            //onClick={props.onClick ? props.onClick : ""}
         >
             {props.text}
         </BootstrapButton>

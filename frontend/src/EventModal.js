@@ -19,12 +19,9 @@ import IconButton from "@material-ui/core/IconButton";
 
 
 const useStyles = makeStyles((theme) => ({
-    depositContext: {
-        flex: 1,
-    },
     paper: {
         display: 'flex',
-        //overflow: 'auto',
+        //overflow: 'auto,
         position: "fixed",
         borderRadius: "13px",
         flexDirection: 'column',
@@ -187,7 +184,7 @@ const classes = useStyles();
                             dateInUserTimeZone={props.dateInUserTimeZone}
                             duration={props.duration}
                         />
-                        <PrimaryButton text={buttonText}/>
+                        <PrimaryButton link={props.link} text={buttonText}/>
                         {/*onClick={props.closeModal}*/}
                     </DialogActions>
         </Dialog>

@@ -70,7 +70,8 @@ export default function EventCategory(props) {
             description: item.description,
             bio: item.bio,
             dateInUserTimeZone: item.dateInUserTimeZone,
-            category: item.category
+            category: item.category,
+            link: item.link
         }
 
         setModalProps(props);
@@ -97,6 +98,7 @@ const classes = useStyles();
             description={modalProps.description}
             bio={modalProps.bio}
             dateInUserTimeZone={modalProps.dateInUserTimeZone}
+            link={modalProps.link}
             eventStatus={props.eventStatus}
             closeModal={handleModalClose}
 
