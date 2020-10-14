@@ -15,6 +15,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Fade from "@material-ui/core/Fade";
+import Grid from "@material-ui/core/Grid";
 
 
 const drawerWidth = 260;
@@ -25,12 +26,17 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    marginLeft: "auto",
     //marginBottom: "-12px",
     padding: '0 0',
 
     ...theme.mixins.toolbar,
   },
   appBar: {
+    justifyContent: "center",
+    backgroundColor: "white",
+    padding: "10px",
+    boxShadow: " 0 0 23px rgba(0,0,0,0.15)",
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(['margin', 'width', 'opacity', 'transform'], {
       easing: theme.transitions.easing.sharp,
@@ -58,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    color: "grey",
   },
   menuButtonHidden: {
     display: 'none',
@@ -69,7 +76,6 @@ const useStyles = makeStyles((theme) => ({
     display: "none"
   },
   drawerPaper: {
-    //zIndex: 9999,
     position: 'relative',
     overflowX: 'hidden',
     boxShadow: " 0 0 23px rgba(0,0,0,0.10)",
@@ -82,6 +88,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaperClose: {
     overflowX: 'hidden',
+    display: 'relative',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: "0.33s",
@@ -90,19 +97,21 @@ const useStyles = makeStyles((theme) => ({
     width: "103px",
   },
   drawerPaperMobile: {
+    paddingTop: "50px",
     overflowX: 'hidden',
-    //]]position: "none",
-    transition: theme.transitions.create('width', {
+    display: 'relative',
+    transition: theme.transitions.create(['width', 'padding'],  {
       easing: theme.transitions.easing.sharp,
       duration: "0.33s",
     }),
     width: "10px",
   },
   drawerPaperMobileOpen: {
+    marginTop: "50px",
     overflowX: 'hidden',
     //display: "none",
     position: 'fixed',
-    transition: theme.transitions.create('width', {
+    transition: theme.transitions.create(['width', 'padding'], {
       easing: theme.transitions.easing.sharp,
       duration: "0.33s",
     }),
@@ -128,10 +137,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "10px",
   },
   logoHidden: {
-    transition: "0.3s ease-in-out",
-    width: 0,
-    height: 0,
-    opacity: "0",
+   display: "none",
   },
   listItemIconContainer: {
     transform: "scale(1.17)",
@@ -168,6 +174,16 @@ const useStyles = makeStyles((theme) => ({
     transition: "0.25s",
     paddingLeft: "11px",
     paddingBottom: "3px"
+  },
+  appbarLogo: {
+    margin: "auto",
+    display: "block",
+    maxWidth: "40px",
+    height: "auto",
+    position: "relative"
+  },
+  addMargin: {
+    marginTop: "50px",
   },
 
 
@@ -217,6 +233,8 @@ export default function SidebarDrawer() {
             )}
         >
           <Toolbar>
+            <Grid container>
+              <Grid item xs={1}>
             <IconButton
                 color="inherit"
                 aria-label="open drawer"
@@ -226,14 +244,17 @@ export default function SidebarDrawer() {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
-              Global C.R.E.D Events
-            </Typography>
+              </Grid>
+              <Grid item xs={10}>
+            <img src={globalSealLogo}  className={classes.appbarLogo} alt={"Global Seal Logo"}/>
+              </Grid>
+              <Grid item xs={1}>
+              </Grid>
+            </Grid>
           </Toolbar>
         </AppBar>
       <Drawer
         variant={"permanent"}
-        className={clsx(open === 0 && classes.drawerHidden)}
         classes={{
           paper: clsx(classes.drawerPaper,
                   (open === 1 || open === 0) && classes.drawerPaperClose,
