@@ -107,7 +107,6 @@ const useStyles = makeStyles((theme) => ({
     width: "10px",
   },
   drawerPaperMobileOpen: {
-    marginTop: "50px",
     overflowX: 'hidden',
     //display: "none",
     position: 'fixed',
@@ -135,9 +134,14 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "8px",
     transition: "0.25s ease-in",
     marginTop: "10px",
+
   },
   logoHidden: {
-   display: "none",
+    // transform: "translate(0, -100px)",
+    transition: "0.25s linear",
+    opacity: 0
+    //width: 0,
+    //height: 0,
   },
   listItemIconContainer: {
     transform: "scale(1.17)",
