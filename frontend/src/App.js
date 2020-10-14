@@ -22,6 +22,20 @@ const theme = createMuiTheme({
             },
 
         },
+        MuiTooltip: {
+            tooltip: {
+                fontSize: "12px",
+                fontWeight: 600,
+                boxShadow: " 0 0 20px rgba(0,0,0,0.30)",
+                backgroundColor: "#1C5100",
+                borderRadius: "6px",
+                padding: "10px",
+                maxWidth: "150px",
+            },
+            arrow: {
+                color: "#1C5100",
+            }
+        }
 
     },
 });

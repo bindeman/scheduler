@@ -9,6 +9,12 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import globalSealLogo from "./img/globalSealLogo.png";
 import globalCRED from "./img/globalCRED.svg";
+import AppBar from "@material-ui/core/AppBar";
+import Typography from "@material-ui/core/Typography";
+import MenuIcon from '@material-ui/icons/Menu';
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Fade from "@material-ui/core/Fade";
 
 
 const drawerWidth = 260;
@@ -24,8 +30,34 @@ const useStyles = makeStyles((theme) => ({
 
     ...theme.mixins.toolbar,
   },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['margin', 'width', 'opacity', 'transform'], {
+      easing: theme.transitions.easing.sharp,
+      duration: "0.33s",
+      //delay: "0.1s"
+    }),
+  },
+  appBarShift: {
+    //width: `calc(100% - ${103}px)`,
+    //marginLeft: drawerWidth,
+    transition: theme.transitions.create(['margin', 'width', 'opacity', 'transform'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: "0.33s",
+      delay: "0.1s"
+    }),
+  },
+  appBarHidden: {
+    transform: "translate(0, -60px)",
+    opacity: 0,
+    transition: theme.transitions.create(['transform', 'opacity'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: "0.33s",
+    }),
+
+  },
   menuButton: {
-    marginRight: 36,
+    marginRight: theme.spacing(2),
   },
   menuButtonHidden: {
     display: 'none',
@@ -33,12 +65,15 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  drawer: {
+    display: "none"
+  },
   drawerPaper: {
-    zIndex: 9999,
+    //zIndex: 9999,
     position: 'relative',
     overflowX: 'hidden',
-    boxShadow: " 0 0 23px rgba(0,0,0,0.10);",
-    width: drawerWidth,
+    boxShadow: " 0 0 23px rgba(0,0,0,0.10)",
+    width: "260px",
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: "0.33s",
@@ -51,6 +86,25 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: "0.33s",
       delay: "0.1s"
+    }),
+    width: "103px",
+  },
+  drawerPaperMobile: {
+    overflowX: 'hidden',
+    //]]position: "none",
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: "0.33s",
+    }),
+    width: "10px",
+  },
+  drawerPaperMobileOpen: {
+    overflowX: 'hidden',
+    //display: "none",
+    position: 'fixed',
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: "0.33s",
     }),
     width: "103px",
   },
@@ -72,6 +126,12 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "8px",
     transition: "0.25s ease-in",
     marginTop: "10px",
+  },
+  logoHidden: {
+    transition: "0.3s ease-in-out",
+    width: 0,
+    height: 0,
+    opacity: "0",
   },
   listItemIconContainer: {
     transform: "scale(1.17)",
@@ -109,15 +169,34 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: "11px",
     paddingBottom: "3px"
   },
+
+
 }));
 
 export default function SidebarDrawer() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const [openMobile, setOpenMobile] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpenMobile(!openMobile);
+  }
+
+  const handleDrawerClose = () => {
+    setOpenMobile(false);
+  }
 
   useEffect(() => {
     function handleResize() {
-      setOpen(window.innerWidth < 720 ? false : true);
+      if(window.innerWidth < 600) {
+        setOpen(0)
+      }
+      else if(window.innerWidth < 720 && window.innerWidth > 600) {
+        setOpen(1);
+      }
+      else {
+        setOpen(2);
+      }
     }
 
     window.addEventListener("resize", handleResize);
@@ -130,24 +209,54 @@ export default function SidebarDrawer() {
   return (
       <React.Fragment>
       <CssBaseline />
+        <AppBar
+            position="fixed"
+            className={clsx(classes.appBar, {
+              [classes.appBarShift]: openMobile,
+            }, open !== 0 && classes.appBarHidden,
+            )}
+        >
+          <Toolbar>
+            <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                className={clsx(classes.menuButton, open && classes.hide)}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" noWrap>
+              Global C.R.E.D Events
+            </Typography>
+          </Toolbar>
+        </AppBar>
       <Drawer
-        variant="permanent"
+        variant={"permanent"}
+        className={clsx(open === 0 && classes.drawerHidden)}
         classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+          paper: clsx(classes.drawerPaper,
+                  (open === 1 || open === 0) && classes.drawerPaperClose,
+                   open === 0 && !openMobile && classes.drawerPaperMobile,
+                   open === 0 && openMobile && classes.drawerPaperMobileOpen),
         }}
-        open={open}
+        open={open === 2}
       >
-        <List className={clsx( open && classes.logo, classes.logoClosed)}>
+        {/*<Fade in={open !== 0} out={open === 0}>*/}
+        <List className={clsx( open === 2 && classes.logo,
+                              open === 0 && classes.logoHidden,
+                              classes.logoClosed)}>
 
         <ListItem>
           <ListItemIcon>
-            <div className={clsx( open && classes.listItemIconContainer, classes.listItemIconContainerClosed)}>
+            <div className={clsx( open === 2 && classes.listItemIconContainer, classes.listItemIconContainerClosed)}>
             <img alt="Global Seal Logo" className={classes.listItemIcon} src={globalSealLogo}/>
             </div>
           </ListItemIcon>
-            <img className={clsx( !open && classes.textLogo, classes.textLogoClosed)} alt="Global C.R.E.D. Logo" src={globalCRED}/>
+            <img className={clsx( (open === 1 || open === 0) && classes.textLogo, classes.textLogoClosed)} alt="Global C.R.E.D. Logo" src={globalCRED}/>
         </ListItem>
         </List>
+        {/*</Fade>*/}
 
         <div className={classes.centered}>
         <ListItems

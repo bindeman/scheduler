@@ -16,7 +16,7 @@ export default function Dashboard() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      {/*<SidebarDrawer/>*/}
+      <SidebarDrawer/>
       <Content/>
     </div>
   );

@@ -13,6 +13,7 @@ import contentproviders from './img/contentproviders.png';
 import educators from './img/educators.png';
 import clsx from "clsx";
 import {useLocation, NavLink } from "react-router-dom";
+import Tooltip from "@material-ui/core/Tooltip";
 
 
 const useMenuStyles = makeStyles(() => ({
@@ -62,6 +63,13 @@ const useMenuStyles = makeStyles(() => ({
         backgroundColor: "red",
         fontWeight: 900,
     },
+    tooltip: {
+        zIndex: 99999999,
+        fontWeight: 700,
+        fontSize: "13px",
+
+
+    }
 
 }));
 
@@ -102,6 +110,16 @@ export default function Sidebar(props) {
         <List className={menubar.menuList}>
         <div>
             {menuItems.map(item => (
+                <Tooltip arrow={true} disableHoverListener={props.drawerOpen === 2} className={menubar.tooltip} title={item.title} placement="right"         PopperProps={{
+                    popperOptions: {
+                        modifiers: {
+                            offset: {
+                                enabled: true,
+                                offset: '0 5px 0 0',
+                            },
+                        },
+                    },
+                }}>
                 <ListItem className={menubar.menuListItem} button component={NavLink} to={item.link} activeClassName="active">
                     <ListItemIcon>
                         <div className={menubar.menuListItemIconContainer}>
@@ -109,7 +127,7 @@ export default function Sidebar(props) {
                         </div>
                     </ListItemIcon>
                     <ListItemText primary={
-                        <Typography className={clsx( !props.drawerOpen && menubar.menuListItemTextClosed, menubar.menuListItemText)}
+                        <Typography className={clsx( (props.drawerOpen === 1 || props.drawerOpen === 0) && menubar.menuListItemTextClosed, menubar.menuListItemText)}
                             component="span"
                             variant="body2"
                             color="textPrimary"
@@ -123,6 +141,7 @@ export default function Sidebar(props) {
 
                         </Typography> }/>
                 </ListItem>
+                </Tooltip>
 
             ))}
         </div>
