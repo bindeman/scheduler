@@ -54,10 +54,16 @@ const useMenuStyles = makeStyles(() => ({
         height: "auto",
         marginTop: "11px",
         marginBottom: "11px",
-        fontWeight: 700
+        fontWeight: 700,
+        transition: "0.25s linear"
+    },
+    menuListItemIconContainerClosed: {
+        opacity: 0,
+        transition: "0.25s linear"
     },
     menuListItemIcon: {
-        width: "100%"
+        width: "100%",
+
     },
     hiThereGOODSir: {
         backgroundColor: "red",
@@ -122,7 +128,7 @@ export default function Sidebar(props) {
                 }}>
                 <ListItem className={menubar.menuListItem} button component={NavLink} to={item.link} activeClassName="active">
                     <ListItemIcon>
-                        <div className={menubar.menuListItemIconContainer}>
+                        <div className={clsx(menubar.menuListItemIconContainer, !props.openMobile && !props.drawerOpen && menubar.menuListItemIconContainerClosed )}>
                         <img alt={`${item.title} icon`} className={menubar.menuListItemIcon} src={item.imageURL}/>
                         </div>
                     </ListItemIcon>

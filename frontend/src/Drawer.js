@@ -286,6 +286,7 @@ export default function SidebarDrawer() {
         <div className={classes.centered}>
         <ListItems
         drawerOpen={open}
+        openMobile={openMobile}
         />
         </div>
 
