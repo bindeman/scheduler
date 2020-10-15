@@ -80,7 +80,7 @@ router.get('/live_old', (req, res) => {
         }).catch(err => res.status(404).json({ success: false }));
 });
 
-router.get('/live/category/:number', (req, res) => {
+router.get('/now/category/:number', (req, res) => {
     const timezone = req.get("timezone") ? req.get("timezone") : "Etc/GMT";
     console.log(timezone)
 

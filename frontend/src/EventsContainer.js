@@ -9,6 +9,7 @@ import Box from '@material-ui/core/Box';
 import Events from "./Events";
 import Paper from "@material-ui/core/Paper";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import PreReordedEvents from "./PreReordedEvents";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -128,7 +129,7 @@ export default function EventsContainer(props) {
                 <Events category={props.category} title={props.title}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <Events category={props.category} title={props.title}/>
+                <PreReordedEvents category={props.category} title={props.title}/>
             </TabPanel>
         </div>
     );

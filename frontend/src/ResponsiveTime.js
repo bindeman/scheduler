@@ -24,7 +24,7 @@ export default function ResponsiveTime(props) {
 
     return (
         <div className={classes.root}>
-            <EventTime time={props.dateInUserTimeZone} eventStatus={props.eventStatus}/>
+            {props.eventStatus !== 'prerecorded' && <EventTime time={props.dateInUserTimeZone} eventStatus={props.eventStatus}/>}
             <Duration duration={props.duration} time={props.dateInUserTimeZone} eventStatus={props.eventStatus}/>
 
         </div>

@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 import moment from "moment-timezone";
 import EventModal from "./EventModal";
 import ResponsiveTime from "./ResponsiveTime";
+import Duration from "./Duration";
 
 
 
@@ -90,7 +91,7 @@ const classes = useStyles();
 
         <div>
 
-        {props.live && <Typography className={classes.dateHeading}>Events happening right now</Typography>}
+        {props.eventStatus === 'live' && <Typography className={classes.dateHeading}>Events happening right now</Typography>}
         {props.data.map((item, index) => {
             return (
                     <div>
@@ -100,14 +101,15 @@ const classes = useStyles();
                         endIcon={<ChevronRight  className={classes.buttonChevron}/>}
                     className={classes.paper}>
                     <Grid container spacing={4}>
-                        <Grid item xs={12} sm={3}>
+                        <Grid item xs={12} sm={props.eventStatus !== 'prerecorded' ? 3 : 12}>
                             <ResponsiveTime
-                                dateInUserTimeZone={item.dateInUserTimeZone}
+                                dateInUserTimeZone={props.eventStatus !== 'prerecorded' ? item.dateInUserTimeZone : null}
                                 duration={item.duration}
                                 eventStatus={props.eventStatus}
                             />
                         </Grid>
-                        <Grid item xs={12} sm={8}>
+
+                        <Grid item xs={12} sm={props.eventStatus !== 'prerecorded' ? 8 : 12}>
                             <Typography className={classes.eventTitle}>{item.title}</Typography>
                             <Typography className={classes.eventSubtitle}>
                                 {`${item.presenter}, ${item.organization}`}

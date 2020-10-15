@@ -52,14 +52,14 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function RecordedEvents(props) {
+export default function NoEvents(props) {
     const classes = useStyles();
     return (
         <div className={classes.wrapper}>
             <div>
-            <Typography className={classes.eventTitle}>42 Pre-recorded Events for Language Learners</Typography>
-            <Typography className={classes.eventSubtitle}>Watch events pre-recorded by our vendors any time. More details are availale in the prerecorded event page.</Typography>
-            <PrimaryWhiteButton className={classes.button} link={"http://google.com"} text="Recorded Events"/>
+            <Typography className={classes.eventTitle}>No events yet, check back soon.</Typography>
+            <Typography className={classes.eventSubtitle}>There's no events listed so far in this category. For more details check our main page:</Typography>
+            <PrimaryWhiteButton className={classes.button} link={"http://theglobalseal.com/cred"} text="Global C.R.E.D. Homepage"/>
             </div>
         </div>
     );

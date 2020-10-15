@@ -114,9 +114,19 @@ let buttonText
             eventTitleText = "Event started " + moment(props.dateInUserTimeZone).fromNow();
             buttonText = "Join Event"
             break;
-        case "recorded":
-            eventTitleText = "Pre-Recorded event";
+        case "prerecorded":
+            //let now = new Date();
+            // if(props.dateInUserTimeZone.getTime() < now.getTime()) {
+
+            //
+            // } else {
+            //     eventTitleText = "Pre-Recorded event";
+            //
+            //     buttonText = "Join Event"
+            // }
+            eventTitleText = "On-demand event available " + moment(props.dateInUserTimeZone).fromNow();
             buttonText = "Watch Event"
+
             break;
 
     }

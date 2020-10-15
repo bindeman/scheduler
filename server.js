@@ -2,7 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
+
 const events = require('./routes/api/events');
+const prerecordedevents = require('./routes/api/prerecordedevents');
 
 
 
@@ -26,8 +28,8 @@ mongoose
     });
 
 //Use Routes
-
-app.use('/api/events', events);
+app.use('/api/events/live', events);
+app.use('/api/events/recorded', prerecordedevents);
 
 //Served compiled static React content in production
 if (process.env.NODE_ENV === 'production') {
@@ -41,6 +43,4 @@ if (process.env.NODE_ENV === 'production') {
 
 const port = process.env.PORT || 5000;
 
-
 app.listen(port, () => console.log(`Server started on port ${port}`));
-
