@@ -14,6 +14,7 @@ import Chip from "@material-ui/core/Chip";
 import Avatar from "@material-ui/core/Avatar";
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from "@material-ui/core/IconButton";
+import Tooltip from "@material-ui/core/Tooltip";
 
 
 
@@ -100,7 +101,8 @@ const useStyles = makeStyles((theme) => ({
 export default function EventModal(props) {
 
 let eventTitleText;
-let buttonText
+let buttonText;
+let buttonDisabled = false;
     switch (props.eventStatus) {
         case "future":
             eventTitleText = "Scheduled event " + moment(props.dateInUserTimeZone).fromNow();
@@ -115,20 +117,15 @@ let buttonText
             buttonText = "Join Event"
             break;
         case "prerecorded":
-            //let now = new Date();
-            // if(props.dateInUserTimeZone.getTime() < now.getTime()) {
-
-            //
-            // } else {
-            //     eventTitleText = "Pre-Recorded event";
-            //
-            //     buttonText = "Join Event"
-            // }
-            eventTitleText = "On-demand event available " + moment(props.dateInUserTimeZone).fromNow();
-            buttonText = "Watch Event"
-
+            const now = new Date();
+            if(moment(props.dateInUserTimeZone).isAfter(now)) {
+                eventTitleText = "On-demand event available " + moment(props.dateInUserTimeZone).fromNow();
+                buttonDisabled = true;
+            } else {
+                eventTitleText = "On-Demand Event";
+            }
+            buttonText = "Watch Event";
             break;
-
     }
 
 const classes = useStyles();
@@ -195,8 +192,11 @@ const classes = useStyles();
                             dateInUserTimeZone={props.dateInUserTimeZone}
                             duration={props.duration}
                         />
-                        <PrimaryButton link={props.link} text={buttonText}/>
-                        {/*onClick={props.closeModal}*/}
+                        <Tooltip disableHoverListener={!buttonDisabled} arrow={true} title={eventTitleText} placement="top">
+                        <div>
+                        <PrimaryButton disabled={buttonDisabled} link={props.link} text={buttonText}/>
+                        </div>
+                        </Tooltip>
                     </DialogActions>
         </Dialog>
 

@@ -110,7 +110,7 @@ const classes = useStyles();
         {!loading && (
             <Fade in={!loading} timeout={500}>
             <Grid item xs={12}>
-                {liveEvents.length !== 0 && futureEvents.length !== 0 && liveEvents.length !== 0 && (
+                {!(liveEvents.length === 0 && futureEvents.length === 0 && liveEvents.length === 0) && (
                 <Typography className={classes.heroTitle}>Events Schedule for {props.title}</Typography>)}
         </Grid>
             </Fade>

@@ -3,6 +3,8 @@ import {
     withStyles,
 } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import Tooltip from "@material-ui/core/Tooltip";
+import DialogActions from "@material-ui/core/DialogActions";
 
 const BootstrapButton = withStyles({
     root: {
@@ -23,8 +25,6 @@ const BootstrapButton = withStyles({
             borderColor: "#1C5100",
             boxShadow: "none",
             color: "#fff"
-
-
         },
         "&:active": {
             boxShadow: "none",
@@ -34,6 +34,12 @@ const BootstrapButton = withStyles({
         },
         "&:focus": {
             boxShadow: "0 0 0 0.2rem rgba(65,117,5,.3)"
+        },
+        "&:disabled": {
+            boxShadow: "0 0 0 0.2rem rgba(65,117,5,.3)",
+            color: "#fff",
+            borderColor: "#1C5100",
+            backgroundColor: "#1C5100",
         }
     }
 })(Button);
@@ -45,9 +51,11 @@ const BootstrapButton = withStyles({
 export default function PrimaryButton(props) {
 
     return (
+
         <BootstrapButton
             variant="contained"
             color="primary"
+            disabled={props.disabled}
             disableRipple
             target={"_blank"}
             href={props.link}
@@ -55,5 +63,6 @@ export default function PrimaryButton(props) {
         >
             {props.text}
         </BootstrapButton>
+
     );
 }
