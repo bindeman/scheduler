@@ -15,6 +15,11 @@ const theme = createMuiTheme({
             sm: 700,
         },
     },
+    palette: {
+        primary: {
+            main: '#fff',
+        },
+    },
     overrides: {
         MuiCssBaseline: {
             '@global': {
@@ -35,7 +40,7 @@ const theme = createMuiTheme({
             arrow: {
                 color: "#1C5100",
             }
-        }
+        },
 
     },
 });

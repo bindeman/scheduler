@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import {Route, Switch} from "react-router-dom";
 import Events from "./Events";
+import EventsContainer from "./EventsContainer";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -12,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
         height: '100vh',
         position: "relative",
         overflow: 'auto',
-        backgroundColor: "#F4F4F4",
+
         padding: "12px"
     },
     container: {
@@ -56,25 +57,25 @@ return (
                 <Route
                     path='/'
                     exact
-                    component={() => <Events category={1}
+                    component={() => <EventsContainer category={1}
                                              title="Language Learners"/>}
                 />
                 <Route
                     path='/learners'
                     exact
-                    component={() => <Events category={1}
+                    component={() => <EventsContainer category={1}
                                              title="Language Learners"/>}
                 />
                 <Route
                     path='/educators'
                     exact
-                    component={() => <Events category={2}
+                    component={() => <EventsContainer category={2}
                                              title="Language Educators"/>}
                 />
                 <Route
                     path='/employers'
                     exact
-                    component={() => <Events category={3}
+                    component={() => <EventsContainer category={3}
                                              title="Employers, Language Service Providers and H.R. Personnel"
 
                     />}
@@ -82,13 +83,13 @@ return (
                 <Route
                     path='/administrators'
                     exact
-                    component={() => <Events category={4}
+                    component={() => <EventsContainer category={4}
                                              title="Administrators, Counselors and College Recruiters"/>}
                 />
                 <Route
                     path='/contentproviders'
                     exact
-                    component={() => <Events category={5}
+                    component={() => <EventsContainer category={5}
                                              title="Language Learning Content and Assessment Providers"/>}
                 />
             </Switch>

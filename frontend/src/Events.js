@@ -9,6 +9,9 @@ import Link from "@material-ui/core/Link";
 import Fade from '@material-ui/core/Fade';
 import EventCategory from "./EventCategory";
 import RecordedEvents from "./RecordedEvents";
+import Paper from "@material-ui/core/Paper";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 
 
 
@@ -75,22 +78,23 @@ export default function Events(props) {
     };
 
 
+
     React.useEffect(() => {
         const FetchData = async () => {
             console.log("======= Props are: " + props.category);
-            const response = await axios.get(`/api/events/future`, {
+            const response = await axios.get(`/api/events/future/category/${props.category}`, {
                 headers: {
                     'timezone': timezone.name()
                 }
             });
 
-            const liveEventsResponse = await axios.get(`/api/events/live`, {
+            const liveEventsResponse = await axios.get(`/api/events/live/category/${props.category}`, {
                 headers: {
                     'timezone': timezone.name()
                 }
             });
 
-            const pastEventsResponse = await axios.get(`/api/events/past`, {
+            const pastEventsResponse = await axios.get(`/api/events/past/category/${props.category}`, {
                 headers: {
                     'timezone': timezone.name()
                 }
@@ -109,6 +113,9 @@ export default function Events(props) {
 
 const classes = useStyles();
 
+
+
+
 function Copyright() {
     return (
         <p className={classes.copyright} align="center">
@@ -122,9 +129,10 @@ function Copyright() {
     );
 }
 
+
+
   return (
     <React.Fragment>
-
 
         {!loading && (
             <Fade in={!loading} timeout={500}>

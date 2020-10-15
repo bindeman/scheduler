@@ -6,7 +6,8 @@ import SidebarDrawer from "./Drawer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
+      display: 'flex',
+      backgroundColor: "#F4F4F4",
   },
 }));
 

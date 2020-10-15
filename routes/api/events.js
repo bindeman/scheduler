@@ -9,10 +9,10 @@ const Event = require('../../models/Event');
 // @route GET api/items
 // @desc GET All Visualizations
 // @access Public
-router.get('/future', (req, res) => {
+router.get('/future/category/:number', (req, res) => {
     let now = new Date()
     const timezone = req.get("timezone") ? req.get("timezone") : "Etc/GMT";
-    Event.find({date: {$gt: now} })
+    Event.find({category: req.params.number, date: {$gt: now} })
         .lean()
         .sort({ date: 1 })
         .then((items) => {
@@ -32,10 +32,10 @@ router.get('/future', (req, res) => {
 
 
 //See past events across all categories
-router.get('/past', (req, res) => {
+router.get('/past/category/:number', (req, res) => {
     let now = new Date()
     const timezone = req.get("timezone") ? req.get("timezone") : "Etc/GMT";
-    Event.find({endDate: {$lt: now} })
+    Event.find({category: req.params.number, endDate: {$lt: now} })
         .lean()
         .sort({ date: -1 })
         .then((items) => {
@@ -80,14 +80,14 @@ router.get('/live_old', (req, res) => {
         }).catch(err => res.status(404).json({ success: false }));
 });
 
-router.get('/live', (req, res) => {
+router.get('/live/category/:number', (req, res) => {
     const timezone = req.get("timezone") ? req.get("timezone") : "Etc/GMT";
     console.log(timezone)
 
     let now = new Date().getTime();
 
 
-    Event.find({date: {$lt: now}, endDate: {$gt: now} })
+    Event.find({category: req.params.number, date: {$lt: now}, endDate: {$gt: now} })
         .lean()
         .sort({ date: 1 })
         .then(items => res.json(items))
@@ -106,11 +106,6 @@ router.get('/category/:number', (req, res) => {
 });
 
 
-router.get('match/:id', (req, res) => {
-    Event.findById(req.params.id)
-        .then(items => res.json(items))
-        .catch(err => res.status(404).json({ success: false }));
-});
 
 
 // @route POST api/items
@@ -133,14 +128,6 @@ router.post('/', (req, res) => {
     newEvent.save().then(item => res.json(item));
 });
 
-// @route DELETE api/items/:id
-// @desc Delete a Post
-// @access Public
-router.delete('/:id', (req, res) => {
-    Event.findById(req.params.id)
-        .then(item => item.remove().then(() => res.json({ sucesss: true })))
-        .catch(err => res.status(404).json({ success: false }));
-});
 
 
 module.exports = router;

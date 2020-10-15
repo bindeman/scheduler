@@ -89,21 +89,7 @@ const classes = useStyles();
 
 
         <div>
-            <EventModal
-            open={modalOpen}
-            title={modalProps.title}
-            presenter={modalProps.presenter}
-            organization={modalProps.organization}
-            duration={modalProps.duration}
-            description={modalProps.description}
-            bio={modalProps.bio}
-            dateInUserTimeZone={modalProps.dateInUserTimeZone}
-            link={modalProps.link}
-            eventStatus={props.eventStatus}
-            closeModal={handleModalClose}
 
-            >
-            </EventModal>
         {props.live && <Typography className={classes.dateHeading}>Events happening right now</Typography>}
         {props.data.map((item, index) => {
             return (
@@ -131,6 +117,21 @@ const classes = useStyles();
                 </Button>
                     </div>)
         })}
+            <EventModal
+                open={modalOpen}
+                title={modalProps.title}
+                presenter={modalProps.presenter}
+                organization={modalProps.organization}
+                duration={modalProps.duration}
+                description={modalProps.description}
+                bio={modalProps.bio}
+                dateInUserTimeZone={modalProps.dateInUserTimeZone}
+                link={modalProps.link}
+                eventStatus={props.eventStatus}
+                closeModal={handleModalClose}
+
+            >
+            </EventModal>
         </div>
 
     </React.Fragment>

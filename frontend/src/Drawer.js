@@ -77,6 +77,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     position: 'relative',
+    height: '100vh',
     overflowX: 'hidden',
     boxShadow: " 0 0 23px rgba(0,0,0,0.10)",
     width: "260px",
@@ -104,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: "0.33s",
     }),
-    width: "10px",
+    width: "1px",
   },
   drawerPaperMobileOpen: {
     overflowX: 'hidden',

@@ -22,13 +22,14 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         display: 'flex',
         //overflow: 'auto,
-        position: "fixed",
+        position: "relative",
+        //margin: 'auto 50px auto 50px',
         borderRadius: "13px",
         flexDirection: 'column',
         boxShadow: "0 0 40px 0 rgba(0,0,0,0.15)",
         textAlign: "left",
         textTransform: "none",
-        marginTop: "18px",
+
 
     },
     eventTitle: {
@@ -126,7 +127,7 @@ const classes = useStyles();
   return (
     <React.Fragment>
         <Dialog
-            style={{position: 'absolute'}}
+            style={{position: 'sticky', height: "100%"}}
             disablePortal
             disableEnforceFocus
             disableAutoFocus
