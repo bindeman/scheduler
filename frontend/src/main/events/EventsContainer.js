@@ -6,14 +6,14 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Events from "./Events";
+import Events from "./eventTypes/Events";
 import Paper from "@material-ui/core/Paper";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import {NavLink, Route, Switch, withRouter} from "react-router-dom";
 import ListItem from "@material-ui/core/ListItem";
-import PreReordedEvents from "./PreRecordedEvents";
+import PreReordedEvents from "./eventTypes/PreRecordedEvents";
 import Grid from "@material-ui/core/Grid";
-import PreRecordedEvents from "./PreRecordedEvents";
+import PreRecordedEvents from "./eventTypes/PreRecordedEvents";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;

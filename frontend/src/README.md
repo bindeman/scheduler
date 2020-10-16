@@ -1,8 +1,8 @@
-# Dashboard template
+# Global C.R.E.D. Scheduler
 
-## Usage
+## Purpose
 
-Simply copy the files into your project, or one of the [example applications](https://github.com/mui-org/material-ui/tree/master/examples), and import and use the `Dashboard` component.
+Display when live, past, future events are ocuring in a timeline fashion.
 
 ## Demo
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Content from "./Content";
-import SidebarDrawer from "./Drawer";
+import Content from "./main/Content";
+import SidebarDrawer from "./sidebar/Drawer";
 
 const useStyles = makeStyles((theme) => ({
   root: {

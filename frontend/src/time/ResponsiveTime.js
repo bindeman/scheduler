@@ -2,8 +2,8 @@ import React from "react";
 import {
     makeStyles,
 } from "@material-ui/core/styles";
-import EventTime from "./EventTime";
-import Duration from "./Duration";
+import EventTime from "./timeComponents/EventTime";
+import Duration from "./timeComponents/Duration";
 
 
 

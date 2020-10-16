@@ -5,28 +5,22 @@ import {
 } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import {Typography} from "@material-ui/core";
-import PrimaryWhiteButton from "./PrimaryWhiteButton";
-import Copyright from "./Copyright";
-import Fade from "@material-ui/core/Fade";
+import PrimaryWhiteButton from "../../buttons/PrimaryWhiteButton";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        margin: "auto",
-        width: "100%",
-    },
     wrapper: {
 
         background: "linear-gradient(to bottom, #1C5100 0%, #658546 100%)",
         width: "100%",
-
         //overflow: 'auto,
         borderRadius: "13px",
         flexDirection: 'column',
         //boxShadow: "0 0 40px 0 rgba(0,0,0,0.15)",
         textAlign: "center",
         textTransform: "none",
-
+        marginTop: "18px",
         padding: "30px",
+        maxHeight: "fit-content"
     },
     content: {
         display: 'flex',
@@ -61,19 +55,13 @@ const useStyles = makeStyles((theme) => ({
 export default function NoEvents(props) {
     const classes = useStyles();
     return (
-        <Fade in={true} timeout={500}>
-        <div className={classes.root}>
         <div className={classes.wrapper}>
             <div>
-            <Typography className={classes.eventTitle}>Page not found</Typography>
-            <Typography className={classes.eventSubtitle}>To see Global C.R.E.D. events, click the link below.</Typography>
-            <PrimaryWhiteButton className={classes.button} link={"/"} text="See Events"/>
+            <Typography className={classes.eventTitle}>No events yet, check back soon.</Typography>
+            <Typography className={classes.eventSubtitle}>There's no events listed so far in this category. For more details check our main page:</Typography>
+            <PrimaryWhiteButton className={classes.button} link={"http://theglobalseal.com/cred"} text="Global C.R.E.D. Homepage"/>
             </div>
-
         </div>
-    <Copyright/>
-        </div>
-        </Fade>
     );
 
 

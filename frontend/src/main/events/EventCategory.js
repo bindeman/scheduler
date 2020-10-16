@@ -6,8 +6,8 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import moment from "moment-timezone";
 import EventModal from "./EventModal";
-import ResponsiveTime from "./ResponsiveTime";
-import Duration from "./Duration";
+import ResponsiveTime from "../../time/ResponsiveTime";
+import Duration from "../../time/timeComponents/Duration";
 
 
 

@@ -4,15 +4,15 @@ import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
 import axios from 'axios';
 import jstz from 'jstz';
-import LoadingSpinner from "./Spinner";
+import LoadingSpinner from "../../../misc/Spinner";
 import Link from "@material-ui/core/Link";
 import Fade from '@material-ui/core/Fade';
-import EventCategory from "./EventCategory";
-import NoEvents from "./NoEvents";
+import EventCategory from "../EventCategory";
+import NoEvents from "../../../misc/notFound/NoEvents";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Copyright from "./Copyright";
+import Copyright from "../../../misc/Copyright";
 
 
 
@@ -60,26 +60,42 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function PreRecordedEvents(props) {
+export default function Events(props) {
     const timezone = jstz.determine();
-    const [events, setEvents] = useState([]);
+    const [futureEvents, setFutureEvents] = useState([]);
+    const [liveEvents, setLiveEvents] = useState([]);
+    const [pastEvents, setPastEvents] = useState([]);
     const [loading, setLoading] = useState(true);
-
 
     React.useEffect(() => {
         const FetchData = async () => {
             console.log("======= Props are: " + props.category);
-            const response = await axios.get(`/api/events/recorded/category/${props.category}`, {
+            const futureEventsResponse = await axios.get(`/api/events/live/future/category/${props.category}`, {
                 headers: {
                     'timezone': timezone.name()
                 }
             });
 
+            const liveEventsResponse = await axios.get(`/api/events/live/now/category/${props.category}`, {
+                headers: {
+                    'timezone': timezone.name()
+                }
+            });
+
+            const pastEventsResponse = await axios.get(`/api/events/live/past/category/${props.category}`, {
+                headers: {
+                    'timezone': timezone.name()
+                }
+            });
 
             let currentDate = null;
-            console.log(response.data);
+            console.log(futureEventsResponse.data);
+            console.log(pastEventsResponse.data);
+            console.log(liveEventsResponse.data);
             console.log("Hey this function is run");
-            setEvents(response.data);
+            setLiveEvents(liveEventsResponse.data);
+            setFutureEvents(futureEventsResponse.data);
+            setPastEvents((pastEventsResponse.data));
             setLoading(false);
         }
         FetchData();
@@ -88,20 +104,14 @@ export default function PreRecordedEvents(props) {
 const classes = useStyles();
 
 
-
-
-
-
-
   return (
     <React.Fragment>
 
         {!loading && (
             <Fade in={!loading} timeout={500}>
             <Grid item xs={12}>
-
-                {events.length !== 0 &&
-                    (<Typography className={classes.heroTitle}>On-Demand Events for {props.title}</Typography>)}
+                {!(liveEvents.length === 0 && futureEvents.length === 0 && liveEvents.length === 0) && (
+                <Typography className={classes.heroTitle}>Events Schedule for {props.title}</Typography>)}
         </Grid>
             </Fade>
                 )}
@@ -113,7 +123,10 @@ const classes = useStyles();
 
                 <Fade in={!loading} timeout={500}>
                     <div>
-                    <EventCategory data={events} eventStatus={"prerecorded"}/>
+                        {liveEvents.length > 0 &&
+                    <EventCategory data={liveEvents} eventStatus={"live"}/>}
+                    <EventCategory data={futureEvents} eventStatus={"future"}/>
+                    <EventCategory data={pastEvents} eventStatus={"past"} />
                     </div>
                 </Fade>
 
@@ -123,7 +136,7 @@ const classes = useStyles();
         {!loading &&
         <Fade in={!loading} timeout={500}>
         <div>
-            {!events.length && <NoEvents/>}
+            {!liveEvents.length && !futureEvents.length && !liveEvents.length && <NoEvents/>}
             <Copyright />
         </div>
         </Fade>

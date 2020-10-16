@@ -3,9 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import {Redirect, Route, Switch} from "react-router-dom";
-import Events from "./Events";
-import EventsContainer from "./EventsContainer";
-import FourOFour from "./FourOFour";
+import Events from "./events/eventTypes/Events";
+import EventsContainer from "./events/EventsContainer";
+import FourOFour from "../misc/notFound/FourOFour";
 
 
 const useStyles = makeStyles((theme) => ({
