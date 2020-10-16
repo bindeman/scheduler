@@ -9,7 +9,11 @@ import Box from '@material-ui/core/Box';
 import Events from "./Events";
 import Paper from "@material-ui/core/Paper";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
-import PreReordedEvents from "./PreReordedEvents";
+import {NavLink, Route, Switch, withRouter} from "react-router-dom";
+import ListItem from "@material-ui/core/ListItem";
+import PreReordedEvents from "./PreRecordedEvents";
+import Grid from "@material-ui/core/Grid";
+import PreRecordedEvents from "./PreRecordedEvents";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -125,12 +129,32 @@ export default function EventsContainer(props) {
 
                 </Tabs>
                 </Paper>
+            {/*<Switch>*/}
+            {/*    <Route*/}
+            {/*        path={`/live`}*/}
+            {/*        exact*/}
+            {/*        component={() => <Events category={props.category}*/}
+            {/*                                          title="Language Learners"/>}*/}
+            {/*    />*/}
+            {/*    <Route*/}
+            {/*        path={`./recorded`}*/}
+            {/*        exact*/}
+            {/*        component={() => <PreRecordedEvents category={props.category}*/}
+            {/*                                          title="Language Learners"/>}*/}
+            {/*    />*/}
+            {/*</Switch>*/}
             <TabPanel value={value} index={0}>
                 <Events category={props.category} title={props.title}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <PreReordedEvents category={props.category} title={props.title}/>
             </TabPanel>
+            {/*<TabPanel value={value} index={0}>*/}
+            {/*    <Events category={props.category} title={props.title}/>*/}
+            {/*</TabPanel>*/}
+            {/*<TabPanel value={value} index={1}>*/}
+            {/*    <PreRecordedEvents category={props.category} title={props.title}/>*/}
+            {/*</TabPanel>*/}
         </div>
     );
 }

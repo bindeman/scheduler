@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Events(props) {
+export default function PreRecordedEvents(props) {
     const timezone = jstz.determine();
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);

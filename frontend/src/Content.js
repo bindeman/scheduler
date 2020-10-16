@@ -2,9 +2,10 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-import {Route, Switch} from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router-dom";
 import Events from "./Events";
 import EventsContainer from "./EventsContainer";
+import FourOFour from "./FourOFour";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -54,12 +55,9 @@ return (
     <Container maxWidth="lg" className={classes.container}>
         <Grid container className={classes.contentGrid} spacing={3} style={{minHeight: "100%"}}>
             <Switch>
-                <Route
-                    path='/'
-                    exact
-                    component={() => <EventsContainer category={1}
-                                             title="Language Learners"/>}
-                />
+                <Route exact path="/">
+                    <Redirect to="/learners" />
+                </Route>
                 <Route
                     path='/learners'
                     exact
@@ -82,16 +80,17 @@ return (
                 />
                 <Route
                     path='/administrators'
-                    exact
+                    strict
                     component={() => <EventsContainer category={4}
                                              title="Administrators, Counselors and College Recruiters"/>}
                 />
                 <Route
                     path='/contentproviders'
-                    exact
+                    strict
                     component={() => <EventsContainer category={5}
                                              title="Language Learning Content and Assessment Providers"/>}
                 />
+                <Route component={FourOFour} />
             </Switch>
 
         </Grid>
