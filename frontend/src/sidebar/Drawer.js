@@ -163,7 +163,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    height: "400px",
+    height: "100%",
   },
   events: {
     maxWidth: "500px",
@@ -197,7 +197,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SidebarDrawer() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(1);
   const [openMobile, setOpenMobile] = React.useState(false);
 
   const handleDrawerOpen = () => {

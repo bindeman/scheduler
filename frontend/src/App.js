@@ -20,6 +20,12 @@ const theme = createMuiTheme({
             main: '#fff',
         },
     },
+    props: {
+        MuiTooltip: {
+            enterTouchDelay: 0,
+            leaveTouchDelay: 2700,
+        },
+    },
     overrides: {
         MuiCssBaseline: {
             '@global': {
