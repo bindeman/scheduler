@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
     transform: "translate(0, -60px)",
     opacity: 0,
     transition: theme.transitions.create(['transform', 'opacity'], {
-      easing: theme.transitions.easing.easeOut,
+      easing: theme.transitions.easing.easeIn,
       duration: "0.33s",
     }),
 

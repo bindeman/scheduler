@@ -46,9 +46,9 @@ const useStyles = makeStyles((theme) => ({
         width: `calc(100% - ${103}px)`,
         marginLeft: 103,
         transition: theme.transitions.create(['margin', 'width', 'opacity', 'transform'], {
-            easing: theme.transitions.easing.easeOut,
+            easing: theme.transitions.easing.sharp,
             duration: "0.33s",
-            delay: "0.1s"
+            //delay: "0.1s"
         }),
     },
     appBarHidden: {
