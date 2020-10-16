@@ -163,7 +163,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    height: "100%",
+    height: "400px",
   },
   events: {
     maxWidth: "500px",
