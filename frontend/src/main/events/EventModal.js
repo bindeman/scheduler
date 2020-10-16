@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
     paper: {
         display: 'flex',
         //overflow: 'auto,
-        position: "fixed",
         //margin: 'auto 50px auto 50px',
         borderRadius: "13px",
         flexDirection: 'column',
@@ -134,14 +133,13 @@ const classes = useStyles();
   return (
     <React.Fragment>
         <Dialog
-            style={{position: 'fixed'}}
             disablePortal
             disableEnforceFocus
             disableAutoFocus
             open={props.open}
             classes={{paper: classes.paper}}
             container={() => document.getElementById('content')}
-            BackdropProps={{ style: { backgroundColor: "rgba(0,0,0,0.10)", position: "fixed"} }}
+            BackdropProps={{ style: { backgroundColor: "rgba(0,0,0,0.10)"} }}
             onClose={props.closeModal}>
 
             <div className={classes.modalContent}>

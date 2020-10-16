@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: 30,
         boxShadow: '0 0 43px rgba(0,0,0,0.40)',
         zIndex: 1,
-        bottom: 25,
+        bottom: 15,
     },
     tabs: {
         color: '#A9BC9B',

@@ -46,7 +46,7 @@ const useMenuStyles = makeStyles(() => ({
         lineHeight: "9px",
         display: "block",
         width: "130px",
-        opacity: "0%",
+        opacity: "0",
         transition: "0.25s",
     },
     menuListItemIconContainer: {

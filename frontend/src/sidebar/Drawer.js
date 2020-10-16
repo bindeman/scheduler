@@ -16,6 +16,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
+import HideAppBar from "../AppBar";
 
 
 const drawerWidth = 260;
@@ -76,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
     display: "none"
   },
   drawerPaper: {
-    position: 'relative',
+    position: 'sticky',
     height: '100vh',
     overflowX: 'hidden',
     boxShadow: " 0 0 23px rgba(0,0,0,0.10)",
@@ -230,34 +231,40 @@ export default function SidebarDrawer() {
   return (
       <React.Fragment>
       <CssBaseline />
-        <AppBar
-            position="fixed"
-            className={clsx(classes.appBar, {
-              [classes.appBarShift]: openMobile,
-            }, open !== 0 && classes.appBarHidden,
-            )}
-        >
-          <Toolbar>
-            <Grid container>
-              <Grid item xs={1}>
-            <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                edge="start"
-                className={clsx(classes.menuButton, open && classes.hide)}
-            >
-              <MenuIcon />
-            </IconButton>
-              </Grid>
-              <Grid item xs={10}>
-            <img src={globalSealLogo}  className={classes.appbarLogo} alt={"Global Seal Logo"}/>
-              </Grid>
-              <Grid item xs={1}>
-              </Grid>
-            </Grid>
-          </Toolbar>
-        </AppBar>
+        <HideAppBar
+          openMobile={openMobile}
+          open={open}
+          handleDrawerOpen={handleDrawerOpen}
+        />
+        {/*<AppBar*/}
+        {/*    position="fixed"*/}
+        {/*    className={clsx(classes.appBar, {*/}
+        {/*      [classes.appBarShift]: openMobile,*/}
+        {/*    }, open !== 0 && classes.appBarHidden,*/}
+        {/*    )}*/}
+        {/*>*/}
+        {/*  */}
+        {/*  <Toolbar>*/}
+        {/*    <Grid container>*/}
+        {/*      <Grid item xs={1}>*/}
+        {/*    <IconButton*/}
+        {/*        color="inherit"*/}
+        {/*        aria-label="open drawer"*/}
+        {/*        onClick={handleDrawerOpen}*/}
+        {/*        edge="start"*/}
+        {/*        className={clsx(classes.menuButton, open && classes.hide)}*/}
+        {/*    >*/}
+        {/*      <MenuIcon />*/}
+        {/*    </IconButton>*/}
+        {/*      </Grid>*/}
+        {/*      <Grid item xs={10}>*/}
+        {/*    <img src={globalSealLogo}  className={classes.appbarLogo} alt={"Global Seal Logo"}/>*/}
+        {/*      </Grid>*/}
+        {/*      <Grid item xs={1}>*/}
+        {/*      </Grid>*/}
+        {/*    </Grid>*/}
+        {/*  </Toolbar>*/}
+        {/*</AppBar>*/}
       <Drawer
         variant={"permanent"}
         classes={{
