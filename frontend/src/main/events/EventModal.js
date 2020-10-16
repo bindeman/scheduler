@@ -192,7 +192,7 @@ const classes = useStyles();
                             dateInUserTimeZone={props.dateInUserTimeZone}
                             duration={props.duration}
                         />
-                        <Tooltip disableHoverListener={!buttonDisabled} arrow={true} title={eventTitleText} placement="top">
+                        <Tooltip disableFocusListener disableHoverListener={!buttonDisabled} arrow={true} title={eventTitleText} placement="top">
                         <div>
                         <PrimaryButton disabled={buttonDisabled} link={props.link} text={buttonText}/>
                         </div>

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Display when live, past, future events are ocuring in a timeline fashion.
+Display when live, past, future events are occuring in a timeline fashion.
 
 ## Demo
 

@@ -116,7 +116,7 @@ export default function Sidebar(props) {
         <List className={menubar.menuList}>
         <div>
             {menuItems.map(item => (
-                <Tooltip arrow={true} disableHoverListener={props.drawerOpen === 2} className={menubar.tooltip} title={item.title} placement="right"         PopperProps={{
+                <Tooltip arrow={true} disableFocusListener disableHoverListener={props.drawerOpen === 2} className={menubar.tooltip} title={item.title} placement="right"         PopperProps={{
                     popperOptions: {
                         modifiers: {
                             offset: {
