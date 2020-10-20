@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useContext, useEffect, useMemo, useState} from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,7 +17,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
 import HideAppBar from "../AppBar";
-
+import {WidthContext} from "../WidthContext";
 
 const drawerWidth = 260;
 
@@ -197,8 +197,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SidebarDrawer() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(1);
+  const {open, setOpen} = useContext(WidthContext);
+  //const [open, setOpen] = React.useState(1);
+
   const [openMobile, setOpenMobile] = React.useState(false);
+
 
   const handleDrawerOpen = () => {
     setOpenMobile(!openMobile);
@@ -207,26 +210,6 @@ export default function SidebarDrawer() {
   const handleDrawerClose = () => {
     setOpenMobile(false);
   }
-
-  useEffect(() => {
-    function handleResize() {
-      if(window.innerWidth < 600) {
-        setOpen(0)
-      }
-      else if(window.innerWidth < 720 && window.innerWidth > 600) {
-        setOpen(1);
-      }
-      else {
-        setOpen(2);
-      }
-    }
-
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => window.removeEventListener("resize", handleResize);
-
-  }, []); // Empty array ensures that effect is only run on mount
-
 
   return (
       <React.Fragment>

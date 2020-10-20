@@ -105,7 +105,8 @@ let buttonDisabled = false;
     switch (props.eventStatus) {
         case "future":
             eventTitleText = "Scheduled event " + moment(props.dateInUserTimeZone).fromNow();
-            buttonText = "Event Page"
+            buttonText = "Join Event";
+            buttonDisabled = true;
             break;
         case "past":
             eventTitleText = "Past event from " + moment(props.dateInUserTimeZone).format('MMMM Do, YYYY');
@@ -192,7 +193,7 @@ const classes = useStyles();
                         />
                         <Tooltip disableFocusListener disableHoverListener={!buttonDisabled} arrow={true} title={eventTitleText} placement="top">
                         <div>
-                        <PrimaryButton disabled={buttonDisabled} link={props.link} text={buttonText}/>
+                        <PrimaryButton disabled={buttonDisabled} link={buttonDisabled ? null : props.link} text={buttonText}/>
                         </div>
                         </Tooltip>
                     </DialogActions>

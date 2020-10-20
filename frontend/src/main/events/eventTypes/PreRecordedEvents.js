@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
@@ -13,6 +13,8 @@ import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Copyright from "../../../misc/Copyright";
+import clsx from "clsx";
+import {WidthContext} from "../../../WidthContext";
 
 
 
@@ -57,6 +59,9 @@ const useStyles = makeStyles((theme) => ({
         //maxWidth: "350px",
         transition: "0.25s"
     },
+    heroTitleMobile: {
+        marginTop: "70px",
+    }
 }));
 
 
@@ -86,51 +91,46 @@ export default function PreRecordedEvents(props) {
     }, []);
 
 const classes = useStyles();
+    const {open, setOpen} = useContext(WidthContext);
 
+      return (
+        <React.Fragment>
 
-
-
-
-
-
-  return (
-    <React.Fragment>
-
-        {!loading && (
-            <Fade in={!loading} timeout={500}>
-            <Grid item xs={12}>
-
-                {events.length !== 0 &&
-                    (<Typography className={classes.heroTitle}>On-Demand Events for {props.title}</Typography>)}
-        </Grid>
-            </Fade>
-                )}
-        <Grid item xs={12} style={{margin: "auto"}}>
-
-        {loading && (
-                <LoadingSpinner/>
-            )}
-
+            {!loading && (
                 <Fade in={!loading} timeout={500}>
-                    <div>
-                    <EventCategory data={events} eventStatus={"prerecorded"}/>
-                    </div>
+                <Grid item xs={12}>
+
+                    {events.length !== 0 &&
+                        (<Typography className={clsx(classes.heroTitle, open === 0 && classes.heroTitleMobile)}>On-Demand Events for {props.title}</Typography>)}
+            </Grid>
                 </Fade>
+                    )}
+            <Grid item xs={12} style={{margin: "auto"}}>
 
-        </Grid>
+            {loading && (
+                    <LoadingSpinner/>
+                )}
+
+                    <Fade in={!loading} timeout={500}>
+                        <div>
+                        <EventCategory data={events} eventStatus={"prerecorded"}/>
+                        </div>
+                    </Fade>
+
+            </Grid>
 
 
-        {!loading &&
-        <Fade in={!loading} timeout={500}>
-        <div>
-            {!events.length && <NoEvents/>}
-            <Copyright />
-        </div>
-        </Fade>
-        }
+            {!loading &&
+            <Fade in={!loading} timeout={500}>
+            <div>
+                {!events.length && <NoEvents/>}
+                <Copyright />
+            </div>
+            </Fade>
+            }
 
 
-    </React.Fragment>
-  );
+        </React.Fragment>
+      );
 
 }

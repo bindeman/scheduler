@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
     appBarShift: {
         width: `calc(100% - ${103}px)`,
         marginLeft: 103,
+        zIndex: theme.zIndex.drawer - 1,
         transition: theme.transitions.create(['margin', 'width', 'opacity', 'transform'], {
             easing: theme.transitions.easing.sharp,
             duration: "0.33s",
@@ -89,8 +90,11 @@ function HideOnScroll(props) {
   const trigger = useScrollTrigger({ target: window ? window() : undefined });
 
   return (
-      <Slide appear={false} direction="down" in={!trigger}>
-        {children}
+
+      <Slide appear={false} direction="down" in={!trigger && props.open === 0}>
+
+          {children}
+
       </Slide>
   );
 }
@@ -108,16 +112,20 @@ export default function HideAppBar(props) {
     const classes = useStyles();
 
     return (
+
       <React.Fragment>
         <CssBaseline />
-        <HideOnScroll {...props}>
+        {/*<Slide in={props.open === 0} out={props.open !== 0} timeout={500}>*/}
+        <HideOnScroll open={props.open} {...props}>
+
           <AppBar
               position="fixed"
-              className={clsx(classes.appBar, {
+              className={clsx(props.open !== 0 && classes.appBarHidden, classes.appBar, {
                       [classes.appBarShift]: props.openMobile,
-                  }, props.open !== 0 && classes.appBarHidden,
+                  }
               )}
           >
+
             <Toolbar>
                 <Grid container>
                     <Grid item xs={1}>
@@ -140,6 +148,8 @@ export default function HideAppBar(props) {
             </Toolbar>
           </AppBar>
         </HideOnScroll>
+        {/*</Slide>*/}
       </React.Fragment>
+
   );
 }

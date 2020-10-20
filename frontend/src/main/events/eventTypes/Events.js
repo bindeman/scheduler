@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
@@ -13,6 +13,8 @@ import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Copyright from "../../../misc/Copyright";
+import {WidthContext} from "../../../WidthContext";
+import clsx from "clsx";
 
 
 
@@ -57,6 +59,9 @@ const useStyles = makeStyles((theme) => ({
         //maxWidth: "350px",
         transition: "0.25s"
     },
+    heroTitleMobile: {
+        marginTop: "70px",
+    }
 }));
 
 
@@ -103,6 +108,7 @@ export default function Events(props) {
 
 const classes = useStyles();
 
+const {open, setOpen} = useContext(WidthContext);
 
   return (
     <React.Fragment>
@@ -111,7 +117,7 @@ const classes = useStyles();
             <Fade in={!loading} timeout={500}>
             <Grid item xs={12}>
                 {!(liveEvents.length === 0 && futureEvents.length === 0 && liveEvents.length === 0) && (
-                <Typography className={classes.heroTitle}>Events Schedule for {props.title}</Typography>)}
+                <Typography className={clsx(classes.heroTitle, open === 0 && classes.heroTitleMobile)}>Events Schedule for {props.title}</Typography>)}
         </Grid>
             </Fade>
                 )}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
@@ -6,22 +6,29 @@ import {Redirect, Route, Switch} from "react-router-dom";
 import Events from "./events/eventTypes/Events";
 import EventsContainer from "./events/EventsContainer";
 import FourOFour from "../misc/notFound/FourOFour";
+import {WidthContext} from "../WidthContext";
+import clsx from "clsx";
+
 
 
 const useStyles = makeStyles((theme) => ({
     content: {
         flexGrow: 1,
-        height: '100vh',
+        //height: '100vh',
         position: "relative",
-        overflow: 'auto',
+        //overflow: 'auto',
+        padding: theme.spacing(4),
+        ...theme.mixins.toolbar,
+    },
+    contentMobile: {
+        padding: theme.spacing(0),
 
-        padding: "12px"
     },
     container: {
         paddingTop: theme.spacing(4),
         paddingBottom: theme.spacing(4),
         maxWidth: "500px",
-        minHeight: "100%",
+        minHeight: "100vh",
         margin: "auto",
         display: "flex",
         //justifyContent: "space-evenly"
@@ -48,11 +55,12 @@ export default function Content() {
 
 const classes = useStyles();
 
+const {open, setOpen} = useContext(WidthContext);
 
 return (
     <React.Fragment>
-    <main className={classes.content} id={"content"}>
-    <Container maxWidth="lg" className={classes.container}>
+    <main className={clsx(classes.content, open === 0 && classes.contentMobile)} id={"content"}>
+    <Container maxWidth="lg" id={"contentContainer"} className={classes.container}>
         <Grid container className={classes.contentGrid} spacing={3} style={{minHeight: "100%"}}>
             <Switch>
                 <Route exact path="/">

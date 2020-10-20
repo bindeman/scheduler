@@ -41,6 +41,7 @@ const theme = createMuiTheme({
                 backgroundColor: "#1C5100",
                 borderRadius: "6px",
                 padding: "10px",
+                minWidth: "75px",
                 maxWidth: "150px",
             },
             arrow: {
@@ -56,9 +57,7 @@ function App() {
     <div className="App">
         <MuiThemeProvider theme={theme}>
             <CssBaseline />
-      <Dashboard />
-
-
+                <Dashboard />
         </MuiThemeProvider>
     </div>
   );
