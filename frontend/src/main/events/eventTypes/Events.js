@@ -15,8 +15,8 @@ import Tab from "@material-ui/core/Tab";
 import Copyright from "../../../misc/Copyright";
 import {WidthContext} from "../../../WidthContext";
 import clsx from "clsx";
-
-
+import moment from "moment-timezone";
+import LanguageIcon from '@material-ui/icons/Language';
 
 
 
@@ -34,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: "600",
         color: "#658546",
         letterSpacing: "-0.08px",
-        lineHeight: "17px"
+        lineHeight: "17px",
+
     },
     buttonChevron: {
         fontSize: "5px",
@@ -47,6 +48,15 @@ const useStyles = makeStyles((theme) => ({
         color: "#B0B0B0",
         letterSpacing: "-0.2px",
         marginTop: "30px",
+    },
+    timeZoneHeading: {
+        fontSize: "13px",
+        textAlign: "left",
+        fontWeight: 700,
+        //color: "#B0B0B0",
+        color: "#658546",
+        letterSpacing: "-0.2px",
+        marginTop: "3px",
     },
     heroTitle: {
         fontSize: "23px",
@@ -61,12 +71,29 @@ const useStyles = makeStyles((theme) => ({
     },
     heroTitleMobile: {
         marginTop: "70px",
+    },
+    timezoneWrapper: {
+        display: "flex",
+        alignItems: "left",
+        //maxWidth: "100px",
+        justifyContent: "left",
+        paddingTop: "7px",
+        paddingBottom: "4px",
+        color: "#727272",
+        minWidth: theme.spacing(8),
+    },
+    timezoneIcon: {
+        fontSize: "20px",
+        margin: "1.5px 3px 1px 0px",
+        color: "#658546",
     }
 }));
 
 
 export default function Events(props) {
     const timezone = jstz.determine();
+
+    const formattedTimezone = timezone.name().replace("_", " ");
     const [futureEvents, setFutureEvents] = useState([]);
     const [liveEvents, setLiveEvents] = useState([]);
     const [pastEvents, setPastEvents] = useState([]);
@@ -117,7 +144,14 @@ const {open, setOpen} = useContext(WidthContext);
             <Fade in={!loading} timeout={500}>
             <Grid item xs={12}>
                 {!(liveEvents.length === 0 && futureEvents.length === 0 && liveEvents.length === 0) && (
-                <Typography className={clsx(classes.heroTitle, open === 0 && classes.heroTitleMobile)}>Events Schedule for {props.title}</Typography>)
+                        <React.Fragment>
+                        <Typography className={clsx(classes.heroTitle, open === 0 && classes.heroTitleMobile)}>Events Schedule for {props.title}</Typography>
+                        <div className={classes.timezoneWrapper}>
+                            <LanguageIcon className={classes.timezoneIcon}/>
+                            <Typography className={classes.timeZoneHeading}>{formattedTimezone} ({moment.tz(timezone.name()).format('z')})</Typography>
+                        </div>
+                        </React.Fragment>
+                )
 
                 }
         </Grid>

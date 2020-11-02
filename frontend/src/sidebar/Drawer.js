@@ -18,6 +18,8 @@ import Fade from "@material-ui/core/Fade";
 import Grid from "@material-ui/core/Grid";
 import HideAppBar from "../AppBar";
 import {WidthContext} from "../WidthContext";
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+
 
 const drawerWidth = 260;
 
@@ -33,36 +35,37 @@ const useStyles = makeStyles((theme) => ({
 
     ...theme.mixins.toolbar,
   },
-  appBar: {
-    justifyContent: "center",
-    backgroundColor: "white",
-    padding: "10px",
-    boxShadow: " 0 0 23px rgba(0,0,0,0.15)",
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['margin', 'width', 'opacity', 'transform'], {
-      easing: theme.transitions.easing.sharp,
-      duration: "0.33s",
-      //delay: "0.1s"
-    }),
-  },
-  appBarShift: {
-    //width: `calc(100% - ${103}px)`,
-    //marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width', 'opacity', 'transform'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: "0.33s",
-      delay: "0.1s"
-    }),
-  },
-  appBarHidden: {
-    transform: "translate(0, -60px)",
-    opacity: 0,
-    transition: theme.transitions.create(['transform', 'opacity'], {
-      easing: theme.transitions.easing.easeIn,
-      duration: "0.33s",
-    }),
-
-  },
+  // appBar: {
+  //   justifyContent: "center",
+  //   backgroundColor: "white",
+  //   padding: "10px",
+  //   boxShadow: " 0 0 23px rgba(0,0,0,0.15)",
+  //   zIndex: theme.zIndex.drawer + 1,
+  //   transition: theme.transitions.create(['margin', 'width', 'opacity', 'transform'], {
+  //     easing: theme.transitions.easing.sharp,
+  //     duration: "0.33s",
+  //     //delay: "0.1s"
+  //   }),
+  // },
+  // appBarShift: {
+  //   //width: `calc(100% - ${103}px)`,
+  //   //marginLeft: drawerWidth,
+  //   zIndex: theme.zIndex.drawer + 1,
+  //   transition: theme.transitions.create(['margin', 'width', 'opacity', 'transform'], {
+  //     easing: theme.transitions.easing.easeOut,
+  //     duration: "0.33s",
+  //     //delay: "0.1s"
+  //   }),
+  // },
+  // appBarHidden: {
+  //   transform: "translate(0, -60px)",
+  //   opacity: 0,
+  //   transition: theme.transitions.create(['margin', 'transform', 'opacity'], {
+  //     easing: theme.transitions.easing.easeIn,
+  //     duration: "0.33s",
+  //   }),
+  //
+  // },
   menuButton: {
     marginRight: theme.spacing(2),
     color: "grey",
@@ -181,13 +184,13 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: "11px",
     paddingBottom: "3px"
   },
-  appbarLogo: {
-    margin: "auto",
-    display: "block",
-    maxWidth: "40px",
-    height: "auto",
-    position: "relative"
-  },
+  // appbarLogo: {
+  //   margin: "auto",
+  //   display: "block",
+  //   maxWidth: "40px",
+  //   height: "auto",
+  //   position: "relative"
+  // },
   addMargin: {
     marginTop: "50px",
   },
@@ -214,11 +217,13 @@ export default function SidebarDrawer() {
   return (
       <React.Fragment>
       <CssBaseline />
+
+        {open === 0 &&
         <HideAppBar
           openMobile={openMobile}
           open={open}
           handleDrawerOpen={handleDrawerOpen}
-        />
+        />}
         {/*<AppBar*/}
         {/*    position="fixed"*/}
         {/*    className={clsx(classes.appBar, {*/}
@@ -248,6 +253,11 @@ export default function SidebarDrawer() {
         {/*    </Grid>*/}
         {/*  </Toolbar>*/}
         {/*</AppBar>*/}
+        <ClickAwayListener
+            mouseEvent="onMouseDown"
+            touchEvent="onTouchStart"
+            onClickAway={handleDrawerClose}
+        >
       <Drawer
         variant={"permanent"}
         classes={{
@@ -288,6 +298,7 @@ export default function SidebarDrawer() {
         </div>
 
       </Drawer>
+      </ClickAwayListener>
       </React.Fragment>
 
   );

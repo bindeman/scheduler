@@ -91,7 +91,7 @@ function HideOnScroll(props) {
 
   return (
 
-      <Slide appear={false} direction="down" in={!trigger && props.open === 0}>
+      <Slide appear={false} direction="down" in={!trigger}>
 
           {children}
 
