@@ -100,8 +100,10 @@ const useStyles = makeStyles((theme) => ({
 export default function EventModal(props) {
 
 let eventTitleText;
+let toolTipText;
 let buttonText;
 let buttonDisabled = false;
+let buttonLink = props.link;
     switch (props.eventStatus) {
         case "future":
             eventTitleText = "Scheduled event " + moment(props.dateInUserTimeZone).fromNow();
@@ -111,6 +113,12 @@ let buttonDisabled = false;
         case "past":
             eventTitleText = "Past event from " + moment(props.dateInUserTimeZone).format('MMMM Do, YYYY');
             buttonText = "Watch Recording"
+            if(props.pastlink) {
+                buttonLink = props.pastlink
+            } else {
+                buttonDisabled = true;
+                toolTipText = "Recording will be available shortly after the Global C.R.E.D event concludes"
+            }
             break;
         case "live":
             eventTitleText = "Event started " + moment(props.dateInUserTimeZone).fromNow();
@@ -191,9 +199,12 @@ const classes = useStyles();
                             dateInUserTimeZone={props.dateInUserTimeZone}
                             duration={props.duration}
                         />
-                        <Tooltip disableFocusListener disableHoverListener={!buttonDisabled} arrow={true} title={eventTitleText} placement="top">
+                        <Tooltip disableFocusListener disableHoverListener={!buttonDisabled}
+                                 arrow={true}
+                                 title={toolTipText ? toolTipText : eventTitleText}
+                                 placement="top">
                         <div>
-                        <PrimaryButton disabled={buttonDisabled} link={buttonDisabled ? null : props.link} text={buttonText}/>
+                        <PrimaryButton disabled={buttonDisabled} link={buttonDisabled ? null : buttonLink} text={buttonText}/>
                         </div>
                         </Tooltip>
                     </DialogActions>

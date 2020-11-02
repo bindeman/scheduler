@@ -41,6 +41,10 @@ const EventSchema = new Schema({
         type: String,
         required: true
     },
+    pastlink: {
+        type: String,
+        required: false
+    },
     description: {
         type: String,
         required: true

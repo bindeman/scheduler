@@ -72,7 +72,8 @@ export default function EventCategory(props) {
             bio: item.bio,
             dateInUserTimeZone: item.dateInUserTimeZone,
             category: item.category,
-            link: item.link
+            link: item.link,
+            pastlink: item.pastlink
         }
 
         setModalProps(props);
@@ -129,6 +130,7 @@ const classes = useStyles();
                 bio={modalProps.bio}
                 dateInUserTimeZone={modalProps.dateInUserTimeZone}
                 link={modalProps.link}
+                pastlink={modalProps.pastlink}
                 eventStatus={props.eventStatus}
                 closeModal={handleModalClose}
 

@@ -121,6 +121,7 @@ router.post('/', (req, res) => {
         duration: req.body.duration,
         category: req.body.category,
         link: req.body.link,
+        pastlink: req.body.pastlink,
         description: req.body.description,
         bio: req.body.bio,
     });

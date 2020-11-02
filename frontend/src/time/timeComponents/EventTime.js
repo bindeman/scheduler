@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
     },
     pastEvent: {
-        opacity: "0.20"
+        backgroundColor: "#D6DDD0",
     }
 
 

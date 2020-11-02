@@ -117,7 +117,9 @@ const {open, setOpen} = useContext(WidthContext);
             <Fade in={!loading} timeout={500}>
             <Grid item xs={12}>
                 {!(liveEvents.length === 0 && futureEvents.length === 0 && liveEvents.length === 0) && (
-                <Typography className={clsx(classes.heroTitle, open === 0 && classes.heroTitleMobile)}>Events Schedule for {props.title}</Typography>)}
+                <Typography className={clsx(classes.heroTitle, open === 0 && classes.heroTitleMobile)}>Events Schedule for {props.title}</Typography>)
+
+                }
         </Grid>
             </Fade>
                 )}
