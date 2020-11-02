@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
+require('dotenv').config();
 
 const events = require('./routes/api/events');
 const prerecordedevents = require('./routes/api/prerecordedevents');
@@ -14,6 +15,7 @@ const app = express();
 app.use(bodyParser.json());
 
 //DB config
+console.log(process.env.DATABASE);
 const db = require('./config/keys').mongoURI;
 
 
