@@ -1,0 +1,35 @@
+<head>
+    <link rel="stylesheet" href="popup_styles.css">
+</head>
+
+<script>
+    var minimized = false;
+
+    function minimize() {
+    let wrapper = document.getElementById("popupWrapper");
+    let frame = document.getElementById("contentframe");
+    let topbar = document.getElementById("topbar");
+    let minimizeButton = document.getElementById("minimizebutton");
+
+    if(minimized) {
+        wrapper.classList.remove("minimized");
+        frame.classList.remove("minimizedContent");
+        topbar.classList.remove("topbarMinimized");
+        minimizeButton.classList.remove("minimizeHidden");
+        } else {
+        wrapper.classList.add("minimized");
+        frame.classList.add("minimizedContent");
+        topbar.classList.add("topbarMinimized");
+        minimizeButton.classList.add("minimizeHidden");
+    }
+    minimized = !minimized;
+    }
+</script>
+ 
+<div id="popupWrapper" class="popupWrapper">
+    <div id="topbar" class="topbar" onclick="minimize()">
+        <h5 class="text">Event Schedule</h5>
+        <a onclick="minimize()"><img id="minimizebutton" class="minimize" src="https://globalcred.herokuapp.com/popup/minimize.svg" alt="Minimize"></a>
+    </div>
+  <iframe id="contentframe" class="frame" src="https://globalcred.herokuapp.com/learners" title="Global C.R.E.D. Scheduler"></iframe>
+</div>å
