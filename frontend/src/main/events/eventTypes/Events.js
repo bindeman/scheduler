@@ -149,7 +149,7 @@ const {open, setOpen} = useContext(WidthContext);
                         <Typography className={clsx(classes.heroTitle, open === 0 && classes.heroTitleMobile)}>Live Events Schedule for {props.title}</Typography>
                         <div className={classes.timezoneWrapper}>
                             <LanguageIcon className={classes.timezoneIcon}/>
-                            <Typography className={classes.timeZoneHeading}>{formattedTimezone} ({moment.tz(timezone.name()).format('z')})</Typography>
+                            <Typography className={classes.timeZoneHeading}>Timezone: {formattedTimezone} ({moment.tz(timezone.name()).format('z')})</Typography>
                         </div>
                         </React.Fragment>
                 )
