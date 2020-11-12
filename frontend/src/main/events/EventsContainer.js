@@ -126,7 +126,7 @@ export default function EventsContainer(props) {
                     scrollButtons="off"
                     aria-label="scrollable auto tabs example"
                 >
-                    <Tab className={classes.tabs}  label="Live Events" {...a11yProps(0)} />
+                    <Tab className={classes.tabs} label="Live Events" {...a11yProps(0)} />
                     <Tab className={classes.tabs} label="Pre-Recorded" {...a11yProps(1)} />
 
                 </Tabs>

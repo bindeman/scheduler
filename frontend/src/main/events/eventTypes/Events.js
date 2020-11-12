@@ -94,6 +94,7 @@ export default function Events(props) {
     const timezone = jstz.determine();
 
     const formattedTimezone = timezone.name().replace("_", " ");
+        //.replace("30", ":30").replace("+", "GMT+");
     const [futureEvents, setFutureEvents] = useState([]);
     const [liveEvents, setLiveEvents] = useState([]);
     const [pastEvents, setPastEvents] = useState([]);
@@ -145,7 +146,7 @@ const {open, setOpen} = useContext(WidthContext);
             <Grid item xs={12}>
                 {!(liveEvents.length === 0 && futureEvents.length === 0 && liveEvents.length === 0) && (
                         <React.Fragment>
-                        <Typography className={clsx(classes.heroTitle, open === 0 && classes.heroTitleMobile)}>Events Schedule for {props.title}</Typography>
+                        <Typography className={clsx(classes.heroTitle, open === 0 && classes.heroTitleMobile)}>Live Events Schedule for {props.title}</Typography>
                         <div className={classes.timezoneWrapper}>
                             <LanguageIcon className={classes.timezoneIcon}/>
                             <Typography className={classes.timeZoneHeading}>{formattedTimezone} ({moment.tz(timezone.name()).format('z')})</Typography>

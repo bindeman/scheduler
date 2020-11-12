@@ -12,7 +12,9 @@ const Event = require('../../models/Event');
 router.get('/future/category/:number', (req, res) => {
     let now = new Date()
     const timezone = req.get("timezone") ? req.get("timezone") : "Etc/GMT";
-    Event.find({category: req.params.number, date: {$gt: now} })
+    const category = req.params.number == "all" ? { $ne: null } : req.params.number; //one category or all
+
+    Event.find({category: category, date: {$gt: now} })
         .lean()
         .sort({ date: 1 })
         .then((items) => {
@@ -35,7 +37,9 @@ router.get('/future/category/:number', (req, res) => {
 router.get('/past/category/:number', (req, res) => {
     let now = new Date()
     const timezone = req.get("timezone") ? req.get("timezone") : "Etc/GMT";
-    Event.find({category: req.params.number, endDate: {$lt: now} })
+    const category = req.params.number == "all" ? { $ne: null } : req.params.number; //one category or all
+
+    Event.find({category: category, endDate: {$lt: now} })
         .lean()
         .sort({ date: -1 })
         .then((items) => {
@@ -82,12 +86,14 @@ router.get('/live_old', (req, res) => {
 
 router.get('/now/category/:number', (req, res) => {
     const timezone = req.get("timezone") ? req.get("timezone") : "Etc/GMT";
+    const category = req.params.number == "all" ? { $ne: null } : req.params.number; //one category or all
+
     console.log(timezone)
 
     let now = new Date().getTime();
 
 
-    Event.find({category: req.params.number, date: {$lt: now}, endDate: {$gt: now} })
+    Event.find({category: category, date: {$lt: now}, endDate: {$gt: now} })
         .lean()
         .sort({ date: 1 })
         .then(items => res.json(items))
@@ -99,7 +105,11 @@ router.get('/now/category/:number', (req, res) => {
 //display all future events
 router.get('/category/:number', (req, res) => {
     let now = new Date();
-    Event.find({ category: req.params.number, date: {$gte: now} })
+
+    const category = req.params.number == "all" ? { $ne: null } : req.params.number; //one category or all
+
+
+    Event.find({ category: category, date: {$gte: now} })
         .sort({ date: 1 })
         .then(items => res.json(items))
         .catch(err => res.status(404).json({ success: false }));

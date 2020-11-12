@@ -83,6 +83,8 @@
 .minimize {
   opacity: 0.5;
   transition: 0.25s;
+  min-height: 0px;
+
 }
 .minimize:hover {
   opacity: 0.8;

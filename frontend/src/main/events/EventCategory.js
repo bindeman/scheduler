@@ -62,6 +62,7 @@ export default function EventCategory(props) {
     const [modalProps, setModalProps] = React.useState({
     });
 
+    const now = new Date();
      const handleModalOpen = (e, item) => {
         const props = {
             title: item.title,
@@ -84,7 +85,20 @@ export default function EventCategory(props) {
     const handleModalClose = () => {
         setModalOpen(false);
     };
+
+     const printDateInCorrectFormat = (dateOfEvent) => {
+         let eventDate = new Date(dateOfEvent).getTime();
+         if(Math.abs(now - eventDate ) < 170000000) {
+             return moment(dateOfEvent).fromNow();
+         } else {
+             return moment(dateOfEvent).format('MMMM D, YYYY');
+         }
+         console.log(eventDate.getTime());
+         //return eventDate.getTime();
+    }
 const classes = useStyles();
+
+
 
   return (
     <React.Fragment>
@@ -96,7 +110,7 @@ const classes = useStyles();
         {props.data.map((item, index) => {
             return (
                     <div>
-                    {item.dateHeader && <Typography className={classes.dateHeading}>Events {moment(item.dateInUserTimeZone).fromNow()}</Typography>}
+                    {item.dateHeader && <Typography className={classes.dateHeading}>Events {printDateInCorrectFormat(item.dateInUserTimeZone)}</Typography>}
                     <Button
                         onClick={(e => handleModalOpen(e, item))}
                         endIcon={<ChevronRight  className={classes.buttonChevron}/>}

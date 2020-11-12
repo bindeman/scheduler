@@ -14,6 +14,8 @@ import educators from '../img/educators.png';
 import clsx from "clsx";
 import {useLocation, NavLink } from "react-router-dom";
 import Tooltip from "@material-ui/core/Tooltip";
+import liveBadge from "./../img/liveevents.svg"
+
 
 
 const useMenuStyles = makeStyles(() => ({
@@ -81,6 +83,11 @@ const useMenuStyles = makeStyles(() => ({
 
 export default function Sidebar(props) {
     const menuItems = [
+        {
+            title: "All Live Events",
+            imageURL: liveBadge,
+            link: "/all"
+        },
         {
             title: "Language Learners",
             imageURL: learners,

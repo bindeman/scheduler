@@ -67,6 +67,12 @@ return (
                     <Redirect to="/learners" />
                 </Route>
                 <Route
+                    path='/all'
+                    exact
+                    component={() => <EventsContainer category={"all"}
+                                                      title="All tracks"/>}
+                />
+                <Route
                     path='/learners'
                     exact
                     component={() => <EventsContainer category={1}
