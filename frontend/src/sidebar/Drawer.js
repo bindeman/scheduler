@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useMemo, useState} from 'react';
+import React, {useContext} from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,13 +9,6 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import globalSealLogo from "../img/globalSealLogo.png";
 import globalCRED from "../img/globalCRED.svg";
-import AppBar from "@material-ui/core/AppBar";
-import Typography from "@material-ui/core/Typography";
-import MenuIcon from '@material-ui/icons/Menu';
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Fade from "@material-ui/core/Fade";
-import Grid from "@material-ui/core/Grid";
 import HideAppBar from "../AppBar";
 import {WidthContext} from "../WidthContext";
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -25,15 +18,13 @@ const drawerWidth = 260;
 
 const useStyles = makeStyles((theme) => ({
 
-  toolbarIcon: {
+  bottomContent: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    height: "10px",
     marginLeft: "auto",
     //marginBottom: "-12px",
     padding: '0 0',
-
-    ...theme.mixins.toolbar,
   },
   // appBar: {
   //   justifyContent: "center",
@@ -82,9 +73,11 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     position: 'sticky',
     height: '100vh',
-    overflowX: 'hidden',
+    display: "flex",
+    //overflowX: 'hidden',
     boxShadow: " 0 0 23px rgba(0,0,0,0.10)",
     width: "260px",
+    justifyContent: "space-between",
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: "0.33s",
@@ -163,10 +156,11 @@ const useStyles = makeStyles((theme) => ({
     width: "100%"
   },
   centered: {
-    display: "flex",
+    //display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    height: "100%",
+    overflowY: "none",
+    //height: "100%",
   },
   events: {
     maxWidth: "500px",
@@ -224,35 +218,7 @@ export default function SidebarDrawer() {
           open={open}
           handleDrawerOpen={handleDrawerOpen}
         />}
-        {/*<AppBar*/}
-        {/*    position="fixed"*/}
-        {/*    className={clsx(classes.appBar, {*/}
-        {/*      [classes.appBarShift]: openMobile,*/}
-        {/*    }, open !== 0 && classes.appBarHidden,*/}
-        {/*    )}*/}
-        {/*>*/}
-        {/*  */}
-        {/*  <Toolbar>*/}
-        {/*    <Grid container>*/}
-        {/*      <Grid item xs={1}>*/}
-        {/*    <IconButton*/}
-        {/*        color="inherit"*/}
-        {/*        aria-label="open drawer"*/}
-        {/*        onClick={handleDrawerOpen}*/}
-        {/*        edge="start"*/}
-        {/*        className={clsx(classes.menuButton, open && classes.hide)}*/}
-        {/*    >*/}
-        {/*      <MenuIcon />*/}
-        {/*    </IconButton>*/}
-        {/*      </Grid>*/}
-        {/*      <Grid item xs={10}>*/}
-        {/*    <img src={globalSealLogo}  className={classes.appbarLogo} alt={"Global Seal Logo"}/>*/}
-        {/*      </Grid>*/}
-        {/*      <Grid item xs={1}>*/}
-        {/*      </Grid>*/}
-        {/*    </Grid>*/}
-        {/*  </Toolbar>*/}
-        {/*</AppBar>*/}
+
         <ClickAwayListener
             mouseEvent="onMouseDown"
             touchEvent="onTouchStart"
@@ -291,10 +257,7 @@ export default function SidebarDrawer() {
         />
         </div>
 
-        <div className={classes.toolbarIcon}>
-          {/*<IconButton onClick={open ? handleDrawerClose : handleDrawerOpen}>*/}
-          {/*  <MenuIcon />*/}
-          {/*</IconButton>*/}
+        <div className={classes.bottomContent}>
         </div>
 
       </Drawer>

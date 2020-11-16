@@ -6,8 +6,12 @@
   position: fixed;
   bottom: 15px;
   right: 15px;
+  max-height: 700px;
+  max-width: 900px;
+  /* margin: 20px; */
   padding: 3px 3px 3px 3px;
-  min-height: 375px;
+  height: calc(100vh - 30px);
+  width: calc(100vw - 35px);
   border-radius: 16px;
   transition: 0.25s;
 }
@@ -112,34 +116,11 @@
 
 
 
-@media only screen and (max-width: 9999px) {
-.popupWrapper {
-  height: 500px;
-  width: 900px;
-  bottom: 25px;
-  right: 25px;
-}
-
-@media only screen and (max-width: 1300px) {
-.popupWrapper {
-  height: 50%;
-  width: 75%;
-  bottom: 20px;
-  right: 20px;
-}
-
-@media only screen and (max-width: 1000px) {
-.popupWrapper {
-  height: 50%;
-  width: 70%;
-  bottom: 15px;
-  right: 15px;
-}
-
 @media only screen and (max-width: 600px) {
 .popupWrapper {
-  min-height: 70%;
-  width: 5%;
+  /* min-height: 70%;
+  width: 5%; */
+  width: calc(100vw - 15px);
   bottom: 5px;
   right: 5px;
 }

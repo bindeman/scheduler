@@ -20,7 +20,7 @@ import liveBadge from "./../img/liveevents.svg"
 
 const useMenuStyles = makeStyles(() => ({
     menuList: {
-        display: "flex",
+        //display: "flex",
         flexDirection: "column",
         justifyContent: "space-evenly",
         width: "100%",
