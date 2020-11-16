@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'sticky',
     height: '100vh',
     display: "flex",
-    //overflowX: 'hidden',
+    overflowX: 'hidden',
     boxShadow: " 0 0 23px rgba(0,0,0,0.10)",
     width: "260px",
     justifyContent: "space-between",
@@ -159,7 +159,7 @@ const useStyles = makeStyles((theme) => ({
     //display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    overflowY: "none",
+    //overflowY: "none",
     //height: "100%",
   },
   events: {

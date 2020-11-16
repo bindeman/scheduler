@@ -8,7 +8,7 @@ const EventSchema = new Schema({
     id: {
         type: Number,
         required: true,
-        default: Date.now
+        //default: Date.now
     },
     title: {
         type: String,
@@ -34,7 +34,7 @@ const EventSchema = new Schema({
         required: true,
     },
     category: {
-        type: Number,
+        type: [Number],
         required: true
     },
     link: {
