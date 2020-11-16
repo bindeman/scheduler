@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
@@ -10,11 +10,11 @@ import DialogContent from "@material-ui/core/DialogContent";
 import PrimaryButton from "../../buttons/PrimaryButton";
 import ResponsiveTime from "../../time/ResponsiveTime";
 import liveBadge from "../../img/livebadge.svg";
-import Chip from "@material-ui/core/Chip";
-import Avatar from "@material-ui/core/Avatar";
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
+import {WidthContext} from "../../WidthContext";
+import clsx from "clsx";
 
 
 
@@ -38,6 +38,9 @@ const useStyles = makeStyles((theme) => ({
         color: "#444444",
         letterSpacing: "-0.08px",
         lineHeight: "17px",
+    },
+    smallModalMargin: {
+        margin: "5px",
     },
     eventSubtitle: {
         fontSize: "13px",
@@ -99,7 +102,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EventModal(props) {
 
-let eventTitleText;
+    const {open, setOpen} = useContext(WidthContext);
+
+
+    let eventTitleText;
 let toolTipText;
 let buttonText;
 let buttonDisabled = false;
@@ -146,7 +152,7 @@ const classes = useStyles();
             disableEnforceFocus
             disableAutoFocus
             open={props.open}
-            classes={{paper: classes.paper}}
+            classes={{paper: clsx(classes.paper, open == 0 && classes.smallModalMargin) }}
             container={() => document.getElementById('content')}
             BackdropProps={{ style: { backgroundColor: "rgba(0,0,0,0.10)"} }}
             onClose={props.closeModal}>

@@ -5,13 +5,9 @@ import Grid from "@material-ui/core/Grid";
 import axios from 'axios';
 import jstz from 'jstz';
 import LoadingSpinner from "../../../misc/Spinner";
-import Link from "@material-ui/core/Link";
 import Fade from '@material-ui/core/Fade';
 import EventCategory from "../EventCategory";
 import NoEvents from "../../../misc/notFound/NoEvents";
-import Paper from "@material-ui/core/Paper";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
 import Copyright from "../../../misc/Copyright";
 import {WidthContext} from "../../../WidthContext";
 import clsx from "clsx";
@@ -144,7 +140,7 @@ const {open, setOpen} = useContext(WidthContext);
         {!loading && (
             <Fade in={!loading} timeout={500}>
             <Grid item xs={12}>
-                {!(liveEvents.length === 0 && futureEvents.length === 0 && liveEvents.length === 0) && (
+                {!(liveEvents.length === 0 && futureEvents.length === 0 && pastEvents.length === 0) && (
                         <React.Fragment>
                         <Typography className={clsx(classes.heroTitle, open === 0 && classes.heroTitleMobile)}>Live Events Schedule for {props.title}</Typography>
                         <div className={classes.timezoneWrapper}>
@@ -179,7 +175,7 @@ const {open, setOpen} = useContext(WidthContext);
         {!loading &&
         <Fade in={!loading} timeout={500}>
         <div>
-            {!liveEvents.length && !futureEvents.length && !liveEvents.length && <NoEvents/>}
+            {!liveEvents.length && !futureEvents.length && !pastEvents.length && <NoEvents/>}
             <Copyright />
         </div>
         </Fade>
