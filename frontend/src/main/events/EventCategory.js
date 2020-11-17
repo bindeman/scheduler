@@ -98,7 +98,7 @@ export default function EventCategory(props) {
     }
 const classes = useStyles();
 
-
+const items = props.data.filter(item => item.title.toLowerCase().includes(props.query.toLowerCase()) || item.presenter.toLowerCase().includes(props.query.toLowerCase()));
 
   return (
     <React.Fragment>
@@ -107,7 +107,7 @@ const classes = useStyles();
         <div>
 
         {props.eventStatus === 'live' && <Typography className={classes.dateHeading}>Events happening right now</Typography>}
-        {props.data.map((item, index) => {
+        {items.map((item, index) => {
             return (
                     <div>
                     {item.dateHeader && <Typography className={classes.dateHeading}>Events {printDateInCorrectFormat(item.dateInUserTimeZone)}</Typography>}

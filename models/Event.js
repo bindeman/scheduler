@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-
 const Schema = mongoose.Schema;
+
+const {PresenterSchema} = require('./Presenter').schema;
 
 // Create Schema
 const EventSchema = new Schema({
@@ -18,6 +19,10 @@ const EventSchema = new Schema({
     presenter: {
         type: String,
         required: true,
+    },
+    presenters: {
+        type: [PresenterSchema],
+        required: false,
     },
     organization: {
         type: String,

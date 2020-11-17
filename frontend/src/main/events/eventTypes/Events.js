@@ -13,6 +13,8 @@ import {WidthContext} from "../../../WidthContext";
 import clsx from "clsx";
 import moment from "moment-timezone";
 import LanguageIcon from '@material-ui/icons/Language';
+import TextField from "@material-ui/core/TextField";
+import {Search} from "@material-ui/icons";
 
 
 
@@ -92,6 +94,7 @@ export default function Events(props) {
     const formattedTimezone = timezone.name().replace("_", " ");
         //.replace("30", ":30").replace("+", "GMT+");
     const [futureEvents, setFutureEvents] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
     const [liveEvents, setLiveEvents] = useState([]);
     const [pastEvents, setPastEvents] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -130,9 +133,17 @@ export default function Events(props) {
         FetchData();
     }, []);
 
+
+    const onChangeSearch = ((e) => {
+        console.log(e.target.value)
+        setSearchQuery(e.target.value)
+    })
+
 const classes = useStyles();
 
 const {open, setOpen} = useContext(WidthContext);
+
+
 
   return (
     <React.Fragment>
@@ -140,6 +151,7 @@ const {open, setOpen} = useContext(WidthContext);
         {!loading && (
             <Fade in={!loading} timeout={500}>
             <Grid item xs={12}>
+
                 {!(liveEvents.length === 0 && futureEvents.length === 0 && pastEvents.length === 0) && (
                         <React.Fragment>
                         <Typography className={clsx(classes.heroTitle, open === 0 && classes.heroTitleMobile)}>Live Events Schedule for {props.title}</Typography>
@@ -151,6 +163,20 @@ const {open, setOpen} = useContext(WidthContext);
                 )
 
                 }
+
+                <Grid container spacing={1} alignItems="flex-end">
+                    <Grid item>
+                        <Search />
+                    </Grid>
+                    <Grid item>
+                        <TextField
+                            id="input-with-icon-grid"
+                            label="Search"
+                            variant="outlined"
+                            type="search"
+                            onChange={e => onChangeSearch(e)}/>
+                    </Grid>
+                </Grid>
         </Grid>
             </Fade>
                 )}
@@ -163,9 +189,9 @@ const {open, setOpen} = useContext(WidthContext);
                 <Fade in={!loading} timeout={500}>
                     <div>
                         {liveEvents.length > 0 &&
-                    <EventCategory data={liveEvents} eventStatus={"live"}/>}
-                    <EventCategory data={futureEvents} eventStatus={"future"}/>
-                    <EventCategory data={pastEvents} eventStatus={"past"} />
+                    <EventCategory data={liveEvents} eventStatus={"live"} query={searchQuery}/>}
+                    <EventCategory data={futureEvents} eventStatus={"future"} query={searchQuery}/>
+                    <EventCategory data={pastEvents} eventStatus={"past"} query={searchQuery} />
                     </div>
                 </Fade>
 

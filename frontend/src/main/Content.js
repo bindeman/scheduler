@@ -8,6 +8,7 @@ import EventsContainer from "./events/EventsContainer";
 import FourOFour from "../misc/notFound/FourOFour";
 import {WidthContext} from "../WidthContext";
 import clsx from "clsx";
+import ScrollToTop from "../ScrollToTop";
 
 
 
@@ -62,6 +63,7 @@ return (
     <main className={clsx(classes.content, open === 0 && classes.contentMobile)} id={"content"}>
     <Container maxWidth="lg" id={"contentContainer"} className={classes.container}>
         <Grid container className={classes.contentGrid} spacing={3} style={{minHeight: "100%"}}>
+            <ScrollToTop>
             <Switch>
                 <Route exact path="/">
                     <Redirect to="/learners" />
@@ -106,7 +108,7 @@ return (
                 />
                 <Route component={FourOFour} />
             </Switch>
-
+            </ScrollToTop>
         </Grid>
     </Container>
     </main>
