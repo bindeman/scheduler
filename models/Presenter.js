@@ -13,15 +13,15 @@ const PresenterSchema = new Schema({
     name: {
         type: String,
         required: true,
-        default: "Untitled Event"
+        default: "Untitled"
     },
     organization: {
         type: String,
-        required: true,
+        required: false,
     },
     bio: {
         type: String,
-        required: true
+        required: false
     },
     link: {
         type: String,

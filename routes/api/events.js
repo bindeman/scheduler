@@ -115,7 +115,22 @@ router.get('/category/:number', (req, res) => {
         .catch(err => res.status(404).json({ success: false }));
 });
 
+//access presenters of specific event
+router.get('/id/:number', (req, res) => {
+    let now = new Date()
+    //const timezone = req.get("timezone") ? req.get("timezone") : "Etc/GMT";
 
+
+    Event.findOne({id: req.params.number}, "presenters")
+        .populate({
+            path: 'presenters',
+            model: 'presenter'
+        }).then((presenters) => {
+        res.json(presenters);
+    })
+        .catch(err => res.status(404).json({success: false}));
+
+})
 
 
 // @route POST api/items

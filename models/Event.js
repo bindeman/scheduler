@@ -21,7 +21,7 @@ const EventSchema = new Schema({
         required: true,
     },
     presenters: {
-        type: [PresenterSchema],
+        type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Presenter'}],
         required: false,
     },
     organization: {
