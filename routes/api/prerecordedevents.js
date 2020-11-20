@@ -14,7 +14,9 @@ const PreRecordedEvent = require('../../models/PreRecordedEvent');
 router.get('/category/:number', (req, res) => {
     let now = new Date()
     const timezone = req.get("timezone") ? req.get("timezone") : "Etc/GMT";
-    PreRecordedEvent.find({category: req.params.number})
+    const category = req.params.number == "all" ? { $ne: null } : req.params.number; //one category or all
+
+    PreRecordedEvent.find({category: category})
         .lean()
         .sort({ title: 1 })
         .then((items) => {

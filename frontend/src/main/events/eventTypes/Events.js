@@ -14,7 +14,7 @@ import clsx from "clsx";
 import moment from "moment-timezone";
 import LanguageIcon from '@material-ui/icons/Language';
 import TextField from "@material-ui/core/TextField";
-import {Search} from "@material-ui/icons";
+import {Search, Pageview} from "@material-ui/icons";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
 
@@ -89,8 +89,35 @@ const useStyles = makeStyles((theme) => ({
     },
     search: {
         width: "100%",
-        borderRadius: "8px",
-        backgroundColor: "grey",
+        borderRadius: "30px",
+        marginTop: "75px",
+        marginBottom: "-10px",
+        fontSize: "10px",
+        border: "none",
+        backgroundColor: "#DDDDDD",
+            '& fieldset': {
+                borderColor: 'black',
+            },
+            '&:hover fieldset': {
+                borderColor: 'black',
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: 'black',
+            },
+    },
+    notchedOutline: {
+        borderWidth: "1px",
+        borderRadius: "30px",
+        borderColor: "transparent !important"
+    },
+    searchSize: {
+        fontSize: "13px",
+        fontWeight: 600,
+        textAlign: "left",
+    },
+    searchIcon: {
+        fontSize: "17px",
+        marginRight: "8px",
     }
 }));
 
@@ -172,18 +199,22 @@ const {open, setOpen} = useContext(WidthContext);
                 }
 
                 <TextField
+                    style={{fontSize: 10}}
                     className={classes.search}
                     id="input-with-icon-grid"
-                    label="Search"
                     variant="outlined"
                     type="search"
+                    placeholder={"Search"}
+                    size="small"
                     onChange={e => onChangeSearch(e)}
                     InputProps={{
+                        classes: {
+                            notchedOutline: classes.notchedOutline,
+                            input: classes.searchSize
+                        },
                         startAdornment: (
                             <InputAdornment>
-                                <IconButton>
-                                    <Search />
-                                </IconButton>
+                                    <Search className={classes.searchIcon} />
                             </InputAdornment>
                         )
                     }}/>

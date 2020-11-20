@@ -65,6 +65,38 @@ const useStyles = makeStyles((theme) => ({
     },
     heroTitleMobile: {
         marginTop: "70px",
+    },
+    search: {
+        width: "100%",
+        borderRadius: "30px",
+        marginTop: "75px",
+        marginBottom: "-10px",
+        fontSize: "10px",
+        border: "none",
+        backgroundColor: "#DDDDDD",
+        '& fieldset': {
+            borderColor: 'black',
+        },
+        '&:hover fieldset': {
+            borderColor: 'black',
+        },
+        '&.Mui-focused fieldset': {
+            borderColor: 'black',
+        },
+    },
+    notchedOutline: {
+        borderWidth: "1px",
+        borderRadius: "30px",
+        borderColor: "transparent !important"
+    },
+    searchSize: {
+        fontSize: "13px",
+        fontWeight: 600,
+        textAlign: "left",
+    },
+    searchIcon: {
+        fontSize: "17px",
+        marginRight: "8px",
     }
 }));
 
@@ -115,18 +147,22 @@ const classes = useStyles();
                         (<Typography className={clsx(classes.heroTitle, open === 0 && classes.heroTitleMobile)}>On-Demand Events for {props.title}</Typography>)}
             </Grid>
                     <TextField
+                        style={{fontSize: 10}}
                         className={classes.search}
                         id="input-with-icon-grid"
-                        label="Search"
                         variant="outlined"
                         type="search"
+                        placeholder={"Search"}
+                        size="small"
                         onChange={e => onChangeSearch(e)}
                         InputProps={{
+                            classes: {
+                                notchedOutline: classes.notchedOutline,
+                                input: classes.searchSize
+                            },
                             startAdornment: (
                                 <InputAdornment>
-                                    <IconButton>
-                                        <Search />
-                                    </IconButton>
+                                    <Search className={classes.searchIcon} />
                                 </InputAdornment>
                             )
                         }}/>
