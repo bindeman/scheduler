@@ -50,11 +50,18 @@ if (!(process.env.NODE_ENV === 'production')) {
     }
 
 
+    function setEndDate(item) {
+        const minute = 60*1000;
+        const time = new Date(item.date).getTime() + (item.duration * 60*1000);
+        return new Date(time);
+    }
+
     function updateEvents(eventsSheet) {
         let count = 0;
         eventsSheet.forEach((event, index, array) => {
             let query = { id: event.id }
             event.date = new Date(event.date)
+            event.endDate = new Date(new Date(event.date).getTime() + (event.duration * 60*1000));
             event.category = event.category.toString().split(',').map(Number);
             event.presenters = event.presenter.toString().split(', ');
 
@@ -81,7 +88,8 @@ if (!(process.env.NODE_ENV === 'production')) {
         //update Presenters
         prerecordedEventsSheet.forEach((event, index, array) => {
             let query = { id: event.id }
-            event.date = new Date(event.date)
+            event.date = new Date(event.date);
+            event.endDate = new Date(new Date(event.date).getTime() + (event.duration * 60*1000));
             event.category = event.category.toString().split(',').map(Number);
             event.presenters = event.presenter.toString().split(', ');
 
@@ -108,7 +116,7 @@ if (!(process.env.NODE_ENV === 'production')) {
         updatePreRecordedEvents(prerecordedEventsSheet);
 
     //display objects to ensure all events have presenters
-    Event.find({}, 'presenters')
+    Event.find({})
         .populate({
             path: 'presenters',
             model: 'presenter'
@@ -116,7 +124,7 @@ if (!(process.env.NODE_ENV === 'production')) {
         .then((res) => console.log(res)).catch(err => console.log(err));
 
     //display objects to ensure all events have presenters
-    PreRecordedEvent.find({}, 'presenters')
+    PreRecordedEvent.find({})
         .populate({
             path: 'presenters',
             model: 'presenter'

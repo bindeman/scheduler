@@ -15,6 +15,8 @@ import moment from "moment-timezone";
 import LanguageIcon from '@material-ui/icons/Language';
 import TextField from "@material-ui/core/TextField";
 import {Search} from "@material-ui/icons";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
 
 
 
@@ -84,6 +86,11 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "20px",
         margin: "1.5px 3px 1px 0px",
         color: "#658546",
+    },
+    search: {
+        width: "100%",
+        borderRadius: "8px",
+        backgroundColor: "grey",
     }
 }));
 
@@ -164,19 +171,22 @@ const {open, setOpen} = useContext(WidthContext);
 
                 }
 
-                <Grid container spacing={1} alignItems="flex-end">
-                    <Grid item>
-                        <Search />
-                    </Grid>
-                    <Grid item>
-                        <TextField
-                            id="input-with-icon-grid"
-                            label="Search"
-                            variant="outlined"
-                            type="search"
-                            onChange={e => onChangeSearch(e)}/>
-                    </Grid>
-                </Grid>
+                <TextField
+                    className={classes.search}
+                    id="input-with-icon-grid"
+                    label="Search"
+                    variant="outlined"
+                    type="search"
+                    onChange={e => onChangeSearch(e)}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment>
+                                <IconButton>
+                                    <Search />
+                                </IconButton>
+                            </InputAdornment>
+                        )
+                    }}/>
         </Grid>
             </Fade>
                 )}

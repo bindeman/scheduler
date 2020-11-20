@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
@@ -15,6 +15,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import {WidthContext} from "../../WidthContext";
 import clsx from "clsx";
+import axios from "axios";
 
 
 
@@ -49,6 +50,15 @@ const useStyles = makeStyles((theme) => ({
         color: "#658546",
         letterSpacing: "-0.08px",
         lineHeight: "17px",
+        transition: "0.2s",
+        '&:hover': {
+            color: "black",
+            transition: "0.2s"
+        },
+    },
+
+    noDecoration: {
+        textDecoration: "none",
     },
     titleGutter: {
         marginBottom: "8px"
@@ -77,7 +87,8 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "11px",
         color: "#BABABA",
         letterSpacing: "-0.03px",
-        lineHeight: "14px"
+        lineHeight: "14px",
+        marginBottom: "8px",
     },
     dialogBottom: {
         backgroundColor: "#F7F7F7",
@@ -102,14 +113,33 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EventModal(props) {
 
+    // React.useEffect(() => {
+    //     const FetchData = async () => {
+    //         const presentersResponse = await axios.get(`/api/events/live/id/${props.id}`, {
+    //         });
+    //         console.log("===============PRESENTERS================")
+    //         console.log(presentersResponse.data.presenters);
+    //
+    //         //setPresenters((presentersResponse.data.presenters));
+    //         setLoading(false);
+    //     }
+    //     FetchData();
+    // }, []);
+
+    console.log(props.presenters)
+    // const [loading, setLoading] = useState(true);
+    // const [presenters, setPresenters] = useState([
+    //     {name: "Phil Bindex", bio: "We're live and ready to go"},
+    //     {name: "Yo Man", bio: "We're live and ready to go"},
+    //     {name: "Light the lights", bio: "We're live and ready to go"},
+    //     {name: "Hi There sirs", bio: "We're live and ready to go"},
+    // ]);
     const {open, setOpen} = useContext(WidthContext);
-
-
     let eventTitleText;
-let toolTipText;
-let buttonText;
-let buttonDisabled = false;
-let buttonLink = props.link;
+    let toolTipText;
+    let buttonText;
+    let buttonDisabled = false;
+    let buttonLink = props.link;
     switch (props.eventStatus) {
         case "future":
             eventTitleText = "Scheduled event " + moment(props.dateInUserTimeZone).fromNow();
@@ -186,9 +216,15 @@ const classes = useStyles();
 
                         </Grid>
                         <Grid item xs={12} sm={5}>
-                            <Typography className={classes.eventSubtitle}>{`${props.presenter},`}</Typography>
-                            <Typography className={`${classes.eventSubtitle} ${classes.titleGutter}`}>{props.organization}</Typography>
-                            <Typography className={classes.eventDescription}>{props.bio}</Typography>
+                            {props.presenters && props.presenters.map((presenter) => {
+                                return (
+                                <React.Fragment>
+                                <a className={classes.noDecoration} target="_blank" href={presenter.link}><Typography className={classes.eventSubtitle}>{`${presenter.name}`}</Typography></a>
+                                <Typography className={classes.eventDescription}>{presenter.bio}</Typography>
+                                </React.Fragment>
+                                )
+                            })
+                        }
                         </Grid>
                         {/*<Grid item xs={12} sm={8}>*/}
 

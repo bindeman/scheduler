@@ -31,6 +31,17 @@ router.get('/category/:number', (req, res) => {
         }).catch(err => res.status(404).json({ success: false }));
 });
 
+router.get('/id/:number', (req, res) => {
+    PreRecordedEvent.findOne({id: req.params.number}, "presenters")
+        .populate({
+            path: 'presenters',
+            model: 'presenter'
+        }).then((presenters) => {
+        res.json(presenters);
+    })
+        .catch(err => res.status(404).json({success: false}));
+
+})
 
 // @route POST api/items
 // @desc Create a visualization

@@ -8,6 +8,7 @@ import moment from "moment-timezone";
 import EventModal from "./EventModal";
 import ResponsiveTime from "../../time/ResponsiveTime";
 import Duration from "../../time/timeComponents/Duration";
+import axios from "axios";
 
 
 
@@ -64,21 +65,43 @@ export default function EventCategory(props) {
 
     const now = new Date();
      const handleModalOpen = (e, item) => {
-        const props = {
-            title: item.title,
-            presenter: item.presenter,
-            organization: item.organization,
-            duration: item.duration,
-            description: item.description,
-            bio: item.bio,
-            dateInUserTimeZone: item.dateInUserTimeZone,
-            category: item.category,
-            link: item.link,
-            pastlink: item.pastlink
+         const urlType = props.eventStatus === "prerecorded" ? "recorded" : "live"
+         const FetchData = async () => {
+             const presentersResponse = await axios.get(`/api/events/${urlType}/id/${item.id}`, {});
+             console.log(presentersResponse.data.presenters)
+             const presenters = presentersResponse.data.presenters
+             console.log(presenters);
+
+             return presentersResponse.data.presenters;
         }
 
-        setModalProps(props);
-        setModalOpen(true);
+
+         FetchData().then((presenters)=> {
+             console.log("AND THE PRESENTERS ARE:")
+             console.log(presenters);
+             const props = {
+                 title: item.title,
+                 id: item.id,
+                 presenter: item.presenter,
+                 presenters: presenters,
+                 organization: item.organization,
+                 duration: item.duration,
+                 description: item.description,
+                 bio: item.bio,
+                 apiUrlType: "live",
+                 dateInUserTimeZone: item.dateInUserTimeZone,
+                 category: item.category,
+                 link: item.link,
+                 pastlink: item.pastlink
+             }
+             console.log(props);
+             setModalProps(props);
+             setModalOpen(true);
+         });
+         console.log(props);
+
+
+
 
     }
 
@@ -127,7 +150,7 @@ const items = props.data.filter(item => item.title.toLowerCase().includes(props.
                         <Grid item xs={12} sm={props.eventStatus !== 'prerecorded' ? 8 : 12}>
                             <Typography className={classes.eventTitle}>{item.title}</Typography>
                             <Typography className={classes.eventSubtitle}>
-                                {`${item.presenter}, ${item.organization}`}
+                                {item.presenter}
                             </Typography>
                         </Grid>
                     </Grid>
@@ -138,10 +161,13 @@ const items = props.data.filter(item => item.title.toLowerCase().includes(props.
                 open={modalOpen}
                 title={modalProps.title}
                 presenter={modalProps.presenter}
+                id={modalProps.id}
                 organization={modalProps.organization}
                 duration={modalProps.duration}
                 description={modalProps.description}
                 bio={modalProps.bio}
+                presenters={modalProps.presenters}
+                apiUrlType={modalProps.apiUrlType}
                 dateInUserTimeZone={modalProps.dateInUserTimeZone}
                 link={modalProps.link}
                 pastlink={modalProps.pastlink}

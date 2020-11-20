@@ -15,6 +15,10 @@ import Tab from "@material-ui/core/Tab";
 import Copyright from "../../../misc/Copyright";
 import clsx from "clsx";
 import {WidthContext} from "../../../WidthContext";
+import TextField from "@material-ui/core/TextField";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import IconButton from "@material-ui/core/IconButton";
+import {Search} from "@material-ui/icons";
 
 
 
@@ -68,6 +72,7 @@ const useStyles = makeStyles((theme) => ({
 export default function PreRecordedEvents(props) {
     const timezone = jstz.determine();
     const [events, setEvents] = useState([]);
+    const [searchQuery, setSearchQuery] = useState("");
     const [loading, setLoading] = useState(true);
 
 
@@ -90,6 +95,11 @@ export default function PreRecordedEvents(props) {
         FetchData();
     }, []);
 
+    const onChangeSearch = ((e) => {
+        console.log(e.target.value)
+        setSearchQuery(e.target.value)
+    })
+
 const classes = useStyles();
     const {open, setOpen} = useContext(WidthContext);
 
@@ -98,11 +108,29 @@ const classes = useStyles();
 
             {!loading && (
                 <Fade in={!loading} timeout={500}>
+                <React.Fragment>
                 <Grid item xs={12}>
 
                     {events.length !== 0 &&
                         (<Typography className={clsx(classes.heroTitle, open === 0 && classes.heroTitleMobile)}>On-Demand Events for {props.title}</Typography>)}
             </Grid>
+                    <TextField
+                        className={classes.search}
+                        id="input-with-icon-grid"
+                        label="Search"
+                        variant="outlined"
+                        type="search"
+                        onChange={e => onChangeSearch(e)}
+                        InputProps={{
+                            startAdornment: (
+                                <InputAdornment>
+                                    <IconButton>
+                                        <Search />
+                                    </IconButton>
+                                </InputAdornment>
+                            )
+                        }}/>
+                        </React.Fragment>
                 </Fade>
                     )}
             <Grid item xs={12} style={{margin: "auto"}}>
@@ -113,10 +141,9 @@ const classes = useStyles();
 
                     <Fade in={!loading} timeout={500}>
                         <div>
-                        <EventCategory data={events} eventStatus={"prerecorded"}/>
+                        <EventCategory data={events} eventStatus={"prerecorded"} query={searchQuery}/>
                         </div>
                     </Fade>
-
             </Grid>
 
 

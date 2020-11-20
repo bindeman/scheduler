@@ -117,10 +117,6 @@ router.get('/category/:number', (req, res) => {
 
 //access presenters of specific event
 router.get('/id/:number', (req, res) => {
-    let now = new Date()
-    //const timezone = req.get("timezone") ? req.get("timezone") : "Etc/GMT";
-
-
     Event.findOne({id: req.params.number}, "presenters")
         .populate({
             path: 'presenters',
