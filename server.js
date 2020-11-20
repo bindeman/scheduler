@@ -2,7 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
-const XLSX = require('xlsx');
+var enforce = require('express-sslify');
+
 //const scheduler = require('./master_schedule.xls');
 
 require('dotenv').config();
@@ -14,8 +15,11 @@ const prerecordedevents = require('./routes/api/prerecordedevents');
 
 const app = express();
 
+
 //bodyparser
 app.use(bodyParser.json());
+
+enforce.HTTPS({ trustProtoHeader: true })
 
 //DB config
 console.log(process.env.DATABASE);

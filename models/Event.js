@@ -57,9 +57,6 @@ const EventSchema = new Schema({
     endDate: {
         type: Date,
     },
-    bio: {
-        type: String,
-    }
 });
 
 

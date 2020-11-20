@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
+const {PresenterSchema} = require('./Presenter').schema;
+
 
 // Create Schema
 const PreRecordedEventSchema = new Schema({
@@ -19,6 +21,10 @@ const PreRecordedEventSchema = new Schema({
         type: String,
         required: true,
     },
+    presenters: {
+        type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Presenter'}],
+        required: false,
+    },
     organization: {
         type: String,
         required: true,
@@ -34,7 +40,7 @@ const PreRecordedEventSchema = new Schema({
         required: true,
     },
     category: {
-        type: Number,
+        type: [Number],
         required: true
     },
     link: {
@@ -45,9 +51,6 @@ const PreRecordedEventSchema = new Schema({
         type: String,
         required: true
     },
-    bio: {
-        type: String,
-    }
 });
 
 
