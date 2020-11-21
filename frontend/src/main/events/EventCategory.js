@@ -26,7 +26,8 @@ const useStyles = makeStyles(() => ({
         textAlign: "left",
         textTransform: "none",
         backgroundColor: "#EFF0ED",
-        marginTop: "18px"
+        marginTop: "18px",
+        transition: "0.25s",
     },
     eventTitle: {
         fontSize: "13px",
@@ -121,7 +122,7 @@ export default function EventCategory(props) {
     }
 const classes = useStyles();
 
-const items = props.data.filter(item => item.title.toLowerCase().includes(props.query.toLowerCase()) || item.presenter.toLowerCase().includes(props.query.toLowerCase()));
+const items = props.data.filter(item => item.title.toLowerCase().includes(props.query.toLowerCase()) || item.description.toLowerCase().includes(props.query.toLowerCase()) || item.presenter.toLowerCase().includes(props.query.toLowerCase()));
 
   return (
     <React.Fragment>

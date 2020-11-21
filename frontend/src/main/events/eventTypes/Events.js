@@ -90,25 +90,21 @@ const useStyles = makeStyles((theme) => ({
     search: {
         width: "100%",
         borderRadius: "30px",
-        marginTop: "75px",
+        marginTop: "50px",
         marginBottom: "-10px",
         fontSize: "10px",
-        border: "none",
-        backgroundColor: "#DDDDDD",
-            '& fieldset': {
-                borderColor: 'black',
-            },
-            '&:hover fieldset': {
-                borderColor: 'black',
-            },
-            '&.Mui-focused fieldset': {
-                borderColor: 'black',
-            },
+        border: "0px",
+        backgroundColor: "#ECECEC",
+        transition: "0.25s",
+        '&:hover': {
+            backgroundColor: "#E4E4E4",
+            transition: "0.25s",
+        },
     },
     notchedOutline: {
         borderWidth: "1px",
         borderRadius: "30px",
-        borderColor: "transparent !important"
+        borderColor: "transparent !important",
     },
     searchSize: {
         fontSize: "13px",
