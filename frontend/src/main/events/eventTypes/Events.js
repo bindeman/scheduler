@@ -129,6 +129,10 @@ export default function Events(props) {
     const [loading, setLoading] = useState(true);
 
     React.useEffect(() => {
+
+        let repeat;
+
+
         const FetchData = async () => {
             console.log("======= Props are: " + props.category);
             const futureEventsResponse = await axios.get(`/api/events/live/future/category/${props.category}`, {
@@ -158,10 +162,18 @@ export default function Events(props) {
             setFutureEvents(futureEventsResponse.data);
             setPastEvents((pastEventsResponse.data));
             setLoading(false);
+            repeat = setTimeout(FetchData, 45000);
         }
         FetchData();
+
+        return function cleanup() {
+            clearTimeout(repeat);
+        }
+
     }, []);
 
+
+    //setInterval(FetchData, 5000);
 
     const onChangeSearch = ((e) => {
         console.log(e.target.value)
@@ -185,7 +197,7 @@ const classes = useStyles();
                         <Typography className={clsx(classes.heroTitle, open === 0 && classes.heroTitleMobile)}>Live Events Schedule for {props.title}</Typography>
                         <div className={classes.timezoneWrapper}>
                             <LanguageIcon className={classes.timezoneIcon}/>
-                            <Typography className={classes.timeZoneHeading}>Timezone: {formattedTimezone} ({moment.tz(timezone.name()).format('z')})</Typography>
+                            <Typography className={classes.timeZoneHeading}>Time Zone: {formattedTimezone} ({moment.tz(timezone.name()).format('z')})</Typography>
                         </div>
 
 

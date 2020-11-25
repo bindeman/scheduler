@@ -56,33 +56,33 @@ router.get('/past/category/:number', (req, res) => {
         }).catch(err => res.status(404).json({ success: false }));
 });
 
-//Get live events
-router.get('/live_old', (req, res) => {
-    const timezone = req.get("timezone") ? req.get("timezone") : "Etc/GMT";
-
-    console.log(timezone)
-
-    const minute = 60*1000;
-    let twoHoursAgo = new Date().getTime()-(120*minute);
-    let now = new Date().getTime();
-
-    function isEventLive(item) {
-        //convert timezone
-        item.dateInUserTimeZone = moment(item.date).tz(timezone).format();
-        let eventStartTime = new Date(item.date).getTime();
-        let eventEndTime = new Date(item.date).getTime()+item.duration*minute;
-        return (eventEndTime > now && eventStartTime < now);
-
-    }
-
-    Event.find({date: {$gte: twoHoursAgo, $lt: now} })
-        .lean()
-        .sort({ date: 1 })
-        .then((items) => {
-           const liveEvents = items.filter((item) => isEventLive(item));
-           res.json(liveEvents);
-        }).catch(err => res.status(404).json({ success: false }));
-});
+// //Get live events
+// router.get('/live_old', (req, res) => {
+//     const timezone = req.get("timezone") ? req.get("timezone") : "Etc/GMT";
+//
+//     console.log(timezone)
+//
+//     const minute = 60*1000;
+//     let twoHoursAgo = new Date().getTime()-(120*minute);
+//     let now = new Date().getTime();
+//
+//     function isEventLive(item) {
+//         //convert timezone
+//         item.dateInUserTimeZone = moment(item.date).tz(timezone).format();
+//         let eventStartTime = new Date(item.date).getTime();
+//         let eventEndTime = new Date(item.date).getTime()+item.duration*minute;
+//         return (eventEndTime > now && eventStartTime < now);
+//
+//     }
+//
+//     Event.find({date: {$gte: twoHoursAgo, $lt: now} })
+//         .lean()
+//         .sort({ date: 1 })
+//         .then((items) => {
+//            const liveEvents = items.filter((item) => isEventLive(item));
+//            res.json(liveEvents);
+//         }).catch(err => res.status(404).json({ success: false }));
+// });
 
 router.get('/now/category/:number', (req, res) => {
     const timezone = req.get("timezone") ? req.get("timezone") : "Etc/GMT";
@@ -96,7 +96,12 @@ router.get('/now/category/:number', (req, res) => {
     Event.find({category: category, date: {$lt: now}, endDate: {$gt: now} })
         .lean()
         .sort({ date: 1 })
-        .then(items => res.json(items))
+        .then(items => {
+            items.map(item => {
+                item.dateInUserTimeZone = moment(item.date).tz(timezone).format();
+            });
+            res.json(items)
+        })
         .catch(err => res.status(404).json({ success: false }));
 
 });

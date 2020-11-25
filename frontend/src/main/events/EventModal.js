@@ -153,7 +153,7 @@ export default function EventModal(props) {
                 buttonLink = props.pastlink
             } else {
                 buttonDisabled = true;
-                toolTipText = "Recording will be available shortly after the Global C.R.E.D event concludes"
+                toolTipText = "Recording will be available shortly after the Global C.R.E.D conference concludes"
             }
             break;
         case "live":
