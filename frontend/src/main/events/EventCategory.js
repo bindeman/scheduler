@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import {ChevronRight} from "@material-ui/icons";
@@ -7,7 +7,6 @@ import Button from "@material-ui/core/Button";
 import moment from "moment-timezone";
 import EventModal from "./EventModal";
 import ResponsiveTime from "../../time/ResponsiveTime";
-import Duration from "../../time/timeComponents/Duration";
 import axios from "axios";
 
 
@@ -131,10 +130,10 @@ const items = props.data.filter(item => item.title.toLowerCase().includes(props.
         <div>
 
         {props.eventStatus === 'live' && <Typography className={classes.dateHeading}>Events happening right now</Typography>}
-        {items.map((item, index) => {
+        {items.map((item) => {
             return (
                     <div>
-                    {item.dateHeader && <Typography className={classes.dateHeading}>Events {printDateInCorrectFormat(item.dateInUserTimeZone)}</Typography>}
+                    {item.dateHeader && props.eventStatus !== 'prerecorded' && <Typography className={classes.dateHeading}>Events {printDateInCorrectFormat(item.dateInUserTimeZone)}</Typography>}
                     <Button
                         onClick={(e => handleModalOpen(e, item))}
                         endIcon={<ChevronRight  className={classes.buttonChevron}/>}

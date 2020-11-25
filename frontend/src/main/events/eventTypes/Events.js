@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
@@ -9,14 +9,12 @@ import Fade from '@material-ui/core/Fade';
 import EventCategory from "../EventCategory";
 import NoEvents from "../../../misc/notFound/NoEvents";
 import Copyright from "../../../misc/Copyright";
-import {WidthContext} from "../../../WidthContext";
 import clsx from "clsx";
 import moment from "moment-timezone";
 import LanguageIcon from '@material-ui/icons/Language';
 import TextField from "@material-ui/core/TextField";
-import {Search, Pageview} from "@material-ui/icons";
+import {Search} from "@material-ui/icons";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import IconButton from "@material-ui/core/IconButton";
 
 
 
@@ -91,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
         width: "100%",
         borderRadius: "30px",
         marginTop: "50px",
-        marginBottom: "-10px",
+        marginBottom: "-5px",
         fontSize: "10px",
         border: "0px",
         backgroundColor: "#ECECEC",
@@ -189,10 +187,10 @@ const {open, setOpen} = useContext(WidthContext);
                             <LanguageIcon className={classes.timezoneIcon}/>
                             <Typography className={classes.timeZoneHeading}>Timezone: {formattedTimezone} ({moment.tz(timezone.name()).format('z')})</Typography>
                         </div>
-                        </React.Fragment>
-                )
 
-                }
+
+
+
 
                 <TextField
                     style={{fontSize: 10}}
@@ -214,6 +212,7 @@ const {open, setOpen} = useContext(WidthContext);
                             </InputAdornment>
                         )
                     }}/>
+                        </React.Fragment>)}
         </Grid>
             </Fade>
                 )}

@@ -26,37 +26,6 @@ const useStyles = makeStyles((theme) => ({
     //marginBottom: "-12px",
     padding: '0 0',
   },
-  // appBar: {
-  //   justifyContent: "center",
-  //   backgroundColor: "white",
-  //   padding: "10px",
-  //   boxShadow: " 0 0 23px rgba(0,0,0,0.15)",
-  //   zIndex: theme.zIndex.drawer + 1,
-  //   transition: theme.transitions.create(['margin', 'width', 'opacity', 'transform'], {
-  //     easing: theme.transitions.easing.sharp,
-  //     duration: "0.33s",
-  //     //delay: "0.1s"
-  //   }),
-  // },
-  // appBarShift: {
-  //   //width: `calc(100% - ${103}px)`,
-  //   //marginLeft: drawerWidth,
-  //   zIndex: theme.zIndex.drawer + 1,
-  //   transition: theme.transitions.create(['margin', 'width', 'opacity', 'transform'], {
-  //     easing: theme.transitions.easing.easeOut,
-  //     duration: "0.33s",
-  //     //delay: "0.1s"
-  //   }),
-  // },
-  // appBarHidden: {
-  //   transform: "translate(0, -60px)",
-  //   opacity: 0,
-  //   transition: theme.transitions.create(['margin', 'transform', 'opacity'], {
-  //     easing: theme.transitions.easing.easeIn,
-  //     duration: "0.33s",
-  //   }),
-  //
-  // },
   menuButton: {
     marginRight: theme.spacing(2),
     color: "grey",

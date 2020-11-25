@@ -5,23 +5,15 @@ import Grid from "@material-ui/core/Grid";
 import axios from 'axios';
 import jstz from 'jstz';
 import LoadingSpinner from "../../../misc/Spinner";
-import Link from "@material-ui/core/Link";
 import Fade from '@material-ui/core/Fade';
 import EventCategory from "../EventCategory";
 import NoEvents from "../../../misc/notFound/NoEvents";
-import Paper from "@material-ui/core/Paper";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
 import Copyright from "../../../misc/Copyright";
 import clsx from "clsx";
 import {WidthContext} from "../../../WidthContext";
 import TextField from "@material-ui/core/TextField";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import IconButton from "@material-ui/core/IconButton";
 import {Search} from "@material-ui/icons";
-import {fade} from "@material-ui/core";
-
-
 
 
 
@@ -70,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
         width: "100%",
         borderRadius: "30px",
         marginTop: "50px",
-        marginBottom: "-10px",
+        marginBottom: "0px",
         fontSize: "10px",
         border: "0px",
         backgroundColor: "#ECECEC",
@@ -116,7 +108,6 @@ export default function PreRecordedEvents(props) {
 
             let currentDate = null;
             console.log(response.data);
-            console.log("Hey this function is run");
             setEvents(response.data);
             setLoading(false);
         }
@@ -134,7 +125,7 @@ const classes = useStyles();
       return (
         <React.Fragment>
 
-            {!loading && (
+            {!loading && events.length !== 0  && (
                 <Fade in={!loading} timeout={500}>
                 <React.Fragment>
                 <Grid item xs={12}>

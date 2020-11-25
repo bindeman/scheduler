@@ -20,7 +20,6 @@ import liveBadge from "./../img/liveevents.svg"
 
 const useMenuStyles = makeStyles(() => ({
     menuList: {
-        //display: "flex",
         flexDirection: "column",
         justifyContent: "space-evenly",
         width: "100%",
@@ -67,10 +66,6 @@ const useMenuStyles = makeStyles(() => ({
         width: "100%",
 
     },
-    hiThereGOODSir: {
-        backgroundColor: "red",
-        fontWeight: 900,
-    },
     tooltip: {
         zIndex: 99999999,
         fontWeight: 700,
@@ -84,7 +79,7 @@ const useMenuStyles = makeStyles(() => ({
 export default function Sidebar(props) {
     const menuItems = [
         {
-            title: "All Live Events",
+            title: "All Tracks",
             imageURL: liveBadge,
             link: "/all"
         },

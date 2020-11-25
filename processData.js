@@ -36,6 +36,17 @@ if (!(process.env.NODE_ENV === 'production')) {
     let presentersSheet = XLSX.utils.sheet_to_json(workbook.Sheets[sheets[2]])
     let options = { upsert: true, new: true, setDefaultsOnInsert: true };
 
+
+
+    console.log("============ EVENTS ============");
+    console.log(eventsSheet);
+
+    console.log("============ ON-DEMAND EVENTS ============");
+    console.log(prerecordedEventsSheet);
+
+    console.log("============ PRESENTERS ============");
+    console.log(presentersSheet);
+
     //load presenters
     function updatePresenters(presentersSheet) {
 
@@ -62,6 +73,7 @@ if (!(process.env.NODE_ENV === 'production')) {
             let query = { id: event.id }
             event.date = new Date(event.date)
             event.endDate = new Date(new Date(event.date).getTime() + (event.duration * 60*1000));
+            console.log(event.id);
             event.category = event.category.toString().split(',').map(Number);
             event.presenters = event.presenter.toString().split(', ');
 
