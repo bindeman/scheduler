@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
         //height: '100vh',
         position: "relative",
         //overflow: 'auto',
-        padding: theme.spacing(4),
+        //padding: theme.spacing(4),
         ...theme.mixins.toolbar,
     },
     contentMobile: {
@@ -66,7 +66,7 @@ return (
             <ScrollToTop>
             <Switch>
                 <Route exact path="/">
-                    <Redirect to="/learners" />
+                    <Redirect to="/all" />
                 </Route>
                 <Route
                     path='/all'

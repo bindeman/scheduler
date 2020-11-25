@@ -15,6 +15,7 @@ import LanguageIcon from '@material-ui/icons/Language';
 import TextField from "@material-ui/core/TextField";
 import {Search} from "@material-ui/icons";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import { WidthContext } from "../../../WidthContext"
 
 
 
@@ -169,8 +170,7 @@ export default function Events(props) {
 
 const classes = useStyles();
 
-const {open, setOpen} = useContext(WidthContext);
-
+    const {open, setOpen} = useContext(WidthContext);
 
 
   return (
