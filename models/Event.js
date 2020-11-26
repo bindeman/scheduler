@@ -35,7 +35,7 @@ const EventSchema = new Schema({
     },
     duration: {
         type: Number,
-        default: 60,
+        //default: 60,
         required: true,
     },
     category: {

@@ -15,9 +15,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import {WidthContext} from "../../WidthContext";
 import clsx from "clsx";
-import axios from "axios";
-
-
+import OpenInNewRoundedIcon from '@material-ui/icons/OpenInNewRounded';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
     },
     eventTitle: {
-        fontSize: "13px",
+        fontSize: "14px",
         fontWeight: "700",
         color: "#444444",
         letterSpacing: "-0.08px",
@@ -46,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
     eventSubtitle: {
         fontSize: "13px",
         fontWeight: "600",
+        marginBottom: "2px",
         display: "block",
         color: "#658546",
         letterSpacing: "-0.08px",
@@ -55,6 +54,15 @@ const useStyles = makeStyles((theme) => ({
             color: "black",
             transition: "0.2s"
         },
+    },
+    eventSubtitleInactive: {
+        fontSize: "13px",
+        fontWeight: "600",
+        display: "block",
+        color: "#658546",
+        letterSpacing: "-0.08px",
+        lineHeight: "17px",
+        transition: "0.2s",
     },
 
     noDecoration: {
@@ -84,12 +92,21 @@ const useStyles = makeStyles((theme) => ({
     },
     eventDescription: {
         fontWeight: 600,
+        fontSize: "12px",
+        color: "#BABABA",
+        letterSpacing: "-0.04px",
+        lineHeight: "15px",
+        marginBottom: "8px",
+    },
+    personDescription: {
+        fontWeight: 600,
         fontSize: "11px",
         color: "#BABABA",
         letterSpacing: "-0.03px",
         lineHeight: "14px",
         marginBottom: "8px",
     },
+
     dialogBottom: {
         backgroundColor: "#F7F7F7",
         marginTop: "20px",
@@ -107,6 +124,11 @@ const useStyles = makeStyles((theme) => ({
     liveBadge: {
         maxWidth: "60px",
         maxHeight: "25px"
+    },
+    newLinkIcon: {
+        fontSize: "11px",
+        margin: "2.5px",
+
     }
 }));
 
@@ -225,8 +247,19 @@ const classes = useStyles();
                             {props.presenters && props.presenters.map((presenter) => {
                                 return (
                                 <React.Fragment>
-                                <a className={classes.noDecoration} target="_blank" href={presenter.link}><Typography className={classes.eventSubtitle}>{`${presenter.name}`}</Typography></a>
-                                <Typography className={classes.eventDescription}>{presenter.bio}</Typography>
+                                <a
+                                    className={classes.noDecoration}
+                                    target="_blank"
+                                    href={presenter.link}>
+                                    <Typography className={presenter.link ? classes.eventSubtitle : classes.eventSubtitleInactive}>{`${presenter.name}`}
+                                        {presenter.link && (
+                                        <span>
+                                            <OpenInNewRoundedIcon className={classes.newLinkIcon}/>
+                                        </span>
+                                        )}
+                                    </Typography>
+                                </a>
+                                <Typography className={classes.personDescription}>{presenter.bio}</Typography>
                                 </React.Fragment>
                                 )
                             })

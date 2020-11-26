@@ -46,7 +46,7 @@ export default function Duration(props) {
           <div className={clsx(classes.duration, props.eventStatus !== 'prerecorded' && classes.justifyCenter)}>
               <ScheduleIcon className={classes.durationIcon}/>
               <Typography className={classes.durationText}>
-                  {`${props.duration} min`}
+                  {props.duration && `${props.duration} min`}
               </Typography>
           </div>
     </React.Fragment>

@@ -125,7 +125,10 @@ export default function EventCategory(props) {
     }
 const classes = useStyles();
 
-const items = props.data.filter(item => item.title.toLowerCase().includes(props.query.toLowerCase()) || item.description.toLowerCase().includes(props.query.toLowerCase()) || item.presenter.toLowerCase().includes(props.query.toLowerCase()));
+const items = props.data.filter(item =>
+    (item.title ? item.title.toLowerCase().includes(props.query.toLowerCase()) : false) ||
+    (item.description ? item.description.toLowerCase().includes(props.query.toLowerCase()) : false) ||
+    (item.presenter ? item.presenter.toLowerCase().includes(props.query.toLowerCase()) : false));
 
   return (
     <React.Fragment>

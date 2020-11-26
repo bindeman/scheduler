@@ -63,7 +63,7 @@ if (!(process.env.NODE_ENV === 'production')) {
 
     function setEndDate(item) {
         const minute = 60*1000;
-        const time = new Date(item.date).getTime() + (item.duration * 60*1000);
+        const time = new Date(item.date).getTime() + ((item.duration ? item.duration : 60) * 60*1000);
         return new Date(time);
     }
 
@@ -72,10 +72,10 @@ if (!(process.env.NODE_ENV === 'production')) {
         eventsSheet.forEach((event, index, array) => {
             let query = { id: event.id }
             event.date = new Date(event.date)
-            event.endDate = new Date(new Date(event.date).getTime() + (event.duration * 60*1000));
+            event.endDate = new Date(event.date).getTime() + ((event.duration ? event.duration : 60) * 60*1000);
             console.log(event.id);
             event.category = event.category.toString().split(',').map(Number);
-            event.presenters = event.presenter.toString().split(', ');
+            event.presenters =  event.presenter === undefined ? [] : event.presenter.toString().split(', ');
 
 
             Presenter.find({
@@ -101,9 +101,9 @@ if (!(process.env.NODE_ENV === 'production')) {
         prerecordedEventsSheet.forEach((event, index, array) => {
             let query = { id: event.id }
             event.date = new Date(event.date);
-            event.endDate = new Date(new Date(event.date).getTime() + (event.duration * 60*1000));
+            event.endDate = new Date(event.date).getTime() + ((event.duration ? event.duration : 60) * 60*1000);
             event.category = event.category.toString().split(',').map(Number);
-            event.presenters = event.presenter !== "" ? event.presenter.toString().split(', ') : "";
+            event.presenters = event.presenter === undefined ? [] : event.presenter.toString().split(', ');
 
 
             Presenter.find({

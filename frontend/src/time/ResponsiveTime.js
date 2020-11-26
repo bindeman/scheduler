@@ -36,7 +36,7 @@ export default function ResponsiveTime(props) {
     return (
         <div className={classes.root}>
             {props.eventStatus !== 'prerecorded' && <EventTime time={props.dateInUserTimeZone} eventStatus={props.eventStatus}/>}
-            <Duration duration={props.duration} time={props.dateInUserTimeZone} eventStatus={props.eventStatus}/>
+            {props.duration && <Duration duration={props.duration} time={props.dateInUserTimeZone} eventStatus={props.eventStatus}/>}
             {props.eventStatus === "live" && (<div className={classes.liveBadgeWrapper}> <img className={classes.liveBadge} alt="Live Badge" src={liveBadge}/></div>)}
 
         </div>
