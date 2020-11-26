@@ -43,7 +43,6 @@ export default function EventTime(props) {
   return (
     <React.Fragment>
           <Button size="large"
-                  className="startTime"
                   variant="contained"
                   disableRipple={true}
                   disabled={false}

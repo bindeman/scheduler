@@ -156,7 +156,7 @@ export default function EventModal(props) {
         case "future":
             eventTitleText = "Scheduled event " + moment(props.dateInUserTimeZone).fromNow();
             buttonText = "Join Event";
-            if(new Date(props.dateInUserTimeZone).getTime() - now.getTime() < 180000) {
+            if (new Date(props.dateInUserTimeZone).getTime() - now.getTime() < 180000) {
                 buttonDisabled = false;
             } else {
                 buttonDisabled = true;
