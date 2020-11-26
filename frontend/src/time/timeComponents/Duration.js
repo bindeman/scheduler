@@ -1,5 +1,5 @@
 import React from 'react';
-import {makeStyles, useTheme} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import ScheduleIcon from "@material-ui/icons/Schedule";
 import Typography from "@material-ui/core/Typography";
 import clsx from "clsx";
@@ -9,15 +9,15 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         alignItems: "center",
         maxWidth: "100px",
-        justifyContent: "center",
+        //justifyContent: "center",
         paddingTop: "7px",
         paddingBottom: "4px",
         color: "#727272",
         minWidth: theme.spacing(8),
 
     },
-    justifyLeft: {
-        justifyContent: "left !important",
+    justifyCenter: {
+        justifyContent: "center",
     },
     durationText: {
         fontSize: "10px",
@@ -43,7 +43,7 @@ export default function Duration(props) {
   return (
     <React.Fragment>
 
-          <div className={clsx(classes.duration, props.eventStatus === 'prerecorded' && classes.justifyLeft)}>
+          <div className={clsx(classes.duration, props.eventStatus !== 'prerecorded' && classes.justifyCenter)}>
               <ScheduleIcon className={classes.durationIcon}/>
               <Typography className={classes.durationText}>
                   {`${props.duration} min`}
