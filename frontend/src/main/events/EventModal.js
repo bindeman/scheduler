@@ -139,11 +139,18 @@ export default function EventModal(props) {
     let toolTipText;
     let buttonText;
     let buttonDisabled = false;
+    const now = new Date();
+
     let buttonLink = props.link;
     switch (props.eventStatus) {
         case "future":
             eventTitleText = "Scheduled event " + moment(props.dateInUserTimeZone).fromNow();
             buttonText = "Join Event";
+            // if(props.dateInUserTimeZone.getTime() - now.getTime() < 1800000) {
+            //     buttonDisabled = false;
+            // } else {
+            //     buttonDisabled = true;
+            // }
             buttonDisabled = true;
             break;
         case "past":
@@ -161,7 +168,6 @@ export default function EventModal(props) {
             buttonText = "Join Event"
             break;
         case "prerecorded":
-            const now = new Date();
             if(moment(props.dateInUserTimeZone).isAfter(now)) {
                 eventTitleText = "On-demand event available " + moment(props.dateInUserTimeZone).fromNow();
                 buttonDisabled = true;

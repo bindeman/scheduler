@@ -103,7 +103,7 @@ if (!(process.env.NODE_ENV === 'production')) {
             event.date = new Date(event.date);
             event.endDate = new Date(new Date(event.date).getTime() + (event.duration * 60*1000));
             event.category = event.category.toString().split(',').map(Number);
-            event.presenters = event.presenter.toString().split(', ');
+            event.presenters = event.presenter !== "" ? event.presenter.toString().split(', ') : "";
 
 
             Presenter.find({

@@ -8,6 +8,7 @@ import moment from "moment-timezone";
 import EventModal from "./EventModal";
 import ResponsiveTime from "../../time/ResponsiveTime";
 import axios from "axios";
+import clsx from "clsx";
 
 
 
@@ -35,6 +36,9 @@ const useStyles = makeStyles(() => ({
         letterSpacing: "-0.08px",
         lineHeight: "17px",
         marginBottom: "5px"
+    },
+    eventTitlePreRecorded: {
+        marginTop: "-10px",
     },
     eventSubtitle: {
         fontSize: "13px",
@@ -116,7 +120,7 @@ export default function EventCategory(props) {
          } else {
              return moment(dateOfEvent).format('MMMM D, YYYY');
          }
-         console.log(eventDate.getTime());
+         //console.log(eventDate.getTime());
          //return eventDate.getTime();
     }
 const classes = useStyles();
@@ -138,7 +142,7 @@ const items = props.data.filter(item => item.title.toLowerCase().includes(props.
                         onClick={(e => handleModalOpen(e, item))}
                         endIcon={<ChevronRight  className={classes.buttonChevron}/>}
                     className={classes.paper}>
-                    <Grid container spacing={4}>
+                    <Grid container spacing={props.eventStatus !== 'prerecorded' ? 4 : 1}>
                         <Grid item xs={12} sm={props.eventStatus !== 'prerecorded' ? 3 : 12}>
                             <ResponsiveTime
                                 dateInUserTimeZone={props.eventStatus !== 'prerecorded' ? item.dateInUserTimeZone : null}
