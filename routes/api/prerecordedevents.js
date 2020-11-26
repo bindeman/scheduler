@@ -48,22 +48,22 @@ router.get('/id/:number', (req, res) => {
 // @route POST api/items
 // @desc Create a visualization
 // @access Public
-router.post('/', (req, res) => {
-    const newEvent = new PreRecordedEvent({
-        id: req.body.id,
-        title: req.body.title,
-        presenter: req.body.presenter,
-        organization: req.body.organization,
-        date: req.body.date,
-        duration: req.body.duration,
-        category: req.body.category,
-        link: req.body.link,
-        description: req.body.description,
-        bio: req.body.bio,
-    });
-    console.log(newEvent);
-    newEvent.save().then(item => res.json(item));
-});
+// router.post('/', (req, res) => {
+//     const newEvent = new PreRecordedEvent({
+//         id: req.body.id,
+//         title: req.body.title,
+//         presenter: req.body.presenter,
+//         organization: req.body.organization,
+//         date: req.body.date,
+//         duration: req.body.duration,
+//         category: req.body.category,
+//         link: req.body.link,
+//         description: req.body.description,
+//         bio: req.body.bio,
+//     });
+//     console.log(newEvent);
+//     newEvent.save().then(item => res.json(item));
+// });
 
 
 

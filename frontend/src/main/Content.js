@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import {Redirect, Route, Switch} from "react-router-dom";
-import Events from "./events/eventTypes/Events";
 import EventsContainer from "./events/EventsContainer";
 import FourOFour from "../misc/notFound/FourOFour";
 import {WidthContext} from "../WidthContext";
@@ -56,7 +55,7 @@ export default function Content() {
 
 const classes = useStyles();
 
-const {open, setOpen} = useContext(WidthContext);
+const {open} = useContext(WidthContext);
 
 return (
     <React.Fragment>

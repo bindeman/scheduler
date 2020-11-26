@@ -4,8 +4,6 @@ const bodyParser = require('body-parser');
 const path = require('path');
 var enforce = require('express-sslify');
 
-//const scheduler = require('./master_schedule.xls');
-
 require('dotenv').config();
 
 const events = require('./routes/api/events');

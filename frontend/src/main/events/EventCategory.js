@@ -8,7 +8,6 @@ import moment from "moment-timezone";
 import EventModal from "./EventModal";
 import ResponsiveTime from "../../time/ResponsiveTime";
 import axios from "axios";
-import clsx from "clsx";
 
 
 
@@ -72,17 +71,14 @@ export default function EventCategory(props) {
          const urlType = props.eventStatus === "prerecorded" ? "recorded" : "live"
          const FetchData = async () => {
              const presentersResponse = await axios.get(`/api/events/${urlType}/id/${item.id}`, {});
-             console.log(presentersResponse.data.presenters)
-             const presenters = presentersResponse.data.presenters
-             console.log(presenters);
+             //console.log(presentersResponse.data.presenters)
+             //console.log(presenters);
 
              return presentersResponse.data.presenters;
         }
 
 
          FetchData().then((presenters)=> {
-             console.log("AND THE PRESENTERS ARE:")
-             console.log(presenters);
              const props = {
                  title: item.title,
                  id: item.id,
@@ -98,11 +94,10 @@ export default function EventCategory(props) {
                  link: item.link,
                  pastlink: item.pastlink
              }
-             console.log(props);
+             //console.log(props);
              setModalProps(props);
              setModalOpen(true);
          });
-         console.log(props);
 
 
 

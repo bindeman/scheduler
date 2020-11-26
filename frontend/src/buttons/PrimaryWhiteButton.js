@@ -47,6 +47,7 @@ export default function PrimaryButton(props) {
             color="primary"
             disableRipple
             target={"_blank"}
+            rel="noopener noreferrer"
             href={props.link}
             //onClick={props.onClick ? props.onClick : ""}
         >

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
@@ -135,28 +135,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EventModal(props) {
 
-    // React.useEffect(() => {
-    //     const FetchData = async () => {
-    //         const presentersResponse = await axios.get(`/api/events/live/id/${props.id}`, {
-    //         });
-    //         console.log("===============PRESENTERS================")
-    //         console.log(presentersResponse.data.presenters);
-    //
-    //         //setPresenters((presentersResponse.data.presenters));
-    //         setLoading(false);
-    //     }
-    //     FetchData();
-    // }, []);
 
-    console.log(props.presenters)
-    // const [loading, setLoading] = useState(true);
-    // const [presenters, setPresenters] = useState([
-    //     {name: "Phil Bindex", bio: "We're live and ready to go"},
-    //     {name: "Yo Man", bio: "We're live and ready to go"},
-    //     {name: "Light the lights", bio: "We're live and ready to go"},
-    //     {name: "Hi There sirs", bio: "We're live and ready to go"},
-    // ]);
-    const {open, setOpen} = useContext(WidthContext);
+    //console.log(props.presenters)
+    const {open} = useContext(WidthContext);
     let eventTitleText;
     let toolTipText;
     let buttonText;
@@ -168,12 +149,12 @@ export default function EventModal(props) {
         case "future":
             eventTitleText = "Scheduled event " + moment(props.dateInUserTimeZone).fromNow();
             buttonText = "Join Event";
-            // if(props.dateInUserTimeZone.getTime() - now.getTime() < 1800000) {
-            //     buttonDisabled = false;
-            // } else {
-            //     buttonDisabled = true;
-            // }
-            buttonDisabled = true;
+            if(new Date(props.dateInUserTimeZone).getTime() - now.getTime() < 180000) {
+                buttonDisabled = false;
+            } else {
+                buttonDisabled = true;
+            }
+            //buttonDisabled = true;
             break;
         case "past":
             eventTitleText = "Past event from " + moment(props.dateInUserTimeZone).format('MMMM Do, YYYY');
@@ -210,7 +191,7 @@ const classes = useStyles();
             disableEnforceFocus
             disableAutoFocus
             open={props.open}
-            classes={{paper: clsx(classes.paper, open == 0 && classes.smallModalMargin) }}
+            classes={{paper: clsx(classes.paper, open === 0 && classes.smallModalMargin) }}
             container={() => document.getElementById('content')}
             BackdropProps={{ style: { backgroundColor: "rgba(0,0,0,0.10)"} }}
             onClose={props.closeModal}>

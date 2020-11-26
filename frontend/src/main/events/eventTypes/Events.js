@@ -134,7 +134,7 @@ export default function Events(props) {
 
 
         const FetchData = async () => {
-            console.log("======= Props are: " + props.category);
+            //console.log("======= Props are: " + props.category);
             const futureEventsResponse = await axios.get(`/api/events/live/future/category/${props.category}`, {
                 headers: {
                     'timezone': timezone.name()
@@ -153,16 +153,14 @@ export default function Events(props) {
                 }
             });
 
-            let currentDate = null;
-            console.log(futureEventsResponse.data);
-            console.log(pastEventsResponse.data);
-            console.log(liveEventsResponse.data);
-            console.log("Hey this function is run");
+            // console.log(futureEventsResponse.data);
+            // console.log(pastEventsResponse.data);
+            // console.log(liveEventsResponse.data);
             setLiveEvents(liveEventsResponse.data);
             setFutureEvents(futureEventsResponse.data);
             setPastEvents((pastEventsResponse.data));
             setLoading(false);
-            repeat = setTimeout(FetchData, 45000);
+            repeat = setTimeout(FetchData, 10000);
         }
         FetchData();
 
@@ -176,13 +174,13 @@ export default function Events(props) {
     //setInterval(FetchData, 5000);
 
     const onChangeSearch = ((e) => {
-        console.log(e.target.value)
+        //console.log(e.target.value)
         setSearchQuery(e.target.value)
     })
 
 const classes = useStyles();
 
-    const {open, setOpen} = useContext(WidthContext);
+    const {open} = useContext(WidthContext);
 
 
   return (
@@ -199,10 +197,6 @@ const classes = useStyles();
                             <LanguageIcon className={classes.timezoneIcon}/>
                             <Typography className={classes.timeZoneHeading}>Time Zone: {formattedTimezone} ({moment.tz(timezone.name()).format('z')})</Typography>
                         </div>
-
-
-
-
 
                 <TextField
                     style={{fontSize: 10}}

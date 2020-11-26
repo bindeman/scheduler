@@ -32,14 +32,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Duration(props) {
     const classes = useStyles();
 
-    function convertMinutes(min) {
-        if(min <= 60) {
-            return `${min} min`;
-        } else {
-            return `${(min/60).toPrecision(2)} hr`;
-        }
-    }
-
   return (
     <React.Fragment>
 

@@ -98,7 +98,7 @@ export default function PreRecordedEvents(props) {
 
     React.useEffect(() => {
         const FetchData = async () => {
-            console.log("======= Props are: " + props.category);
+            //console.log("======= Props are: " + props.category);
             const response = await axios.get(`/api/events/recorded/category/${props.category}`, {
                 headers: {
                     'timezone': timezone.name()
@@ -106,21 +106,20 @@ export default function PreRecordedEvents(props) {
             });
 
 
-            let currentDate = null;
-            console.log(response.data);
+            // console.log(response.data);
             setEvents(response.data);
             setLoading(false);
         }
         FetchData();
-    }, []);
+    },[]);
 
     const onChangeSearch = ((e) => {
-        console.log(e.target.value)
+        //console.log(e.target.value)
         setSearchQuery(e.target.value)
     })
 
 const classes = useStyles();
-    const {open, setOpen} = useContext(WidthContext);
+    const {open} = useContext(WidthContext);
 
       return (
         <React.Fragment>

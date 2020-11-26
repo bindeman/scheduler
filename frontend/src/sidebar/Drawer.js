@@ -14,8 +14,6 @@ import {WidthContext} from "../WidthContext";
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 
-const drawerWidth = 260;
-
 const useStyles = makeStyles((theme) => ({
 
   bottomContent: {
@@ -163,8 +161,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SidebarDrawer() {
   const classes = useStyles();
-  const {open, setOpen} = useContext(WidthContext);
-  //const [open, setOpen] = React.useState(1);
+  const {open} = useContext(WidthContext);
 
   const [openMobile, setOpenMobile] = React.useState(false);
 
