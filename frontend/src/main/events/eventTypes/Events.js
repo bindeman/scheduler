@@ -160,7 +160,7 @@ export default function Events(props) {
             setFutureEvents(futureEventsResponse.data);
             setPastEvents((pastEventsResponse.data));
             setLoading(false);
-            repeat = setTimeout(FetchData, 10000);
+            repeat = setTimeout(FetchData, 45000);
         }
         FetchData();
 
