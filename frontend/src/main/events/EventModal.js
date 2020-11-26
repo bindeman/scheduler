@@ -129,6 +129,13 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "11px",
         margin: "2.5px",
 
+    },
+    tooltip: {
+        textAlign: "center",
+        fontWeight: 600,
+        fontSize: "12px",
+        padding: "10px",
+        lineHeight: "15.5px"
     }
 }));
 
@@ -179,6 +186,10 @@ export default function EventModal(props) {
             }
             buttonText = "Watch Event";
             break;
+        default: {
+            eventTitleText = "Event"
+            buttonText = "Join"
+        }
     }
 
 const classes = useStyles();
@@ -231,6 +242,7 @@ const classes = useStyles();
                                 <a
                                     className={classes.noDecoration}
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                     href={presenter.link}>
                                     <Typography className={presenter.link ? classes.eventSubtitle : classes.eventSubtitleInactive}>{`${presenter.name}`}
                                         {presenter.link && (
@@ -261,8 +273,10 @@ const classes = useStyles();
                             dateInUserTimeZone={props.dateInUserTimeZone}
                             duration={props.duration}
                         />
-                        <Tooltip disableFocusListener disableHoverListener={!buttonDisabled}
+                        <Tooltip disableFocusListener
+                                 disableHoverListener={!buttonDisabled}
                                  arrow={true}
+                                 classes={{tooltip: classes.tooltip}}
                                  title={toolTipText ? toolTipText : eventTitleText}
                                  placement="top">
                         <div>
