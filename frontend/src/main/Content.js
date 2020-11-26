@@ -71,7 +71,7 @@ return (
                     path='/all'
                     exact
                     component={() => <EventsContainer category={"all"}
-                                                      title="All tracks"/>}
+                                                      title="All Tracks"/>}
                 />
                 <Route
                     path='/learners'

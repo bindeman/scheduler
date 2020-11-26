@@ -79,7 +79,7 @@ const useMenuStyles = makeStyles(() => ({
 export default function Sidebar(props) {
     const menuItems = [
         {
-            title: "All Tracks",
+            title: "All Events",
             imageURL: liveBadge,
             link: "/all"
         },
