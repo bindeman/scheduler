@@ -88,7 +88,7 @@ return (
                 <Route
                     path='/employers'
                     exact
-                    component={() => <EventsContainer category={3}
+                    component={() => <EventsContainer category={5}
                                              title="Employers, Language Service Providers and H.R. Personnel"
 
                     />}
@@ -96,13 +96,13 @@ return (
                 <Route
                     path='/administrators'
                     strict
-                    component={() => <EventsContainer category={4}
+                    component={() => <EventsContainer category={3}
                                              title="Administrators, Counselors and College Recruiters"/>}
                 />
                 <Route
                     path='/contentproviders'
                     strict
-                    component={() => <EventsContainer category={5}
+                    component={() => <EventsContainer category={4}
                                              title="Language Learning Content and Assessment Providers"/>}
                 />
                 <Route component={FourOFour} />
