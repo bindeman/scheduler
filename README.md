@@ -1,14 +1,15 @@
-Will be visible as a popup: https://theglobalseal.com/schedulertest 
+Link: https://schedule.theglobalseal.com/
 
 
-![Screenshots](https://i.imgur.com/DXJRdaw.png)
+![Screenshot](https://i.imgur.com/TbuGIsc.png)
+![Screenshot with Modal](https://i.imgur.com/eNdyNtL.png)
 
 
 #### Purpose:
 
 This app is designed to help users navigate the five YouTube live streams that will be happening during the Global C.R.E.D. event. Each live event has at least one category it belongs to (Language Learners, Language Educators, etc). The goal of this app is to display the events scheduled for each category and offering users a way to access the live stream of the event that is live. It will also be used as an archive of past events once Global C.R.E.D. is over, offering a way to browse events and view the recorded videos of live events.
 
-Adding events from API (will be deactivated on production): 
+Adding events from API (deactivated on production): 
 
 **Add new live event via POST request:**
 
@@ -43,7 +44,7 @@ URL:  `{app-url}/api/events/live/` with body:
 
 `5` – Language Learning Content and Assessment Providers
 
-## Acceptance Criteria:
+## Functionality:
 
 ### Timing:
 
@@ -117,6 +118,9 @@ Each category displays only events that are in that category. `Language Learners
 
 * Clicking the button shows the popup.
 
+#### Auto-update:
+* The schedule is automatically updated every 45-seconds
+
 #### Responsive Design:
 
 - Width Definitions: 
@@ -150,3 +154,15 @@ The app renders correctly in the following browsers:
 - Safari 12+
 
 - Firefox 40+
+
+# Running the app
+
+### Uploading a Schedule
+1. Add your schedule to the `master_template.xlsx` template, following the format in the template
+1. Run `node processData.js` in order to real and upload all data in `master_template.xlsx`
+
+### Run
+1. Create a `.env` file and in that file add a line `DATABASE` equal to your mongoURI
+1. Run `npm install`
+2. Run `npm run frontend-install`
+3. To start both backend and locally run `npm run dev`
