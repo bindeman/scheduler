@@ -43,6 +43,7 @@ const useStyles = makeStyles(() => ({
         fontSize: "13px",
         fontWeight: "600",
         color: "#658546",
+        width: "250px",
         letterSpacing: "-0.08px",
         lineHeight: "17px"
     },
