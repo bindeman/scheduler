@@ -44,7 +44,7 @@ URL:  `{app-url}/api/events/live/` with body:
 
 `5` – Language Learning Content and Assessment Providers
 
-## Functionality:
+# Functionality:
 
 ### Timing:
 
@@ -159,7 +159,9 @@ The app renders correctly in the following browsers:
 
 ### Uploading a Schedule
 1. Add your schedule to the `master_template.xlsx` template, following the format in the template
-1. Run `node processData.js` in order to real and upload all data in `master_template.xlsx`
+2. IDs can overlap for presenters and events, but must be unique in their category
+3. Use `https://` in all of your URLs
+3. Run `node processData.js` in order to read and upload all data in `master_template.xlsx`
 
 ### Run
 1. Create a `.env` file and in that file add a line `DATABASE` equal to your mongoURI
