@@ -43,7 +43,7 @@ URL:  `{app-url}/api/events/live/` with body:
 
 ### Acceptance Criteria:
 
-#### Timing:
+### Timing:
 
 **Live Events:**
 
