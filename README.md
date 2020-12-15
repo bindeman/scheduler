@@ -1,8 +1,8 @@
 Will be visible as a popup: https://theglobalseal.com/schedulertest 
 
-##Background:
+## Background:
 
-####Purpose:
+#### Purpose:
 
 This app is designed to help users navigate the five YouTube live streams that will be happening during the Global C.R.E.D. event. Each live event has at least one category it belongs to (Language Learners, Language Educators, etc). The goal of this app is to display the events scheduled for each category and offering users a way to access the live stream of the event that is live. It will also be used as an archive of past events once Global C.R.E.D. is over, offering a way to browse events and view the recorded videos of live events.
 
@@ -29,7 +29,7 @@ URL:  `{app-url}/api/events/live/` with body:
 
 * `pastlink` is also optional
 
-####Categories (may be changed later):
+#### Categories (may be changed later):
 
 `1` – Language Learners
 
@@ -41,9 +41,9 @@ URL:  `{app-url}/api/events/live/` with body:
 
 `5` – Language Learning Content and Assessment Providers
 
-###Acceptance Criteria:
+### Acceptance Criteria:
 
-####Timing:
+#### Timing:
 
 **Live Events:**
 
@@ -61,19 +61,19 @@ URL:  `{app-url}/api/events/live/` with body:
 
 - Start time of event is not displayed.
 
-###Categories:
+### Categories:
 
 Each category displays only events that are in that category. `Language Learners` will only return events that have category `1`
 
 - If an `Live Event` or `On-Demand` has multiple categories, both `1` and `2`, for example, it will display as an event both on `Language Learners` and `Language Educators`
 
-####Event Type: Live or Pre-Recorded:**
+#### Event Type: Live or Pre-Recorded:**
 
 - If Live Events are selected, only `Live Events` for that category will be displayed (i.e. Live Language Learners Events)
 
 - If Pre-Recorded is selected, only `Pre-Recorded` will appear for that category (i.e. Pre-Recorded Language Educators)
 
-####Modal:
+#### Modal:
 
 - The correct start time, duration, presenter, organization, event, event description, and bio is displayed in the modal when clicking the event.
 
@@ -107,7 +107,7 @@ Each category displays only events that are in that category. `Language Learners
 
     * The `Watch Event` button is disabled and a tooltip appears with the same text as the header on hover or tap on mobile.
 
-####Popup located in `/popup`:
+#### Popup located in `/popup`:
 
 * The popup resizes the height and width of the iFrame depending on the size of the window.
 
@@ -115,7 +115,7 @@ Each category displays only events that are in that category. `Language Learners
 
 * Clicking the button shows the popup.
 
-####Responsive Design:
+#### Responsive Design:
 
 - Width Definitions: 
 
@@ -137,7 +137,7 @@ Each category displays only events that are in that category. `Language Learners
 
 * There are no unnecessary scrollbars.
 
-####Browser compatibility:
+#### Browser compatibility:
 
 The app renders correctly in the following browsers:
 
