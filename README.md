@@ -1,6 +1,8 @@
 Will be visible as a popup: https://theglobalseal.com/schedulertest 
 
-## Background:
+
+![Screenshots](https://i.imgur.com/DXJRdaw.png)
+
 
 #### Purpose:
 
@@ -41,7 +43,7 @@ URL:  `{app-url}/api/events/live/` with body:
 
 `5` – Language Learning Content and Assessment Providers
 
-### Acceptance Criteria:
+## Acceptance Criteria:
 
 ### Timing:
 
