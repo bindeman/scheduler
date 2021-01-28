@@ -130,7 +130,7 @@ const classes = useStyles();
                 <Grid item xs={12}>
 
                     {events.length !== 0 &&
-                        (<Typography className={clsx(classes.heroTitle, open === 0 && classes.heroTitleMobile)}>On-Demand Events for {props.title}</Typography>)}
+                        (<Typography className={clsx(classes.heroTitle, open === 0 && classes.heroTitleMobile)}>Events from Global C.R.E.D 2020 for {props.title}</Typography>)}
             </Grid>
                     <TextField
                         style={{fontSize: 10}}

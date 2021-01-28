@@ -68,6 +68,7 @@ const useStyles = makeStyles((theme) => ({
         color: '#A9BC9B',
         fontWeight: 700,
         fontSize: 11,
+        display: 'none', //HIDE TABS WHILE NOT IN LIVE EVENT MODE
         textTransform: 'none',
         '&:hover': {
             color: '#fff',
@@ -138,12 +139,15 @@ export default function EventsContainer(props) {
             {/*                                          title="Language Learners"/>}*/}
             {/*    />*/}
             {/*</Switch>*/}
-            <TabPanel value={value} index={0}>
+
+            {/*{ SWITCH INDEXES OF TABS TO DEFAULT TO PRERECORDED }*/}
+            <TabPanel value={value} index={1}>
                 <Events category={props.category} title={props.title}/>
             </TabPanel>
-            <TabPanel value={value} index={1}>
+            <TabPanel value={value} index={0}>
                 <PreRecordedEvents category={props.category} title={props.title}/>
             </TabPanel>
+
             {/*<TabPanel value={value} index={0}>*/}
             {/*    <Events category={props.category} title={props.title}/>*/}
             {/*</TabPanel>*/}

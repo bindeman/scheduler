@@ -156,11 +156,7 @@ export default function EventModal(props) {
         case "future":
             eventTitleText = "Scheduled event " + moment(props.dateInUserTimeZone).fromNow();
             buttonText = "Join Event";
-            if (new Date(props.dateInUserTimeZone).getTime() - now.getTime() < 180000) {
-                buttonDisabled = false;
-            } else {
-                buttonDisabled = true;
-            }
+            buttonDisabled = new Date(props.dateInUserTimeZone).getTime() - now.getTime() >= 180000;
             //buttonDisabled = true;
             break;
         case "past":
@@ -182,7 +178,7 @@ export default function EventModal(props) {
                 eventTitleText = "On-demand event available " + moment(props.dateInUserTimeZone).fromNow();
                 buttonDisabled = true;
             } else {
-                eventTitleText = "On-Demand Event";
+                eventTitleText = "Global C.R.E.D. Event";
             }
             buttonText = "Watch Event";
             break;
@@ -272,6 +268,7 @@ const classes = useStyles();
                         <ResponsiveTime
                             dateInUserTimeZone={props.dateInUserTimeZone}
                             duration={props.duration}
+                            eventStatus={props.eventStatus}
                         />
                         <Tooltip disableFocusListener
                                  disableHoverListener={!buttonDisabled}
